@@ -1,20 +1,28 @@
-<?php namespace Github\Exceptions;
+<?php namespace Github\Base;
 
 /**
  * ----------------------------------------------------------------------------------
- *  GithubExceptions
+ *  API
  * ----------------------------------------------------------------------------------
  *
  * @author Felix
  * @change 2018/12/13
  */
-class GithubExceptions extends \Exception
+class API
 {
     // ------------------------------------------------------------------------------
 
-    protected $code = 999;
+    /**
+     * github api list array
+     */
+    const LIST =
+    [
+        'server' => 'https://api.github.com',
 
-    protected $message = 'some issue found when calling github.';
+        // Porject
+        'oAuthToken'        => '/oauth/token',
+    ];
+
 
     // ------------------------------------------------------------------------------
     
