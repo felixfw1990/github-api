@@ -4,4 +4,4 @@ composer.lock
 composer.phar
 vendor/*
 .idea/
-src/Config/*
+src/Config/Config.php
