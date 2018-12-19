@@ -1,15 +1,17 @@
-<?php namespace Github\Projects;
+<?php namespace Github\Repos;
 
 /**
  * ----------------------------------------------------------------------------------
  *  Abs
  * ----------------------------------------------------------------------------------
- * @method \Github\Projects\Project Project
+ *
+ * @method \Github\Repos\Contents Contents()
+ * @method \Github\Repos\Repos Repos()
  *
  * @author Felix
- * @change 2018/12/13
+ * @change 2018/12/19
  */
-class Abs 
+class Abs
 {
     // ------------------------------------------------------------------------------
     

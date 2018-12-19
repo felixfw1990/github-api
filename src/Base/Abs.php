@@ -1,5 +1,7 @@
 <?php namespace Github\Base;
 
+use Github\Exceptions\GithubExceptions;
+
 /**
  * Trait Abs
  *
@@ -30,12 +32,12 @@ trait Abs
     // ------------------------------------------------------------------------------
 
     /**
-     * call github apis
+     * call
      *
      * @param string $name
      * @param array  $arguments
      * @return mixed
-     * @throws \GithubExceptions
+     * @throws \Github\Exceptions\GithubExceptions
      */
     public function __call(string $name, array $arguments)
     {
@@ -46,7 +48,7 @@ trait Abs
         // check class exists
         if (!class_exists($subClass))
         {
-            throw new \GithubExceptions("class {$subClass} not found!");
+            throw new GithubExceptions("class {$subClass} not found!");
         }
 
         return new $subClass($this->options);

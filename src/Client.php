@@ -1,13 +1,14 @@
 <?php namespace Github;
 
 use Github\Base\Options;
+use Github\Exceptions\GithubExceptions;
 
 /**
  * ----------------------------------------------------------------------------------
  *  Client
  * ----------------------------------------------------------------------------------
  *
- * @method Projects\Abs Projects()
+ * @method Repos\Abs Repos()
  *
  * @author Felix
  * @change 2018/12/13
@@ -50,7 +51,7 @@ class Client
      * @param string $name
      * @param array  $arguments
      * @return mixed
-     * @throws \GithubExceptions
+     * @throws \Github\Exceptions\GithubExceptions
      */
     public function __call(string $name, array $arguments)
     {
@@ -59,7 +60,7 @@ class Client
         // check class exists
         if (!class_exists($apiClass))
         {
-            throw new \GithubExceptions("class {$apiClass} not found!");
+            throw new GithubExceptions("class {$apiClass} not found!");
         }
 
         return new $apiClass($this->options);

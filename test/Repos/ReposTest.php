@@ -1,24 +1,25 @@
-<?php namespace GithubTest\Project;
+<?php namespace GithubTest\Repositories;
 
 use Github\Client;
 use GithubTest\Abs;
+use Github\Repos\Repos;
 
 /**
  * ----------------------------------------------------------------------------------
- *  ProjectTest
+ *  ReposTest
  * ----------------------------------------------------------------------------------
  *
  * @author Felix
- * @change 2018/12/13
+ * @change 2018/12/19
  */
-class ProjectTest extends Abs
+class ReposTest extends Abs
 {
     // ------------------------------------------------------------------------------
 
-//    /**
-//     * @var Project
-//     */
-//    private $module;
+    /**
+     * @var Repos
+     */
+    private $module;
 
     // ------------------------------------------------------------------------------
 
@@ -26,24 +27,22 @@ class ProjectTest extends Abs
     {
        parent::setUp();
 
-//       $this->module = new Project();
+        $options = ['token' => \Github\Config\Config::getToken()];
+
+        $this->module = (new Client($options))->Repos()->repos();
     }
     
     // ------------------------------------------------------------------------------
 
-    public function testAll()
+    public function testContents()
     {
-        $options =
-        [
-            'token' => \Github\Config\Config::getToken(),
-        ];
+        $params = ['page' => ['size' => 5, 'now' => 1]];
 
-        $result = (new Client($options))->Projects()->Project()->getList();
+        $result = $this->module->userRepos($params);
 
-        var_dump($result);
         $this->assertNotEmpty($result);
     }
-    
+
     // ------------------------------------------------------------------------------
     
 }

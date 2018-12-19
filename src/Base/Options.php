@@ -17,6 +17,10 @@ class Options
 
     // ------------------------------------------------------------------------------
 
+    private $baseUri;
+
+    // ------------------------------------------------------------------------------
+
     /**
      * Options constructor.
      *
@@ -24,7 +28,8 @@ class Options
      */
     public function __construct(array $option)
     {
-        $this->token = $option['token'] ?? '';
+        $this->baseUri = 'https://api.github.com';
+        $this->token   = $option['token'] ?? '';
     }
 
     // ------------------------------------------------------------------------------
@@ -49,6 +54,18 @@ class Options
     public function getToken():string
     {
         return $this->token;
+    }
+    
+    // ------------------------------------------------------------------------------
+
+    /**
+     * get base uri
+     *
+     * @return string
+     */
+    public function getBaseUri()
+    {
+        return $this->baseUri;
     }
 
     // ------------------------------------------------------------------------------
