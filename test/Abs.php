@@ -2,6 +2,8 @@
 
 use \PHPUnit\Framework\TestCase;
 
+use Github\Client;
+
 /**
  * ----------------------------------------------------------------------------------
  *  Abs
@@ -14,9 +16,18 @@ abstract class Abs extends TestCase
 {
     // ------------------------------------------------------------------------------
 
+    /**
+     * @var Client
+     */
+    protected $client;
+
+    // ------------------------------------------------------------------------------
+
     public function setUp()
     {
+        $options = ['token' => \Github\Config\Config::getToken()];
 
+        $this->client = new Client($options);
     }
 
     // ------------------------------------------------------------------------------

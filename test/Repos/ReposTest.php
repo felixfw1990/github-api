@@ -1,6 +1,5 @@
 <?php namespace GithubTest\Repositories;
 
-use Github\Client;
 use GithubTest\Abs;
 use Github\Repos\Repos;
 
@@ -27,9 +26,7 @@ class ReposTest extends Abs
     {
        parent::setUp();
 
-        $options = ['token' => \Github\Config\Config::getToken()];
-
-        $this->module = (new Client($options))->Repos()->repos();
+        $this->module = $this->client->Repos()->repos();
     }
     
     // ------------------------------------------------------------------------------

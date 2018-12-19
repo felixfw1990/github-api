@@ -13,7 +13,7 @@ use Github\Exceptions\GithubExceptions;
  * @author Felix
  * @change 2018/12/13
  */
-class Client 
+class Client
 {
     // ------------------------------------------------------------------------------
     
