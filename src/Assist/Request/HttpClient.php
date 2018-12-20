@@ -1,5 +1,6 @@
-<?php namespace Github\Base;
+<?php namespace Github\Assist\Request;
 
+use Github\Assist\Base\Options;
 use GuzzleHttp\Client;
 use Psr\Http\Message\MessageInterface;
 
@@ -13,29 +14,60 @@ use Psr\Http\Message\MessageInterface;
  */
 class HttpClient
 {
+    /**
+     * @var Options
+     */
+    private $option;
+
+    // ------------------------------------------------------------------------------
+
+    /**
+     * HttpClient constructor.
+     *
+     * @param \Github\Assist\Base\Options $options
+     */
+    public function __construct(Options $options)
+    {
+        $this->option = $options;
+    }
+
+    // ------------------------------------------------------------------------------
+
+    /**
+     * @var array
+     */
+    private $headers;
+
+    // ------------------------------------------------------------------------------
+
+    /**
+     * set headers
+     *
+     * @param array $params
+     */
+    public function setHeaders(array $params):void
+    {
+        $this->headers = $params;
+    }
+
     // ------------------------------------------------------------------------------
 
     /**
      * get result
      *
-     * @param Options $options
      * @param string  $uri
      * @param bool    $getMaxPage
      * @return array
      */
-    public function getResult
-    (
-        Options $options, string $uri, bool $getMaxPage = false
-    ):array
+    public function getResult (string $uri, bool $getMaxPage = false):array
     {
-        $baseUri = $options->getBaseUri();
-        $token   = $options->getToken();
+        $baseUri = $this->option->getBaseUri();
 
         $clientParam = ['base_uri' => $baseUri];
 
         $client = new Client($clientParam);
 
-        $headers = $this->requestHeaders($token);
+        $headers = $this->requestHeaders();
 
         $result = $client->get($uri, $headers);
 
@@ -57,15 +89,13 @@ class HttpClient
     /**
      * get headers
      *
-     * @param string $token
      * @return array
      */
-    private function requestHeaders(string $token)
+    private function requestHeaders()
     {
-        $headers =
-        [
-            'Authorization' => 'token '.$token,
-        ];
+        $headers = ['Authorization' => 'token '.$this->option->getToken()];
+
+        $headers = array_merge($headers, $this->headers ?? []);
 
         return ['headers' => $headers];
     }

@@ -1,6 +1,6 @@
-<?php namespace Github\Base;
+<?php namespace Github\Assist\Base;
 
-use Github\Exceptions\GithubExceptions;
+use Github\Assist\Exceptions\GithubException;
 
 /**
  * Trait Abs
@@ -22,7 +22,7 @@ trait Abs
     /**
      * Abs constructor.
      *
-     * @param \Github\Base\Options $options
+     * @param \Github\Assist\Base\Options $options
      */
     public function __construct(Options $options)
     {
@@ -37,7 +37,7 @@ trait Abs
      * @param string $name
      * @param array  $arguments
      * @return mixed
-     * @throws \Github\Exceptions\GithubExceptions
+     * @throws \Github\Assist\Exceptions\GithubException
      */
     public function __call(string $name, array $arguments)
     {
@@ -48,7 +48,7 @@ trait Abs
         // check class exists
         if (!class_exists($subClass))
         {
-            throw new GithubExceptions("class {$subClass} not found!");
+            throw new GithubException("class {$subClass} not found!");
         }
 
         return new $subClass($this->options);

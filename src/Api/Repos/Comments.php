@@ -1,17 +1,17 @@
 <?php namespace Github\Repos;
 
-use Github\Base\Options;
+use Github\Assist\Base\Options;
 use Github\Base\HttpClient;
 
 /**
  * ----------------------------------------------------------------------------------
- *  Contents
+ *  Comments
  * ----------------------------------------------------------------------------------
  *
  * @author Felix
- * @change 2018/12/19
+ * @change 2018/12/20
  */
-class Contents
+class Comments
 {
     // ------------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ class Contents
     // ------------------------------------------------------------------------------
 
     /**
-     * Project constructor.
+     * Comments constructor.
      *
      * @param \Github\Base\Options $options
      */
@@ -43,26 +43,27 @@ class Contents
     // ------------------------------------------------------------------------------
 
     /**
-     * get contents folder or file
+     * get comments
      *
-     * @link https://developer.github.com/v3/repos/contents/#get-contents
-     *
-     * @param array $params
+     * @param array $param
      * @return array
      */
-    public function reposContents(array $params):array
+    public function reposComments(array $param):array
     {
-        $path  = $params['path']  ?? '';
-        $repo  = $params['repo']  ?? [];
-        $owner = $params['owner'] ?? '';
-        $ref   = $params['ref']   ?? 'master';
+        //@TODO
+    }
 
-        $uri = "repos/{$owner}/{$repo}/contents";
+    // ------------------------------------------------------------------------------
 
-        $path AND $uri .= "/{$path}";
-        $ref  AND $uri .= "?ref={$ref}";
-
-        return $this->httpClient->getResult($this->options, $uri, false);
+    /**
+     * get a comment
+     *
+     * @param array $param
+     * @return array
+     */
+    public function reposComment(array $param):array
+    {
+        //@TODO
     }
 
     // ------------------------------------------------------------------------------

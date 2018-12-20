@@ -1,4 +1,4 @@
-<?php namespace Github\Repos;
+<?php namespace Github\Api\Repos;
 
 use Github\Base\Options;
 use Github\Base\HttpClient;

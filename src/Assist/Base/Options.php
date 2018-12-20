@@ -1,4 +1,7 @@
-<?php namespace Github\Base;
+<?php namespace Github\Assist\Base;
+
+use Github\Assist\Request\Async;
+use Github\Assist\Request\Sync;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -13,11 +16,24 @@ class Options
 
     // ------------------------------------------------------------------------------
 
-    private $token;
+    /**
+     * @var bool
+     */
+    private $debug;
 
     // ------------------------------------------------------------------------------
 
-    private $baseUri;
+    /**
+     * @var string
+     */
+    private $logFile;
+
+    // ------------------------------------------------------------------------------
+
+    /**
+     * @var string
+     */
+    private $token;
 
     // ------------------------------------------------------------------------------
 
@@ -28,8 +44,9 @@ class Options
      */
     public function __construct(array $option)
     {
-        $this->baseUri = 'https://api.github.com';
         $this->token   = $option['token'] ?? '';
+        $this->debug   = $option['debug'] ?? false;
+        $this->logFile = $option['log_file'] ?? '';
     }
 
     // ------------------------------------------------------------------------------
@@ -55,17 +72,48 @@ class Options
     {
         return $this->token;
     }
-    
+
     // ------------------------------------------------------------------------------
 
     /**
-     * get base uri
-     *
-     * @return string
+     * get sync request instance
      */
-    public function getBaseUri()
+    public function getSync()
     {
-        return $this->baseUri;
+        $debug  = $this->debug;
+        $server = API::LIST['server'];
+
+        // when set log file
+        if ($this->debug && !empty($this->logFile))
+        {
+            $debug = fopen($this->logFile, 'a');
+        }
+
+        $sync = new Sync($server, $debug);
+
+        $this->token AND
+        $sync->setHeaderParams(['Authorization' => 'token '.$this->token]);
+
+        return $sync;
+    }
+
+    // ------------------------------------------------------------------------------
+
+    /**
+     * get async request instance
+     */
+    public function getAsync()
+    {
+        $debug  = $this->debug;
+        $server = API::LIST['server'];
+
+        // when set log file
+        if ($this->debug && !empty($this->logFile))
+        {
+            $debug = fopen($this->logFile, 'a');
+        }
+
+        return new Async($server, $debug);
     }
 
     // ------------------------------------------------------------------------------

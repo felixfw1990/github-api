@@ -1,7 +1,9 @@
-<?php namespace Github\Repos;
+<?php namespace Github\Api\Repos;
 
-use Github\Base\Options;
-use Github\Base\HttpClient;
+use Github\Assist\Base\API;
+use Github\Assist\Base\Helper;
+use Github\Assist\Base\Options;
+use Github\Assist\Request\HttpClient;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -16,14 +18,14 @@ class Branches
     // ------------------------------------------------------------------------------
 
     /**
-     * @var \Github\Base\Options
+     * @var Options
      */
     private $options;
 
     // ------------------------------------------------------------------------------
 
     /**
-     * @var \Github\Base\HttpClient
+     * @var HttpClient
      */
     private $httpClient;
 
@@ -32,37 +34,44 @@ class Branches
     /**
      * Project constructor.
      *
-     * @param \Github\Base\Options $options
+     * @param Options $options
      */
     public function __construct(Options $options)
     {
         $this->options    = $options;
-        $this->httpClient = new HttpClient();
+        $this->httpClient = new HttpClient($options);
     }
 
     // ------------------------------------------------------------------------------
 
     /**
-     * get contents folder or file
+     * repos branches
      *
-     * @link https://developer.github.com/v3/repos/branches/#list-branches
      * @param array $params
      * @return array
+     * @throws \Exception
      */
     public function reposBranches(array $params):array
     {
-        $repo      = $params['repo']  ?? [];
-        $owner     = $params['owner'] ?? '';
-        $page      = $params['page'] ?? [];
-        $protected = $params['protected'] ?? false;
+        $path  = [$params['owner'] ?? '', $params['repo'] ?? ''];
+        $queue =
+        [
+            'page'      => $params['page']['now'] ?? 1,
+            'per_page'  => $params['page']['size'] ?? 1,
+            'protected' => $params['protected'] ?? false,
+        ];
 
-        $uri = "repos/{$owner}/{$repo}/branches";
+        $result = $this->options
+        ->getSync()
+        ->setPath(...$path)
+        ->setQuery($queue)
+        ->get(API::LIST['reposBranches'], true);
 
-        $uri .= "?protected={$protected}";
-
-        $page AND $uri = $uri."&page={$page['now']}&per_page={$page['size']}";
-
-        return $this->httpClient->getResult($this->options, $uri, true);
+        return
+        [
+            'data'     => $result['data'] ?? [],
+            'max_page' => Helper::getMaxPage($result['headers'])
+        ];
     }
 
     // ------------------------------------------------------------------------------

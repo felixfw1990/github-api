@@ -1,7 +1,7 @@
-<?php namespace GithubTest\Repositories;
+<?php namespace GithubTest\Api\Repositories;
 
 use GithubTest\Abs;
-use Github\Repos\Branches;
+use Github\Api\Repos\Branches;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ class BranchesTest extends Abs
     {
        parent::setUp();
 
-        $this->module = $this->client->Repos()->Branches();
+        $this->module = $this->client->Api()->Repos()->Branches();
     }
     
     // ------------------------------------------------------------------------------
@@ -43,7 +43,6 @@ class BranchesTest extends Abs
 
         $result = $this->module->reposBranches($params);
 
-        var_dump($result);
         $this->assertNotEmpty($result);
     }
 

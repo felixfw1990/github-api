@@ -1,24 +1,21 @@
-<?php namespace Github\Repos;
+<?php namespace Github\Assist\Exceptions;
 
 /**
  * ----------------------------------------------------------------------------------
- *  Abs
+ *  GithubException
  * ----------------------------------------------------------------------------------
  *
- * @method \Github\Repos\Contents Contents()
- * @method \Github\Repos\Repos Repos()
- * @method \Github\Repos\Branches Branches()
- * @method \Github\Repos\Commits Commits()
- *
  * @author Felix
- * @change 2018/12/19
+ * @change 2018/12/13
  */
-class Abs
+class GithubException extends \Exception
 {
     // ------------------------------------------------------------------------------
-    
-    use \Github\Base\Abs;
-    
+
+    protected $code = 999;
+
+    protected $message = 'some issue found when calling github.';
+
     // ------------------------------------------------------------------------------
     
 }

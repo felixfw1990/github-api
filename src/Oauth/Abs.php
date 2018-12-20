@@ -1,20 +1,18 @@
-<?php namespace Github\Exceptions;
+<?php namespace Github\Oauth;
 
 /**
  * ----------------------------------------------------------------------------------
- *  GithubExceptions
+ *  Abs
  * ----------------------------------------------------------------------------------
  *
  * @author Felix
- * @change 2018/12/13
+ * @change 2018/12/19
  */
-class GithubExceptions extends \Exception
+class Abs
 {
     // ------------------------------------------------------------------------------
 
-    protected $code = 999;
-
-    protected $message = 'some issue found when calling github.';
+    use \Github\Assist\Base\Abs;
 
     // ------------------------------------------------------------------------------
     

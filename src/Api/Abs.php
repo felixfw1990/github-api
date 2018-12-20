@@ -1,35 +1,35 @@
-<?php namespace Github;
+<?php namespace Github\Api;
 
+use Github\Api\Repos;
 use Github\Assist\Base\Options;
 use Github\Assist\Exceptions\GithubException;
 
 /**
  * ----------------------------------------------------------------------------------
- *  Client
+ *  Abs
  * ----------------------------------------------------------------------------------
  *
- * @method Api\Abs Api()
- * @method Oauth\Abs Oauth()
+ * @method Repos\Abs Repos()
  *
  * @author Felix
- * @change 2018/12/13
+ * @change 2018/12/19
  */
-class Client
+class Abs
 {
     // ------------------------------------------------------------------------------
-    
+
     private $options;
 
     // ------------------------------------------------------------------------------
 
     /**
-     * Client constructor.
+     * Abs constructor.
      *
-     * @param array $options
+     * @param \Github\Assist\Base\Options $options
      */
-    public function __construct(array $options)
+    public function __construct(Options $options)
     {
-        $this->options = new Options($options);
+        $this->options = $options;
     }
 
     // ------------------------------------------------------------------------------
@@ -67,6 +67,4 @@ class Client
         return new $apiClass($this->options);
     }
 
-    // ------------------------------------------------------------------------------
-    
 }
