@@ -25,7 +25,12 @@ abstract class Abs extends TestCase
 
     public function setUp()
     {
-        $options = ['token' => ''];
+        $options =
+        [
+            'token' => '',
+            'debug' => true,
+            'log_file' => 'Log/log_file.log',
+        ];
 
         $this->client = new Client($options);
     }
