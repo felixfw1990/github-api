@@ -5,13 +5,13 @@ use Github\Base\HttpClient;
 
 /**
  * ----------------------------------------------------------------------------------
- *  Contents
+ *  Branch
  * ----------------------------------------------------------------------------------
  *
  * @author Felix
- * @change 2018/12/19
+ * @change 2018/12/20
  */
-class Contents
+class Branches
 {
     // ------------------------------------------------------------------------------
 
@@ -45,24 +45,24 @@ class Contents
     /**
      * get contents folder or file
      *
-     * @link https://developer.github.com/v3/repos/contents/#get-contents
-     *
+     * @link https://developer.github.com/v3/repos/branches/#list-branches
      * @param array $params
      * @return array
      */
-    public function reposContents(array $params):array
+    public function reposBranches(array $params):array
     {
-        $path  = $params['path']  ?? '';
-        $repo  = $params['repo']  ?? [];
-        $owner = $params['owner'] ?? '';
-        $ref   = $params['ref']   ?? 'master';
+        $repo      = $params['repo']  ?? [];
+        $owner     = $params['owner'] ?? '';
+        $page      = $params['page'] ?? [];
+        $protected = $params['protected'] ?? false;
 
-        $uri = "repos/{$owner}/{$repo}/contents";
+        $uri = "repos/{$owner}/{$repo}/branches";
 
-        $path AND $uri .= "/{$path}";
-        $ref  AND $uri .= "?ref={$ref}";
+        $uri .= "?protected={$protected}";
 
-        return $this->httpClient->getResult($this->options, $uri, false);
+        $page AND $uri = $uri."&page={$page['now']}&per_page={$page['size']}";
+
+        return $this->httpClient->getResult($this->options, $uri, true);
     }
 
     // ------------------------------------------------------------------------------

@@ -25,7 +25,7 @@ abstract class Abs extends TestCase
 
     public function setUp()
     {
-        $options = ['token' => \Github\Config\Config::getToken()];
+        $options = ['token' => ''];
 
         $this->client = new Client($options);
     }

@@ -1,7 +1,6 @@
 <?php namespace Github\Base;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
 use Psr\Http\Message\MessageInterface;
 
 /**
