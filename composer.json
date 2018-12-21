@@ -1,5 +1,5 @@
 {
-    "name": "felix/github-api",
+    "name": "felixfw/github-api",
     "description": "PHP wrapper for the Github API.",
     "license": "MIT",
     "authors": [
