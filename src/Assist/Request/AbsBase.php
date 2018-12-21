@@ -297,7 +297,7 @@ trait AbsBase
      * @param \Psr\Http\Message\ResponseInterface $response
      * @return array
      */
-    private function parseResponseData(ResponseInterface $response):array
+    private function parseResponseData(ResponseInterface $response)
     {
         $expc = 'application/json';
         $type = $response->getHeader('Content-Type');

@@ -44,8 +44,8 @@ class Repos
      */
     public function userRepos(array $params):array
     {
-        $queue = Helper::arrayExistCum($params, 'page');
-        $queue = Helper::arrayExistCum($params, 'per_page', $queue);
+        $keys  = ['page', 'per_page'];
+        $queue = Helper::arrayExistCums($params, $keys);
 
         return $this->options
         ->getSync()

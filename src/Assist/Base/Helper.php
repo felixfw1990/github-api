@@ -62,6 +62,87 @@ class Helper
     // ------------------------------------------------------------------------------
 
     /**
+     * Verify that the key in the array exists and accumulate it
+     *
+     * @param array  $checkParams   check parameters
+     * @param array  $keys          check key
+     *
+     * @return  array
+     */
+    public static function arrayExistCums (array $checkParams, array $keys):array
+    {
+        $data = [];
+
+        if (!$keys) { return $data; }
+
+        foreach ($keys as $v)
+        {
+            $checkParams[$v] ?? NULL AND $data[$v] = $checkParams[$v];
+        }
+
+        return $data;
+    }
+
+    // ------------------------------------------------------------------------------
+
+    /**
+     * get get link
+     *
+     * @param string $baseUri
+     * @param array  $params
+     * @return string
+     */
+    public static function getLink(string $baseUri, array $params):string
+    {
+        if (!$params) { return $baseUri; }
+
+        $baseUri .= "?";
+
+        $index = 0;
+
+        foreach ($params as $k => $v)
+        {
+            $index OR  $baseUri .= "{$k}={$v}";
+            $index AND $baseUri .= "&{$k}={$v}";
+
+            $index ++;
+        }
+
+        return $baseUri;
+    }
+
+    // ------------------------------------------------------------------------------
+
+    public static function getRandString(int $length = 12)
+    {
+        $keys =
+        [
+            '0','1','2','3','4','5','6','7','8','9','10',
+
+            'a','b','c','d','e','f','g','h','i','j','k',
+            'l','m','n','o','p','q','r','s','t','u','v',
+            'w','x','y','z',
+
+            'A','B','C','D','E','F','G','H','I','J','K',
+            'L','M','N','O','P','Q','R','S','T','U','V',
+            'W','X','Y','Z'
+        ];
+
+        $str = '';
+
+        while ($length)
+        {
+            $str .= $keys[rand(0, count($keys) - 1)];
+
+           $length -- ;
+        }
+
+        return $str;
+    }
+
+    // ------------------------------------------------------------------------------
+
+    /**
      * check if assoc array
      *
      * @param array $arr

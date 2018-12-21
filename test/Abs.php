@@ -23,13 +23,27 @@ abstract class Abs extends TestCase
 
     // ------------------------------------------------------------------------------
 
+    /**
+     * @var array
+     */
+    protected $params =
+    [
+        'token'              => '',
+        'code_redirect_uri'  => '',
+        'token_redirect_uri' => '',
+        'client_id'          => '',
+        'client_secret'      => '',
+    ];
+
+    // ------------------------------------------------------------------------------
+
     public function setUp()
     {
         $options =
         [
-            'token' => '',
-            'debug' => true,
-            'log_file' => 'Log/log_file.log',
+            'token'         => $this->params['token'],
+            'debug'         => false,
+            'log_file'      => 'Log/log_file.log',
         ];
 
         $this->client = new Client($options);

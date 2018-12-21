@@ -47,13 +47,8 @@ class Commits
         $owner = $params['owner'] ?? '';
         $repo  = $params['repo']  ?? '';
 
-        $queue = Helper::arrayExistCum($params, 'sha');
-        $queue = Helper::arrayExistCum($params, 'path', $queue);
-        $queue = Helper::arrayExistCum($params, 'author', $queue);
-        $queue = Helper::arrayExistCum($params, 'since', $queue);
-        $queue = Helper::arrayExistCum($params, 'until', $queue);
-        $queue = Helper::arrayExistCum($params, 'page', $queue);
-        $queue = Helper::arrayExistCum($params, 'per_page', $queue);
+        $keys  = ['sha', 'path', 'author', 'since', 'until', 'page', 'per_page'];
+        $queue = Helper::arrayExistCums($params, $keys);
 
         return $this->options
         ->getSync()

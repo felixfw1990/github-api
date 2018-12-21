@@ -47,9 +47,8 @@ class Branches
         $owner = $params['owner'] ?? '';
         $repo  = $params['repo'] ?? '';
 
-        $queue = Helper::arrayExistCum($params, 'page');
-        $queue = Helper::arrayExistCum($params, 'per_page', $queue);
-        $queue = Helper::arrayExistCum($params, 'protected', $queue);
+        $keys  = ['page', 'per_page', 'protected'];
+        $queue = Helper::arrayExistCums($params, $keys);
 
         $result = $this->options
         ->getSync()
