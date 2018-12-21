@@ -15,7 +15,6 @@ use Psr\Http\Message\StreamInterface;
  */
 class Sync
 {
-
     // ------------------------------------------------------------------------------
 
     /**
@@ -30,24 +29,25 @@ class Sync
      *
      * @param string $api
      * @param bool   $headers
+     * @param bool   $data
      * @return mixed
      * @throws \Exception
      */
-    public function get(string $api, bool $headers = false)
+    public function get(string $api, bool $headers = false, bool $data = true)
     {
         $apiPath = $this->concatApiPath($api);
         $options = $this->concatOptions();
 
-//        try
-//        {
+        try
+        {
             $response = $this->guzzle->get($apiPath, $options);
-//        }
-//        catch (\Exception $e)
-//        {
-//            throw new GithubException($this->getExceptionMsg($e));
-//        }
+        }
+        catch (\Exception $e)
+        {
+            throw new GithubException($this->getExceptionMsg($e));
+        }
 
-        return $this->parseResponse($response, $headers);
+        return $this->parseResponse($response, $headers, $data);
     }
 
     // ------------------------------------------------------------------------------
@@ -189,36 +189,6 @@ class Sync
         }
 
         return $this->parseResponse($response, true);
-    }
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * get max page number
-     *
-     * @param  array $headers
-     * @return int
-     */
-    public function getMaxPage(array $headers):int
-    {
-        $linkString = $headers['Link'][0] ?? '';
-
-        //不支持分页或者每页数量超出最大数量
-        if (!$linkString) { return 1 ;}
-
-        //第一次处理
-        $rule    = "/(next|first|prev).*page=(\d).*rel=\"last\"/";
-        $matches = [];
-
-        preg_match($rule, $linkString, $matches);
-
-        $linkString = $matches[0] ?? '';
-
-        //第二次处理
-        $rule = '/page=([1-9]\d*)/';
-        preg_match($rule, $linkString, $matches);
-
-        return $matches[1] ?? 1;
     }
 
     // ------------------------------------------------------------------------------

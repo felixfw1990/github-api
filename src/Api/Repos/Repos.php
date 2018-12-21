@@ -1,7 +1,8 @@
 <?php namespace Github\Api\Repos;
 
-use Github\Base\Options;
-use Github\Base\HttpClient;
+use Github\Assist\Base\API;
+use Github\Assist\Base\Helper;
+use Github\Assist\Base\Options;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -16,28 +17,20 @@ class Repos
     // ------------------------------------------------------------------------------
 
     /**
-     * @var \Github\Base\Options
+     * @var Options
      */
     private $options;
 
     // ------------------------------------------------------------------------------
 
     /**
-     * @var \Github\Base\HttpClient
-     */
-    private $httpClient;
-
-    // ------------------------------------------------------------------------------
-
-    /**
      * Project constructor.
      *
-     * @param \Github\Base\Options $options
+     * @param Options $options
      */
     public function __construct(Options $options)
     {
-        $this->options    = $options;
-        $this->httpClient = new HttpClient();
+        $this->options = $options;
     }
 
     // ------------------------------------------------------------------------------
@@ -45,20 +38,19 @@ class Repos
     /**
      * get contents
      *
-     * @link https://developer.github.com/v3/repos/#list-your-repositories
-     *
      * @param array $params
      * @return array
+     * @throws \Exception
      */
     public function userRepos(array $params):array
     {
-        $page = $params['page'] ?? [];
+        $queue = Helper::arrayExistCum($params, 'page');
+        $queue = Helper::arrayExistCum($params, 'per_page', $queue);
 
-        $uri = "user/repos";
-
-        $page AND $uri = $uri."?page={$page['now']}&per_page={$page['size']}";
-
-        return $this->httpClient->getResult($this->options, $uri, true);
+        return $this->options
+        ->getSync()
+        ->setQuery($queue)
+        ->get(API::LIST['RRUser'], true);
     }
 
     // ------------------------------------------------------------------------------

@@ -1,7 +1,8 @@
 <?php namespace GithubTest\Repositories;
 
+use Github\Assist\Base\Helper;
 use GithubTest\Abs;
-use Github\Repos\Commits;
+use Github\Api\Repos\Commits;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -26,32 +27,45 @@ class CommitsTest extends Abs
     {
        parent::setUp();
 
-        $this->module = $this->client->Repos()->Commits();
+        $this->module = $this->client->Api()->Repos()->Commits();
     }
     
     // ------------------------------------------------------------------------------
 
-    public function testReposCommits()
+    /**
+     * test owner repo commits
+     *
+     * @throws \Exception
+     */
+    public function testOwnerRepoCommits()
     {
         $params =
         [
-            'owner' => 'Uranuslab',
-            'repo'  => 'Testing',
-            'page'  =>
-            [
-                'size' => 1,
-                'now' => 1,
-            ]
+            'owner'    => 'Uranuslab',
+            'repo'     => 'Testing',
+            'page'     => 1,
+            'per_page' => 1,
         ];
 
-        $result = $this->module->reposCommits($params);
+        $result = $this->module->ownerRepoCommits($params);
 
-        $this->assertNotEmpty($result);
+        $data = $result['data'] ?? [];
+
+        $headers = $result['headers'] ?? [];
+        $maxPageSize = Helper::getMaxPage($headers['Link'][0] ?? '');
+
+        $this->assertCount(1, $data);
+        $this->assertNotEmpty($maxPageSize);
     }
 
     // ------------------------------------------------------------------------------
 
-    public function testReposCommitM()
+    /**
+     * test owner repo commits sha
+     *
+     * @throws \Exception
+     */
+    public function testOwnerRepoCommitsSha()
     {
         $params =
         [
@@ -60,7 +74,7 @@ class CommitsTest extends Abs
             'sha'   => 'ba6fd6779a70aae80d8b74be23bb4a81b63ae706',
         ];
 
-        $result = $this->module->reposCommit($params);
+        $result = $this->module->ownerRepoCommitsSha($params);
 
         $this->assertNotEmpty($result);
     }

@@ -41,6 +41,27 @@ class Helper
     // ------------------------------------------------------------------------------
 
     /**
+     * Verify that the key in the array exists and accumulate it
+     *
+     * @param array  $checkParams   check parameters
+     * @param string $key           check key
+     * @param array  $data          accumulate array
+     *
+     * @return  array
+     */
+    public static function arrayExistCum
+    (
+        array $checkParams, string $key, array $data = []
+    ):array
+    {
+        $checkParams[$key] ?? NULL AND $data[$key] = $checkParams[$key];
+
+        return $data;
+    }
+
+    // ------------------------------------------------------------------------------
+
+    /**
      * check if assoc array
      *
      * @param array $arr
@@ -61,13 +82,11 @@ class Helper
     /**
      * get max page number
      *
-     * @param  array $headers
+     * @param  string $linkString
      * @return int
      */
-    public static function getMaxPage(array $headers):int
+    public static function getMaxPage(string $linkString):int
     {
-        $linkString = $headers['Link'][0] ?? '';
-
         //不支持分页或者每页数量超出最大数量
         if (!$linkString) { return 1 ;}
 

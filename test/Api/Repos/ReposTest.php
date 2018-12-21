@@ -1,7 +1,8 @@
 <?php namespace GithubTest\Repositories;
 
 use GithubTest\Abs;
-use Github\Repos\Repos;
+use Github\Api\Repos\Repos;
+use Github\Assist\Base\Helper;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -26,18 +27,33 @@ class ReposTest extends Abs
     {
        parent::setUp();
 
-        $this->module = $this->client->Repos()->repos();
+        $this->module = $this->client->Api()->Repos()->repos();
     }
     
     // ------------------------------------------------------------------------------
 
-    public function testContents()
+    /**
+     * user repos
+     *
+     * @throws \Exception
+     */
+    public function testUserRepos()
     {
-        $params = ['page' => ['size' => 5, 'now' => 1]];
+        $params =
+        [
+            'page'     => 1,
+            'per_page' => 5,
+        ];
 
         $result = $this->module->userRepos($params);
 
-        $this->assertNotEmpty($result);
+        $data = $result['data'] ?? [];
+
+        $headers     = $result['headers'] ?? [];
+        $pageMaxSize = Helper::getMaxPage($headers['Link'][0] ?? '');
+
+        $this->assertCount(5, $data);
+        $this->assertNotEmpty($pageMaxSize);
     }
 
     // ------------------------------------------------------------------------------

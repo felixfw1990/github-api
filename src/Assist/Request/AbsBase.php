@@ -144,11 +144,15 @@ trait AbsBase
      * set header params
      *
      * @param array $headers
+     * @param bool  $cover
      * @return $this
      */
-    public function setHeaderParams(array $headers)
+    public function setHeaderParams(array $headers, $cover = false)
     {
-        $this->headerParams = ['headers' => array_merge($headers)];
+        $headers = $cover ? $headers:
+        array_merge($this->headerParams['headers'] ?? [], $headers);
+
+        $this->headerParams = ['headers' => $headers];
 
         return $this;
     }
@@ -226,32 +230,27 @@ trait AbsBase
      * Parse the JSON response body and return an array
      *
      * @param ResponseInterface $response
-     * @param bool $headers  TIPS: true return headers and body ,false return body
+     * @param bool $headers true return headers
+     * @param bool $data  true return  body
      * @return mixed
      * @throws \Exception if the response body is not in JSON format
      */
-    private function parseResponse(ResponseInterface $response, bool $headers = false)
+    private function parseResponse
+    (
+        ResponseInterface $response, bool $headers = false, $data = true
+    )
     {
-        $expc = 'application/json';
-        $type = $response->getHeader('Content-Type');
+        if ($data && !$headers) { return $this->parseResponseData($response); }
 
-        $noJson = strpos(strtolower(current($type)), $expc) === false;
+        if ($headers && !$data) { return $this->parseResponseHeaders($response); }
 
-        $data = $noJson ?
-        $response->getBody():
-        $response->getBody()->getContents();
-
-        $noJson OR $data = json_decode($data, true);
-
-        if (!$headers){ return $data; }
-
-        //get headers
-        $headerData = $response->getHeaders();
+        // Are you ok?
+        if (!$headers && !$data) { return []; }
 
         return
         [
-            'data'    => $data,
-            'headers' => $headerData,
+            'data'    => $this->parseResponseData($response),
+            'headers' => $this->parseResponseHeaders($response),
         ];
     }
 
@@ -288,6 +287,44 @@ trait AbsBase
                 call_user_func($func, $response);
             }
         };
+    }
+
+    // ------------------------------------------------------------------------------
+
+    /**
+     * parse response data
+     *
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @return array
+     */
+    private function parseResponseData(ResponseInterface $response):array
+    {
+        $expc = 'application/json';
+        $type = $response->getHeader('Content-Type');
+
+        $noJson = strpos(strtolower(current($type)), $expc) === false;
+
+        $data = $noJson ?
+        $response->getBody():
+        $response->getBody()->getContents();
+
+        $noJson OR $data = json_decode($data, true);
+
+        return $data;
+    }
+
+    // ------------------------------------------------------------------------------
+
+    /**
+     * parse response headers
+     *
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @return array
+     */
+    private function parseResponseHeaders(ResponseInterface $response):array
+    {
+        //get headers
+        return $response->getHeaders();
     }
 
     // ------------------------------------------------------------------------------

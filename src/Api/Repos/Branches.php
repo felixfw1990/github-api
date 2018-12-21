@@ -3,7 +3,6 @@
 use Github\Assist\Base\API;
 use Github\Assist\Base\Helper;
 use Github\Assist\Base\Options;
-use Github\Assist\Request\HttpClient;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -25,21 +24,13 @@ class Branches
     // ------------------------------------------------------------------------------
 
     /**
-     * @var HttpClient
-     */
-    private $httpClient;
-
-    // ------------------------------------------------------------------------------
-
-    /**
      * Project constructor.
      *
      * @param Options $options
      */
     public function __construct(Options $options)
     {
-        $this->options    = $options;
-        $this->httpClient = new HttpClient($options);
+        $this->options = $options;
     }
 
     // ------------------------------------------------------------------------------
@@ -51,27 +42,22 @@ class Branches
      * @return array
      * @throws \Exception
      */
-    public function reposBranches(array $params):array
+    public function ownerRepoBranches(array $params):array
     {
-        $path  = [$params['owner'] ?? '', $params['repo'] ?? ''];
-        $queue =
-        [
-            'page'      => $params['page']['now'] ?? 1,
-            'per_page'  => $params['page']['size'] ?? 1,
-            'protected' => $params['protected'] ?? false,
-        ];
+        $owner = $params['owner'] ?? '';
+        $repo  = $params['repo'] ?? '';
+
+        $queue = Helper::arrayExistCum($params, 'page');
+        $queue = Helper::arrayExistCum($params, 'per_page', $queue);
+        $queue = Helper::arrayExistCum($params, 'protected', $queue);
 
         $result = $this->options
         ->getSync()
-        ->setPath(...$path)
+        ->setPath($owner, $repo)
         ->setQuery($queue)
-        ->get(API::LIST['reposBranches'], true);
+        ->get(API::LIST['RBBranches'], true);
 
-        return
-        [
-            'data'     => $result['data'] ?? [],
-            'max_page' => Helper::getMaxPage($result['headers'])
-        ];
+        return $result;
     }
 
     // ------------------------------------------------------------------------------

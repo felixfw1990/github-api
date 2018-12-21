@@ -1,7 +1,8 @@
 <?php namespace GithubTest\Repositories;
 
-use Github\Repos\Contents;
+use Github\Assist\Base\Helper;
 use GithubTest\Abs;
+use Github\Api\Repos\Contents;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -26,12 +27,17 @@ class ContentsTest extends Abs
     {
        parent::setUp();
 
-        $this->module = $this->client->Repos()->Contents();
+        $this->module = $this->client->Api()->Repos()->Contents();
     }
     
     // ------------------------------------------------------------------------------
 
-    public function testContents()
+    /**
+     * test owner repo contents path
+     *
+     * @throws \Exception
+     */
+    public function testOwnerRepoContentsPath()
     {
         $params =
         [
@@ -41,7 +47,7 @@ class ContentsTest extends Abs
             'ref'   => 'demo1',
         ];
 
-        $result = $this->module->reposContents($params);
+        $result = $this->module->ownerRepoContentsPath($params);
 
         $this->assertNotEmpty($result);
     }

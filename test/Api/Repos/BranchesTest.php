@@ -1,6 +1,7 @@
 <?php namespace GithubTest\Api\Repositories;
 
 use GithubTest\Abs;
+use Github\Assist\Base\Helper;
 use Github\Api\Repos\Branches;
 
 /**
@@ -31,19 +32,31 @@ class BranchesTest extends Abs
     
     // ------------------------------------------------------------------------------
 
-    public function testContents()
+    /**
+     * test contents
+     *
+     * @throws \Exception
+     */
+    public function testOwnerRepoBranches()
     {
         $params =
         [
             'repo'      => 'Testing',
             'owner'     => 'Uranuslab',
-            'page'      => ['size' => 1, 'now' => 1],
+            'page'      => 1,
+            'per_page'  => 1,
             'protected' => false,
         ];
 
-        $result = $this->module->reposBranches($params);
+        $result = $this->module->ownerRepoBranches($params);
 
-        $this->assertNotEmpty($result);
+        $resultData = $result['data'] ?? [];
+
+        $resultHeaders = $result['headers'] ?? [];
+        $maxPageSize   = Helper::getMaxPage($resultHeaders['Link'][0] ?? '');
+
+        $this->assertCount(1, $resultData);
+        $this->assertNotEmpty($maxPageSize);
     }
 
     // ------------------------------------------------------------------------------

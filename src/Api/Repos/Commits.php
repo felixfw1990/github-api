@@ -1,7 +1,8 @@
 <?php namespace Github\Api\Repos;
 
-use Github\Base\Options;
-use Github\Base\HttpClient;
+use Github\Assist\Base\API;
+use Github\Assist\Base\Helper;
+use Github\Assist\Base\Options;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -16,28 +17,20 @@ class Commits
     // ------------------------------------------------------------------------------
 
     /**
-     * @var \Github\Base\Options
+     * @var Options
      */
     private $options;
 
     // ------------------------------------------------------------------------------
 
     /**
-     * @var \Github\Base\HttpClient
-     */
-    private $httpClient;
-
-    // ------------------------------------------------------------------------------
-
-    /**
      * Commits constructor.
      *
-     * @param \Github\Base\Options $options
+     * @param Options $options
      */
     public function __construct(Options $options)
     {
-        $this->options    = $options;
-        $this->httpClient = new HttpClient();
+        $this->options = $options;
     }
 
     // ------------------------------------------------------------------------------
@@ -45,46 +38,49 @@ class Commits
     /**
      * get commits list
      *
-     * @link https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository
      * @param array $params
      * @return array
+     * @throws \Exception
      */
-    public function reposCommits(array $params):array
+    public function ownerRepoCommits(array $params):array
     {
-        $owner  = $params['owner'] ?? '';
-        $repo   = $params['repo']  ?? '';
-        $path   = $params['path']  ?? '';
-        $ref    = $params['ref']   ?? 'master'; //sha 开始位置或者分支列出提交
-        $page   = $params['page']  ?? [];
+        $owner = $params['owner'] ?? '';
+        $repo  = $params['repo']  ?? '';
 
-        $uri = "repos/{$owner}/{$repo}/commits?";
+        $queue = Helper::arrayExistCum($params, 'sha');
+        $queue = Helper::arrayExistCum($params, 'path', $queue);
+        $queue = Helper::arrayExistCum($params, 'author', $queue);
+        $queue = Helper::arrayExistCum($params, 'since', $queue);
+        $queue = Helper::arrayExistCum($params, 'until', $queue);
+        $queue = Helper::arrayExistCum($params, 'page', $queue);
+        $queue = Helper::arrayExistCum($params, 'per_page', $queue);
 
-        $uri .= "sha={$ref}";
-
-        $path AND $uri .= "&path={$path}";
-        $page AND $uri .= "&page={$page['now']}&per_page={$page['size']}";
-
-        return $this->httpClient->getResult($this->options, $uri, true);
+        return $this->options
+        ->getSync()
+        ->setPath($owner, $repo)
+        ->setQuery($queue)
+        ->get(API::LIST['RCCommits'], true);
     }
 
     // ------------------------------------------------------------------------------
 
     /**
-     * get a commit
+     * get commit
      *
-     * @link https://developer.github.com/v3/repos/commits/#get-a-single-commit
      * @param array $params
      * @return array
+     * @throws \Exception
      */
-    public function reposCommit(array $params):array
+    public function ownerRepoCommitsSha(array $params):array
     {
         $owner  = $params['owner'] ?? '';
         $repo   = $params['repo']  ?? [];
         $sha    = $params['sha']   ?? '';
 
-        $uri = "/repos/{$owner}/{$repo}/commits/{$sha}";
-
-        return $this->httpClient->getResult($this->options, $uri, false);
+        return $this->options
+            ->getSync()
+            ->setPath($owner, $repo, $sha)
+            ->get(API::LIST['RCCommit']);
     }
 
     // ------------------------------------------------------------------------------

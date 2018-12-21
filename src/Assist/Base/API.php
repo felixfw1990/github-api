@@ -10,16 +10,28 @@
  */
 class API
 {
-    // ------------------------------------------------------------------------------
-
     const LIST =
     [
+        // ------------------------------------------------------------------------------
+
         'server' => 'https://api.github.com',
 
-        //Repos
-        'reposBranches' => 'repos/%s/%s/branches',
-    ];
+        // ------------------------------------------------------------------------------
+        # repositories
 
-    // ------------------------------------------------------------------------------
-    
+        // repos root
+        'RRUser' => 'user/repos',
+
+        // branches
+        'RBBranches' => 'repos/%s/%s/branches',
+
+        // comments
+
+        // commits
+        'RCCommits' => 'repos/%s/%s/commits',
+        'RCCommit'  => 'repos/%s/%s/commits/%s',
+
+        // content
+        'RCContents' => 'repos/%s/%s/contents/%s',
+    ];
 }

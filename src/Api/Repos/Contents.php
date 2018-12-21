@@ -1,7 +1,8 @@
 <?php namespace Github\Api\Repos;
 
+use Github\Assist\Base\API;
+use Github\Assist\Base\Helper;
 use Github\Assist\Base\Options;
-use Github\Base\HttpClient;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -16,16 +17,9 @@ class Contents
     // ------------------------------------------------------------------------------
 
     /**
-     * @var \Github\Assist\Base\Options
+     * @var Options
      */
     private $options;
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * @var \Github\Base\HttpClient
-     */
-    private $httpClient;
 
     // ------------------------------------------------------------------------------
 
@@ -36,33 +30,31 @@ class Contents
      */
     public function __construct(Options $options)
     {
-        $this->options    = $options;
-        $this->httpClient = new HttpClient($options);
+        $this->options = $options;
     }
 
     // ------------------------------------------------------------------------------
 
     /**
-     * get contents folder or file
-     *
-     * @link https://developer.github.com/v3/repos/contents/#get-contents
+     * owner repo contents path
      *
      * @param array $params
      * @return array
+     * @throws \Exception
      */
-    public function reposContents(array $params):array
+    public function ownerRepoContentsPath(array $params):array
     {
-        $path  = $params['path']  ?? '';
-        $repo  = $params['repo']  ?? [];
         $owner = $params['owner'] ?? '';
-        $ref   = $params['ref']   ?? 'master';
+        $repo  = $params['repo']  ?? [];
+        $path  = $params['path']  ?? '';
 
-        $uri = "repos/{$owner}/{$repo}/contents";
+        $queue = Helper::arrayExistCum($params, 'ref');
 
-        $path AND $uri .= "/{$path}";
-        $ref  AND $uri .= "?ref={$ref}";
-
-        return $this->httpClient->getResult($uri, false);
+        return $this->options
+        ->getSync()
+        ->setPath($owner, $repo, $path)
+        ->setQuery($queue)
+        ->get(API::LIST['RCContents']);
     }
 
     // ------------------------------------------------------------------------------
