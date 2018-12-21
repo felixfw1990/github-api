@@ -54,7 +54,7 @@ class Branches
         ->getSync()
         ->setPath($owner, $repo)
         ->setQuery($queue)
-        ->get(API::LIST['RBBranches'], true);
+        ->get(API::REPOSITORIES['BRBranches'], true);
 
         return $result;
     }

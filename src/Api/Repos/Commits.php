@@ -54,7 +54,7 @@ class Commits
         ->getSync()
         ->setPath($owner, $repo)
         ->setQuery($queue)
-        ->get(API::LIST['RCCommits'], true);
+        ->get(API::REPOSITORIES['CRCommits'], true);
     }
 
     // ------------------------------------------------------------------------------
@@ -73,9 +73,9 @@ class Commits
         $sha    = $params['sha']   ?? '';
 
         return $this->options
-            ->getSync()
-            ->setPath($owner, $repo, $sha)
-            ->get(API::LIST['RCCommit']);
+        ->getSync()
+        ->setPath($owner, $repo, $sha)
+        ->get(API::REPOSITORIES['CRCommit']);
     }
 
     // ------------------------------------------------------------------------------

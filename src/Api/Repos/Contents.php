@@ -54,7 +54,7 @@ class Contents
         ->getSync()
         ->setPath($owner, $repo, $path)
         ->setQuery($queue)
-        ->get(API::LIST['RCContents']);
+        ->get(API::REPOSITORIES['CRContents']);
     }
 
     // ------------------------------------------------------------------------------

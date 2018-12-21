@@ -56,7 +56,7 @@ trait AbsBase
     {
         $option =
         [
-            'base_uri' => trim($server ?? API::LIST['server'])
+            'base_uri' => trim($server ?? API::SERVER)
         ];
 
         $this->debug  = $debug;

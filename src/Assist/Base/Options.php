@@ -81,7 +81,7 @@ class Options
     public function getSync()
     {
         $debug  = $this->debug;
-        $server = API::LIST['server'];
+        $server = API::SERVER;
 
         // when set log file
         if ($this->debug && !empty($this->logFile))
@@ -105,7 +105,7 @@ class Options
     public function getAsync()
     {
         $debug  = $this->debug;
-        $server = API::LIST['server'];
+        $server = API::SERVER;
 
         // when set log file
         if ($this->debug && !empty($this->logFile))

@@ -44,13 +44,41 @@ class Repos
      */
     public function userRepos(array $params):array
     {
-        $keys  = ['page', 'per_page'];
+        $keys =
+        [
+            'visibility', 'affiliation', 'type',
+            'sort', 'direction', 'page', 'per_page'
+        ];
+
         $queue = Helper::arrayExistCums($params, $keys);
 
         return $this->options
         ->getSync()
         ->setQuery($queue)
-        ->get(API::LIST['RRUser'], true);
+        ->get(API::REPOSITORIES['RMRepos'], true);
+    }
+
+    // ------------------------------------------------------------------------------
+
+    /**
+     * user user name repos
+     *
+     * @param array $params
+     * @return mixed
+     * @throws \Exception
+     */
+    public function usersUserNameRepos(array $params)
+    {
+        $userName = $params['username'];
+
+        $keys  = ['page', 'per_page', 'type', 'sort', 'direction'];
+        $queue = Helper::arrayExistCums($params, $keys);
+
+        return $this->options
+        ->getSync()
+        ->setPath($userName)
+        ->setQuery($queue)
+        ->get(API::REPOSITORIES['RURepos'], true);
     }
 
     // ------------------------------------------------------------------------------

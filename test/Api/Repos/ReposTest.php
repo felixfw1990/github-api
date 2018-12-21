@@ -57,5 +57,32 @@ class ReposTest extends Abs
     }
 
     // ------------------------------------------------------------------------------
+
+    /**
+     * user repos
+     *
+     * @throws \Exception
+     */
+    public function testUserUserNameRepos()
+    {
+        $params =
+        [
+            'username' => 'felixfw1111',
+            'page'     => 1,
+            'per_page' => 1,
+        ];
+
+        $result = $this->module->usersUserNameRepos($params);
+
+        $data = $result['data'] ?? [];
+
+        $headers     = $result['headers'] ?? [];
+        $pageMaxSize = Helper::getMaxPage($headers['Link'][0] ?? '');
+
+        $this->assertCount(1, $data);
+        $this->assertNotEmpty($pageMaxSize);
+    }
+
+    // ------------------------------------------------------------------------------
     
 }
