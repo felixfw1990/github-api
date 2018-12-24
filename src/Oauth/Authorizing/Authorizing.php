@@ -22,8 +22,7 @@ class Authorizing
 
     // ------------------------------------------------------------------------------
 
-    /**
-     * Project constructor.
+    /** * Project constructor.
      *
      * @param Options $options
      */

@@ -15,6 +15,24 @@ class API
     const SERVER = 'https://api.github.com';
 
     // gists
+    const GISTS =
+    [
+        // gists root
+        'GGUGists'   => 'users/%s/gists',
+        'GGists'     => 'gists',
+        'GGGPublic'  => 'gists/public',
+        'GGGStarred' => 'gists/starred',
+        'GGGists'    => 'gists/%s',
+        'GGGSha'     => 'gists/%s/%s',
+        'GGGCommits' => 'gists/%s/commits',
+        'GGGStar'    => 'gists/%s/star',
+        'GGGForks'   => 'gists/%s/forks',
+
+        // comments
+        'GCGComments'  => 'gists/%s/comments',
+        'GCGComment'   => 'gists/%s/comments/%s',
+    ];
+
     // git data
     // github apps
     // interactions
@@ -71,10 +89,10 @@ class API
         // commits
         'CRCommits' => 'repos/%s/%s/commits',   //
         'CRCommit'  => 'repos/%s/%s/commits/%s', //
-        'CRCompare' => '/repos/%s/%s/compare/%s...%s',
+        'CRCompare' => 'repos/%s/%s/compare/%s...%s',
 
         // commits
-        'CRCProfile' => '/repos/%s/%s/community/profile',
+        'CRCProfile' => 'repos/%s/%s/community/profile',
 
         // content
         'CRReadme'        => 'repos/%s/%s/readme',
@@ -82,6 +100,9 @@ class API
         'CRArchiveFormat' => 'repos/%s/%s/%s/%s',
 
         // deploy keys
+        'RDRKeys' => 'repos/%s/%s/keys',
+        'RDRKey'  => 'repos/%s/%s/keys/%s',
+
         // deployments
         // downloads
         // forks
@@ -89,6 +110,13 @@ class API
         // merging
         // pages
         // releases
+        'RRRReleases'  => 'repos/%s/%s/releases',
+        'RRRRelease'   => 'repos/%s/%s/releases/%s',
+        'RRRRLatest'   => 'repos/%s/%s/releases/latest',
+        'RRRRTag'      => 'repos/%s/%s/releases/tags/%s',
+        'RRRRAssets'   => 'repos/%s/%s/releases/%s/assets',
+        'RRRRAsset'    => 'repos/%s/%s/releases/assets/%s',
+
         // statistics
         // statuses
         // traffic

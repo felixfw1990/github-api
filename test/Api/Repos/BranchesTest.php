@@ -41,8 +41,8 @@ class BranchesTest extends Abs
     {
         $params =
         [
-            'repo'      => 'Testing',
-            'owner'     => 'Uranuslab',
+            'owner'     => $this->params['owner'],
+            'repo'      => $this->params['repo'],
             'page'      => 1,
             'per_page'  => 1,
             'protected' => false,

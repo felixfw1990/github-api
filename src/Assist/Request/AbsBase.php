@@ -211,7 +211,7 @@ trait AbsBase
         [
             'debug'       => $this->debug,
             'on_headers'  => $this->onHeadersFuncions(),
-            'http_errors' => $httpErrors
+            'http_errors' => $httpErrors,
         ];
 
         return array_merge(
@@ -222,6 +222,7 @@ trait AbsBase
             empty($this->headerParams) ? [] : $this->headerParams,
             empty($this->bodyContents) ? [] : $this->bodyContents
         );
+
     }
 
     // ------------------------------------------------------------------------------

@@ -41,8 +41,8 @@ class CommitsTest extends Abs
     {
         $params =
         [
-            'owner'    => 'Uranuslab',
-            'repo'     => 'Testing',
+            'owner'    => $this->params['owner'],
+            'repo'     => $this->params['repo'],
             'page'     => 1,
             'per_page' => 1,
         ];
@@ -69,8 +69,8 @@ class CommitsTest extends Abs
     {
         $params =
         [
-            'repo'  => 'Testing',
-            'owner' => 'Uranuslab',
+            'owner' => $this->params['owner'],
+            'repo'  => $this->params['repo'],
             'sha'   => 'ba6fd6779a70aae80d8b74be23bb4a81b63ae706',
         ];
 

@@ -1,23 +1,22 @@
-<?php namespace GithubTest\Repositories;
+<?php namespace GithubTest\Api\Pubs;
 
-use Github\Assist\Base\Helper;
+use Github\Assist\Base\API;
 use GithubTest\Abs;
-use Github\Api\Repos\Contents;
 
 /**
  * ----------------------------------------------------------------------------------
- *  Contents
+ *  PubTest
  * ----------------------------------------------------------------------------------
  *
  * @author Felix
- * @change 2018/12/19
+ * @change 2018/12/24
  */
-class ContentsTest extends Abs
+class PubTest extends Abs
 {
     // ------------------------------------------------------------------------------
 
     /**
-     * @var Contents
+     * @var \Github\Api\Pubs\Pub
      */
     private $module;
 
@@ -25,33 +24,36 @@ class ContentsTest extends Abs
 
     public function setUp()
     {
-       parent::setUp();
+        parent::setUp();
 
-        $this->module = $this->client->Api()->Repos()->Contents();
+        $this->module = $this->client->Api()->Pubs()->Pub();
     }
-    
+
     // ------------------------------------------------------------------------------
 
-    /**
-     * test owner repo contents path
-     *
-     * @throws \Exception
-     */
-    public function testOwnerRepoContentsPath()
+    public function testRequest()
     {
         $params =
         [
-            'owner' => $this->params['owner'],
-            'repo'  => $this->params['repo'],
-            'path'  => 'base/demo1',
-            'ref'   => 'demo1',
+            'uri'           => API::REPOSITORIES['BRBranches'],
+            'request_type'  => 'get',
+            'path'          => ['felixfw1990', 'test'],
+            'queue'         =>
+            [
+
+                'page'      => 1,
+                'per_page'  => 1,
+                'protected' => false,
+            ],
+            'get_headers'   => true,
+            'get_data'      => true,
         ];
 
-        $result = $this->module->ownerRepoContentsPath($params);
+        $result = $this->module->request($params);
 
         $this->assertNotEmpty($result);
     }
-
+    
     // ------------------------------------------------------------------------------
     
 }

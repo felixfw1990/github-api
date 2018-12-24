@@ -1,6 +1,5 @@
 <?php namespace Github\Assist\Request;
 
-use Github\Assist\Base\Helper;
 use Github\Assist\Base\Validate as V;
 use Github\Assist\Exceptions\GithubException;
 use Psr\Http\Message\StreamInterface;

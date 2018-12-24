@@ -113,35 +113,6 @@ class Helper
 
     // ------------------------------------------------------------------------------
 
-    public static function getRandString(int $length = 12)
-    {
-        $keys =
-        [
-            '0','1','2','3','4','5','6','7','8','9','10',
-
-            'a','b','c','d','e','f','g','h','i','j','k',
-            'l','m','n','o','p','q','r','s','t','u','v',
-            'w','x','y','z',
-
-            'A','B','C','D','E','F','G','H','I','J','K',
-            'L','M','N','O','P','Q','R','S','T','U','V',
-            'W','X','Y','Z'
-        ];
-
-        $str = '';
-
-        while ($length)
-        {
-            $str .= $keys[rand(0, count($keys) - 1)];
-
-           $length -- ;
-        }
-
-        return $str;
-    }
-
-    // ------------------------------------------------------------------------------
-
     /**
      * check if assoc array
      *
@@ -184,6 +155,57 @@ class Helper
         preg_match($rule, $linkString, $matches);
 
         return $matches[1] ?? 1;
+    }
+
+    // ------------------------------------------------------------------------------
+
+    /**
+     * get has string
+     *
+     * @param string $str
+     * @param string $has
+     * @return bool
+     */
+    public static function getHas(string $str, string $has):bool
+    {
+        if (!$str || !$has) { return false; }
+
+        $result = strpos($str, $has);
+
+        return $result !== false ? true : false;
+    }
+
+    // ------------------------------------------------------------------------------
+
+    /**
+     * @param int $length
+     * @return string
+     */
+    public static function getRandString(int $length = 12)
+    {
+        $keys =
+        [
+            '0','1','2','3','4','5','6','7','8','9','10',
+
+            'a','b','c','d','e','f','g','h','i','j','k',
+            'l','m','n','o','p','q','r','s','t','u','v',
+            'w','x','y','z',
+
+            'A','B','C','D','E','F','G','H','I','J','K',
+            'L','M','N','O','P','Q','R','S','T','U','V',
+            'W','X','Y','Z'
+        ];
+
+        $str = '';
+
+        while ($length)
+        {
+            $str .= $keys[rand(0, count($keys) - 1)];
+
+            $length -- ;
+        }
+
+        return $str;
     }
 
 

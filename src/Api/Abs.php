@@ -1,6 +1,7 @@
 <?php namespace Github\Api;
 
 use Github\Api\Repos\Abs as ReposAbs;
+use Github\Api\Pubs\Abs as PubsAbs;
 use Github\Assist\Base\Options;
 use Github\Assist\Exceptions\GithubException;
 
@@ -10,6 +11,7 @@ use Github\Assist\Exceptions\GithubException;
  * ----------------------------------------------------------------------------------
  *
  * @method ReposAbs Repos()
+ * @method PubsAbs  Pubs()
  *
  * @author Felix
  * @change 2018/12/19
