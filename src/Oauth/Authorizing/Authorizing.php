@@ -76,26 +76,13 @@ class Authorizing
 
         $queue = Helper::arrayExistCums($params, $keys);
 
-        $str = $this->options
+        $result = $this->options
         ->getSync()
+        ->setHeaderParams(['Accept' => 'application/json'])
         ->setQuery($queue)
         ->post($uri);
 
-        $strArray = explode('&', $str);
-
-        $output = [];
-
-        foreach ($strArray as $v)
-        {
-            $tempArr = explode('=', $v);
-
-            $tempKey   = $tempArr[0];
-            $tempValue = $tempArr[1];
-
-            $output[$tempKey] = $tempValue ;
-        }
-
-        return $output;
+        return $result;
     }
     
     // ------------------------------------------------------------------------------

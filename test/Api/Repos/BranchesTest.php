@@ -2,7 +2,7 @@
 
 use GithubTest\Abs;
 use Github\Assist\Base\Helper;
-use Github\Api\Repos\Branches;
+use Github\Api\Repositories\Branches;
 
 /**
  * ----------------------------------------------------------------------------------

@@ -66,8 +66,8 @@ class AuthorizingTest extends Abs
     {
         $params =
         [
-            'code'          => '7cde46103cc053722d6c',
-            'state'         => 'JNnX2TtT4mE0ANih3qe3RJwIyQxKr10',
+            'code'          => '1e937f1bd2e6ea0f9f23',
+            'state'         => 'Z93QmWdkK6AQroqaZ9EDQNUW2GhsMn',
             'client_id'     => $this->params['client_id'],
             'client_secret' => $this->params['client_secret'],
             'redirect_uri'  => $this->params['token_redirect_uri'],

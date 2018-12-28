@@ -210,7 +210,7 @@ trait AbsBase
         $temp =
         [
             'debug'       => $this->debug,
-            'on_headers'  => $this->onHeadersFuncions(),
+//            'on_headers'  => $this->onHeadersFuncions(),
             'http_errors' => $httpErrors,
         ];
 

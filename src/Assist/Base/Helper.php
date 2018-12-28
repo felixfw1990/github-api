@@ -132,6 +132,34 @@ class Helper
     // ------------------------------------------------------------------------------
 
     /**
+     * Extract an element (non-null value) from a two-dimensional array to form a new array
+     *
+     * @param  array  $data
+     * @param  string $key _id, id ...
+     * @param  bool   $inside true is array false is string
+     * @return array
+     */
+    public  static function generalArray(array $data, string $key = '_id', bool $inside = false): array
+    {
+        $temp = [];
+
+        if (!count($data)) { return $temp; }
+
+        foreach ($data as $val)
+        {
+            if (empty($val[$key])) { continue; }
+
+            $inside ?
+            $temp = array_merge($temp, $val[$key]) :
+            $temp[] = $val[$key];
+        }
+
+        return $temp;
+    }
+
+    // ------------------------------------------------------------------------------
+
+    /**
      * get max page number
      *
      * @param  string $linkString

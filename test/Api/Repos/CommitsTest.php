@@ -2,7 +2,7 @@
 
 use Github\Assist\Base\Helper;
 use GithubTest\Abs;
-use Github\Api\Repos\Commits;
+use Github\Api\Repositories\Commits;
 
 /**
  * ----------------------------------------------------------------------------------

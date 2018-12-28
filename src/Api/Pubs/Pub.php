@@ -41,16 +41,18 @@ class Pub
      */
     public function request(array $params):array
     {
-        $uri         = $params['uri'] ?? '';
-        $requestType = $params['request_type'] ?? 'get';
-        $path        = $params['path'] ?? [];
-        $queue       = $params['queue'] ?? [];
-        $getHeaders  = $params['get_headers'] ?? false;
-        $getData     = $params['get_data'] ?? true;
+        $uri         = $params['uri']           ?? '';
+        $requestType = $params['request_type']  ?? 'get';
+        $headers     = $params['headers']       ?? [];
+        $path        = $params['path']          ?? [];
+        $queue       = $params['queue']         ?? [];
+        $getHeaders  = $params['get_headers']   ?? false;
+        $getData     = $params['get_data']      ?? true;
 
         $result = $this->options
         ->getSync()
         ->setPath(...$path)
+        ->setHeaderParams($headers)
         ->setQuery($queue)
         ->$requestType($uri, $getHeaders, $getData);
 

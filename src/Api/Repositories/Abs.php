@@ -1,6 +1,6 @@
-<?php namespace Github\Api\Repos;
+<?php namespace Github\Api\Repositories;
 
-use Github\Api\Repos;
+use Github\Api\Repositories;
 use Github\Assist\Base\BaseAbs;
 
 /**
@@ -8,10 +8,10 @@ use Github\Assist\Base\BaseAbs;
  *  Abs
  * ----------------------------------------------------------------------------------
  *
- * @method Repos\Contents Contents()
- * @method Repos\Repos Repos()
- * @method Repos\Branches Branches()
- * @method Repos\Commits Commits()
+ * @method Repositories\Contents Contents()
+ * @method Repositories\Repos Repos()
+ * @method Repositories\Branches Branches()
+ * @method Repositories\Commits Commits()
  *
  * @author Felix
  * @change 2018/12/19

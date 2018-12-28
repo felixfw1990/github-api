@@ -38,6 +38,7 @@ class PubTest extends Abs
             'uri'           => API::REPOSITORIES['BRBranches'],
             'request_type'  => 'get',
             'path'          => ['felixfw1990', 'test'],
+            'headers'       => [],
             'queue'         =>
             [
 

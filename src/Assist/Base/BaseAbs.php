@@ -7,7 +7,7 @@ use Github\Assist\Exceptions\GithubException;
  *
  * @package Github\Base
  */
-class BaseAbs
+abstract class BaseAbs
 {
 
     // ------------------------------------------------------------------------------

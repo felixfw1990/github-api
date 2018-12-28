@@ -1,6 +1,7 @@
 <?php namespace Github\Api\Pubs;
 
 use Github\Api\Pubs;
+use Github\Assist\Base\BaseAbs;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -12,12 +13,7 @@ use Github\Api\Pubs;
  * @author Felix
  * @change 2018/12/19
  */
-class Abs
+class Abs extends BaseAbs
 {
-    // ------------------------------------------------------------------------------
 
-    use \Github\Assist\Base\Abs;
-
-    // ------------------------------------------------------------------------------
-    
 }

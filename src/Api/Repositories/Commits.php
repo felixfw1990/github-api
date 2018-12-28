@@ -1,4 +1,4 @@
-<?php namespace Github\Api\Repos;
+<?php namespace Github\Api\Repositories;
 
 use Github\Assist\Base\API;
 use Github\Assist\Base\Helper;

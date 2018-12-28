@@ -1,6 +1,6 @@
 <?php namespace Github\Api;
 
-use Github\Api\Repos\Abs as ReposAbs;
+use Github\Api\Repositories\Abs as ReposAbs;
 use Github\Api\Pubs\Abs as PubsAbs;
 use Github\Assist\Base\Options;
 use Github\Assist\Exceptions\GithubException;

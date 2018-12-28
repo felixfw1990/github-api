@@ -1,7 +1,7 @@
 <?php namespace GithubTest\Repositories;
 
 use GithubTest\Abs;
-use Github\Api\Repos\Repos;
+use Github\Api\Repositories\Repos;
 use Github\Assist\Base\Helper;
 
 /**

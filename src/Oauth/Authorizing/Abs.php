@@ -1,5 +1,6 @@
 <?php namespace Github\Oauth\Authorizing;
 
+use Github\Assist\Base\BaseAbs;
 use \Github\Oauth\Authorizing;
 
 /**
@@ -12,12 +13,7 @@ use \Github\Oauth\Authorizing;
  * @author Felix
  * @change 2018/12/19
  */
-class Abs
+class Abs extends BaseAbs
 {
-    // ------------------------------------------------------------------------------
 
-    use \Github\Assist\Base\Abs;
-
-    // ------------------------------------------------------------------------------
-    
 }
