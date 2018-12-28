@@ -1,6 +1,5 @@
-<?php namespace Github\Api\Repositories;
+<?php namespace Github\Api;
 
-use Github\Api\Repositories;
 use Github\Assist\Base\BaseAbs;
 
 /**
@@ -8,15 +7,13 @@ use Github\Assist\Base\BaseAbs;
  *  Abs
  * ----------------------------------------------------------------------------------
  *
- * @method Repositories\Contents Contents()
- * @method Repositories\Repos Repos()
- * @method Repositories\Branches Branches()
- * @method Repositories\Commits Commits()
+ * @method Pubs\Pubs Pubs()
+ * @method Repositories\Repositories Repositories()
  *
  * @author Felix
  * @change 2018/12/19
  */
-class Abs extends BaseAbs
+class Api extends BaseAbs
 {
 
 }

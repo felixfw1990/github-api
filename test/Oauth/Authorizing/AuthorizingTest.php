@@ -25,7 +25,7 @@ class AuthorizingTest extends Abs
     {
         parent::setUp();
 
-        $this->module = $this->client->Oauth()->Authorizing()->Authorizing();
+        $this->module = $this->client->Oauth()->Authorizing();
     }
 
     // ------------------------------------------------------------------------------

@@ -1,23 +1,23 @@
 <?php namespace GithubTest\Repositories;
 
-use Github\Assist\Base\Helper;
 use GithubTest\Abs;
-use Github\Api\Repositories\Commits;
+use Github\Api\Repositories\Repos;
+use Github\Assist\Base\Helper;
 
 /**
  * ----------------------------------------------------------------------------------
- *  CommitsTest
+ *  ReposTest
  * ----------------------------------------------------------------------------------
  *
  * @author Felix
- * @change 2018/12/20
+ * @change 2018/12/19
  */
-class CommitsTest extends Abs
+class ReposTest extends Abs
 {
     // ------------------------------------------------------------------------------
 
     /**
-     * @var Commits
+     * @var Repos
      */
     private $module;
 
@@ -27,56 +27,60 @@ class CommitsTest extends Abs
     {
        parent::setUp();
 
-        $this->module = $this->client->Api()->Repos()->Commits();
+        $this->module = $this->client->Api()->Repositories()->repos();
     }
     
     // ------------------------------------------------------------------------------
 
     /**
-     * test owner repo commits
+     * user repos
      *
      * @throws \Exception
      */
-    public function testOwnerRepoCommits()
+    public function testUserRepos()
     {
         $params =
         [
-            'owner'    => $this->params['owner'],
-            'repo'     => $this->params['repo'],
             'page'     => 1,
-            'per_page' => 1,
+            'per_page' => 5,
         ];
 
-        $result = $this->module->ownerRepoCommits($params);
+        $result = $this->module->userRepos($params);
 
         $data = $result['data'] ?? [];
 
-        $headers = $result['headers'] ?? [];
-        $maxPageSize = Helper::getMaxPage($headers['Link'][0] ?? '');
+        $headers     = $result['headers'] ?? [];
+        $pageMaxSize = Helper::getMaxPage($headers['Link'][0] ?? '');
 
-        $this->assertCount(1, $data);
-        $this->assertNotEmpty($maxPageSize);
+        $this->assertCount(5, $data);
+        $this->assertNotEmpty($pageMaxSize);
     }
 
     // ------------------------------------------------------------------------------
 
     /**
-     * test owner repo commits sha
+     * user repos
      *
      * @throws \Exception
      */
-    public function testOwnerRepoCommitsSha()
+    public function testUserUserNameRepos()
     {
         $params =
         [
-            'owner' => $this->params['owner'],
-            'repo'  => $this->params['repo'],
-            'sha'   => 'ba6fd6779a70aae80d8b74be23bb4a81b63ae706',
+            'username' => 'felixfw1111',
+            'page'     => 1,
+            'per_page' => 1,
         ];
 
-        $result = $this->module->ownerRepoCommitsSha($params);
+        $result = $this->module->usersUserNameRepos($params);
 
-        $this->assertNotEmpty($result);
+        $data = $result['data'] ?? [];
+
+        $headers     = $result['headers'] ?? [];
+        $pageMaxSize = Helper::getMaxPage($headers['Link'][0] ?? '');
+
+        $this->assertCount(1, $data);
+        $this->assertNotEmpty($pageMaxSize);
     }
 
     // ------------------------------------------------------------------------------

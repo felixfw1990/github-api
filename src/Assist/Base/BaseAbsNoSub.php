@@ -1,53 +1,41 @@
-<?php namespace Github;
+<?php namespace Github\Assist\Base;
 
-use Github\Assist\Base\Options;
 use Github\Assist\Exceptions\GithubException;
 
 /**
  * ----------------------------------------------------------------------------------
- *  Client
+ *  BaseAbsNoSub
  * ----------------------------------------------------------------------------------
  *
- * @method Api\Api Api()
- * @method Oauth\Oauth Oauth()
- *
  * @author Felix
- * @change 2018/12/13
+ * @change 2018/12/28
  */
-class Client
+abstract class BaseAbsNoSub
 {
+
     // ------------------------------------------------------------------------------
-    
+
+    /**
+     * @var Options
+     */
     private $options;
 
     // ------------------------------------------------------------------------------
 
     /**
-     * Client constructor.
+     * Abs constructor.
      *
-     * @param array $options
+     * @param \Github\Assist\Base\Options $options
      */
-    public function __construct(array $options)
+    public function __construct(Options $options = NULL)
     {
-        $this->options = new Options($options);
+        $options AND $this->options = $options;
     }
 
     // ------------------------------------------------------------------------------
 
     /**
-     * get options
-     *
-     * @return \Github\Assist\Base\Options
-     */
-    public function Options()
-    {
-        return $this->options;
-    }
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * call github apis
+     * call
      *
      * @param string $name
      * @param array  $arguments
@@ -57,19 +45,23 @@ class Client
     public function __call(string $name, array $arguments)
     {
         $name      = ucfirst($name);
-        $nameSpace = __NAMESPACE__;
+        $nameSpace = get_class($this);
 
-        $apiClass = "{$nameSpace}\\{$name}\\{$name}";
+        $tempArray = explode('\\' , $nameSpace);
+        array_pop($tempArray);
+        $nameSpace = implode('\\', $tempArray);
+
+        $subClass = "{$nameSpace}\\{$name}";
 
         // check class exists
-        if (!class_exists($apiClass))
+        if (!class_exists($subClass))
         {
-            throw new GithubException("class {$apiClass} not found!");
+            throw new GithubException("class {$subClass} not found!");
         }
 
-        return new $apiClass($this->options);
+        return new $subClass($this->options);
     }
 
     // ------------------------------------------------------------------------------
-    
+
 }

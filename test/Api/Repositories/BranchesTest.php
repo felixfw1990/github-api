@@ -27,7 +27,7 @@ class BranchesTest extends Abs
     {
        parent::setUp();
 
-        $this->module = $this->client->Api()->Repos()->Branches();
+        $this->module = $this->client->Api()->Repositories()->Branches();
     }
     
     // ------------------------------------------------------------------------------

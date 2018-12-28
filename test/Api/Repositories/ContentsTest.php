@@ -26,7 +26,7 @@ class ContentsTest extends Abs
     {
        parent::setUp();
 
-        $this->module = $this->client->Api()->Repos()->Contents();
+        $this->module = $this->client->Api()->Repositories()->Contents();
     }
     
     // ------------------------------------------------------------------------------

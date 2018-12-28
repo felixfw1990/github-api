@@ -1,19 +1,18 @@
-<?php namespace Github\Oauth\Authorizing;
+<?php namespace Github\Oauth;
 
 use Github\Assist\Base\BaseAbs;
-use \Github\Oauth\Authorizing;
 
 /**
  * ----------------------------------------------------------------------------------
- *  Abs
+ *  Oauth
  * ----------------------------------------------------------------------------------
  *
  * @method Authorizing\Authorizing Authorizing()
  *
  * @author Felix
- * @change 2018/12/19
+ * @change 2018/12/28
  */
-class Abs extends BaseAbs
+class Oauth extends BaseAbs
 {
 
 }

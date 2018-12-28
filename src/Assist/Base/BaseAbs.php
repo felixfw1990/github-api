@@ -3,9 +3,12 @@
 use Github\Assist\Exceptions\GithubException;
 
 /**
- * Trait Abs
+ * ----------------------------------------------------------------------------------
+ *  BaseAbs
+ * ----------------------------------------------------------------------------------
  *
- * @package Github\Base
+ * @author Felix
+ * @change 2018/12/28
  */
 abstract class BaseAbs
 {
@@ -24,9 +27,9 @@ abstract class BaseAbs
      *
      * @param \Github\Assist\Base\Options $options
      */
-    public function __construct(Options $options)
+    public function __construct(Options $options = NULL)
     {
-        $this->options = $options;
+        $options AND $this->options = $options;
     }
 
     // ------------------------------------------------------------------------------
@@ -41,9 +44,14 @@ abstract class BaseAbs
      */
     public function __call(string $name, array $arguments)
     {
-        $nmSpace  = trim(get_class($this), 'Abs');
-        $nmSpace  = trim($nmSpace, '\\');
-        $subClass = $nmSpace .'\\'. ucfirst($name);
+        $name      = ucfirst($name);
+        $nameSpace = get_class($this);
+
+        $tempArray = explode('\\' , $nameSpace);
+        array_pop($tempArray);
+        $nameSpace = implode('\\', $tempArray);
+
+        $subClass = "{$nameSpace}\\{$name}\\{$name}";
 
         // check class exists
         if (!class_exists($subClass))

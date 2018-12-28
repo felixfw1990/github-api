@@ -1,6 +1,8 @@
 <?php namespace GithubTest\Api\Pubs;
 
 use Github\Assist\Base\API;
+use Github\Assist\Base\Helper;
+use Github\Client;
 use GithubTest\Abs;
 
 /**
@@ -16,7 +18,7 @@ class PubTest extends Abs
     // ------------------------------------------------------------------------------
 
     /**
-     * @var \Github\Api\Pubs\Pub
+     * @var \Github\Api\Pubs\Pubs
      */
     private $module;
 
@@ -26,7 +28,7 @@ class PubTest extends Abs
     {
         parent::setUp();
 
-        $this->module = $this->client->Api()->Pubs()->Pub();
+        $this->module = $this->client->Api()->Pubs();
     }
 
     // ------------------------------------------------------------------------------
@@ -54,7 +56,7 @@ class PubTest extends Abs
 
         $this->assertNotEmpty($result);
     }
-    
+
     // ------------------------------------------------------------------------------
     
 }

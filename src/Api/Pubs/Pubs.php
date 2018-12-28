@@ -10,7 +10,7 @@ use Github\Assist\Base\Options;
  * @author Felix
  * @change 2018/12/24
  */
-class Pub
+class Pubs
 {
     // ------------------------------------------------------------------------------
 
