@@ -11,7 +11,7 @@ use Github\Assist\Base\BaseAbsNoSub;
  * @method Comments Comments()
  * @method Commits  Commits()
  * @method Contents Contents()
- * @method Repos    Repos()
+ * @method Root     Root()
  *
  * @author Felix
  * @change 2018/12/28
