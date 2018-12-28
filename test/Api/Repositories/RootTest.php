@@ -1,7 +1,7 @@
 <?php namespace GithubTest\Repositories;
 
 use GithubTest\Abs;
-use Github\Api\Repositories\Repos;
+use Github\Api\Repositories\Root;
 use Github\Assist\Base\Helper;
 
 /**
@@ -17,7 +17,7 @@ class ReposTest extends Abs
     // ------------------------------------------------------------------------------
 
     /**
-     * @var Repos
+     * @var Root
      */
     private $module;
 
@@ -27,7 +27,7 @@ class ReposTest extends Abs
     {
        parent::setUp();
 
-        $this->module = $this->client->Api()->Repositories()->repos();
+        $this->module = $this->client->Api()->Repositories()->Root();
     }
     
     // ------------------------------------------------------------------------------
