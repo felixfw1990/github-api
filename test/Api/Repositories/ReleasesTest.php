@@ -1,23 +1,22 @@
 <?php namespace GithubTest\Api\Repositories;
 
 use GithubTest\Abs;
-use Github\Assist\Base\Helper;
-use Github\Api\Repositories\Branches;
+use Github\Api\Repositories\Releases;
 
 /**
  * ----------------------------------------------------------------------------------
- *  BranchesTest
+ *  ReleasesTest
  * ----------------------------------------------------------------------------------
  *
  * @author Felix
- * @change 2018/12/20
+ * @change 2018/12/29
  */
-class BranchesTest extends Abs
+class ReleasesTest extends Abs
 {
     // ------------------------------------------------------------------------------
 
     /**
-     * @var Branches
+     * @var Releases
      */
     private $module;
 
@@ -27,7 +26,7 @@ class BranchesTest extends Abs
     {
        parent::setUp();
 
-        $this->module = $this->client->Api()->Repositories()->Branches();
+        $this->module = $this->client->Api()->Repositories()->Releases();
     }
     
     // ------------------------------------------------------------------------------
@@ -45,18 +44,11 @@ class BranchesTest extends Abs
             'repo'      => $this->params['repo'],
             'page'      => 1,
             'per_page'  => 1,
-            'protected' => false,
         ];
 
-        $result = $this->module->ownerRepoBranches($params);
+        $result = $this->module->ownerRepoReleases($params);
 
-        $resultData = $result['data'] ?? [];
-
-        $resultHeaders = $result['headers'] ?? [];
-        $maxPageSize   = Helper::getLastPage($resultHeaders['Link'][0] ?? '');
-
-        $this->assertCount(1, $resultData);
-        $this->assertNotEmpty($maxPageSize);
+        $this->assertNotEmpty($result);
     }
 
     // ------------------------------------------------------------------------------

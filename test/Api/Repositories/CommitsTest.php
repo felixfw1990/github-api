@@ -52,7 +52,7 @@ class CommitsTest extends Abs
         $data = $result['data'] ?? [];
 
         $headers = $result['headers'] ?? [];
-        $maxPageSize = Helper::getMaxPage($headers['Link'][0] ?? '');
+        $maxPageSize = Helper::getLastPage($headers['Link'][0] ?? '');
 
         $this->assertCount(1, $data);
         $this->assertNotEmpty($maxPageSize);

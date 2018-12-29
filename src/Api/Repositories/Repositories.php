@@ -10,6 +10,7 @@ use Github\Assist\Base\BaseAbsNoSub;
  * @method Branches Branches()
  * @method Comments Comments()
  * @method Commits  Commits()
+ * @method Releases Releases()
  * @method Contents Contents()
  * @method Root     Root()
  *
