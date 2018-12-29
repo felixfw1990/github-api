@@ -57,6 +57,26 @@ class Root
         ->setQuery($queue)
         ->get(API::REPOSITORIES['RMRepos'], true);
     }
+    
+    // ------------------------------------------------------------------------------
+
+    /**
+     * repos owner repo tags
+     *
+     * @param array $params
+     * @return array
+     * @throws \Exception
+     */
+    public function reposOwnerRepoTags(array $params):array
+    {
+        $owner = $params['owner'] ?? '';
+        $repo  = $params['repo'] ?? '';
+
+        return $this->options
+        ->getSync()
+        ->setPath($owner, $repo)
+        ->get(API::REPOSITORIES['RRTags'], true);
+    }
 
     // ------------------------------------------------------------------------------
 

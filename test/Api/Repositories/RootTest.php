@@ -63,6 +63,28 @@ class RootTest extends Abs
      *
      * @throws \Exception
      */
+    public function testReposOwnerRepoTags()
+    {
+        $params =
+        [
+            'owner'    => $this->params['owner'],
+            'repo'     => $this->params['repo'],
+            'page'     => 1,
+            'per_page' => 1,
+        ];
+
+        $result = $this->module->reposOwnerRepoTags($params);
+
+        $this->assertNotEmpty($result);
+    }
+
+    // ------------------------------------------------------------------------------
+
+    /**
+     * user repos
+     *
+     * @throws \Exception
+     */
     public function testUserUserNameRepos()
     {
         $params =
