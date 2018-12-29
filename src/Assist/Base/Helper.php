@@ -162,13 +162,15 @@ class Helper
     /**
      * get max page number
      *
+     * if return 0 not found 'last' tag, Recommended to take the current page
+     *
      * @param  string $linkString
      * @return int
      */
-    public static function getMaxPage(string $linkString):int
+    public static function getLastPage(string $linkString):int
     {
         //不支持分页或者每页数量超出最大数量
-        if (!$linkString) { return 1 ;}
+        if (!$linkString) { return 0 ;}
 
         //第一次处理
         $rule    = "/(next|first|prev).*page=(\d).*rel=\"last\"/";
@@ -182,7 +184,7 @@ class Helper
         $rule = '/page=([1-9]\d*)/';
         preg_match($rule, $linkString, $matches);
 
-        return $matches[1] ?? 1;
+        return $matches[1] ?? 0;
     }
 
     // ------------------------------------------------------------------------------

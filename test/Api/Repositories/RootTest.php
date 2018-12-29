@@ -50,7 +50,7 @@ class RootTest extends Abs
         $data = $result['data'] ?? [];
 
         $headers     = $result['headers'] ?? [];
-        $pageMaxSize = Helper::getMaxPage($headers['Link'][0] ?? '');
+        $pageMaxSize = Helper::getLastPage($headers['Link'][0] ?? '');
 
         $this->assertCount(5, $data);
         $this->assertNotEmpty($pageMaxSize);
