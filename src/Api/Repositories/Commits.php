@@ -72,7 +72,8 @@ class Commits
         $repo   = $params['repo']  ?? [];
         $sha    = $params['sha']   ?? '';
 
-        return $this->options->getSync()
+        return $this->options
+        ->getSync()
         ->setPath($owner, $repo, $sha)
         ->get(API::REPOSITORIES['CRCommit']);
     }
