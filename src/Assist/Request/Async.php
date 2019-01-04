@@ -1,6 +1,5 @@
 <?php namespace Github\Assist\Request;
 
-use Github\Assist\Base\Helper;
 use GuzzleHttp\Pool;
 use Github\Assist\Base\Validate as V;
 use Github\Assist\Exceptions\GithubException;

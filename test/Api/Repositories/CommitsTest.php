@@ -43,8 +43,9 @@ class CommitsTest extends Abs
         [
             'owner'    => $this->params['owner'],
             'repo'     => $this->params['repo'],
+            'path'     => 'base/demo1',
             'page'     => 1,
-            'per_page' => 1,
+            'per_page' => 5,
         ];
 
         $result = $this->module->ownerRepoCommits($params);

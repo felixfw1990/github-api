@@ -58,6 +58,33 @@ class Contents
 
         return $result;
     }
+    
+    // ------------------------------------------------------------------------------
+
+    /**
+     * owner repo contents path put
+     *
+     * @param array $params
+     * @return array
+     * @throws \Exception
+     */
+    public function ownerRepoContentsPathPut(array $params):array
+    {
+        $owner = $params['owner'] ?? '';
+        $repo  = $params['repo']  ?? [];
+        $path  = $params['path']  ?? '';
+
+        $keys  = ['message', 'content', 'branch', 'committer', 'author'];
+        $queue = Helper::arrayExistCums($params, $keys);
+
+        $result = $this->options
+        ->getSync()
+        ->setPath($owner, $repo, $path)
+        ->setFormParams($queue)
+        ->put(API::REPOSITORIES['CRContents']);
+
+        return $result;
+    }
 
     // ------------------------------------------------------------------------------
     
