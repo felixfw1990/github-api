@@ -87,5 +87,33 @@ class Contents
     }
 
     // ------------------------------------------------------------------------------
+
+    /**
+     * owner repo contents path delete
+     *
+     * @param array $params
+     *
+     * @return array
+     * @throws \Exception
+     */
+    public function ownerRepoContentsPathDelete(array $params)
+    {
+        $owner = $params['owner'] ?? '';
+        $repo  = $params['repo']  ?? [];
+        $path  = $params['path']  ?? '';
+
+        $keys  = ['message', 'sha', 'branch', 'committer', 'author'];
+        $queue = Helper::arrayExistCums($params, $keys);
+
+        $result = $this->options
+        ->getSync()
+        ->setPath($owner, $repo, $path)
+        ->setFormParams($queue)
+        ->delete(API::REPOSITORIES['CRContents']);
+
+        return $result;
+    }
+
+    // ------------------------------------------------------------------------------
     
 }

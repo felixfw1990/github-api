@@ -3,6 +3,7 @@
 use Github\Assist\Base\Helper;
 use GithubTest\Abs;
 use Github\Api\Repositories\Contents;
+use phpDocumentor\Reflection\File;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -72,7 +73,7 @@ class ContentsTest extends Abs
             'owner'     => $this->params['owner'],
             'repo'      => $this->params['repo'],
             'path'      => "base/demo1/commit{$number}.{$suffix}",
-            'message'   => 'test commit',
+            'message'   => 'test commit create file',
             'content'   => $content,
             'branch'    => 'master',
             'committer' =>
@@ -80,14 +81,48 @@ class ContentsTest extends Abs
                 'name' => 'felixfw1111',
                 'email' => 'felixfw1111@gmail.com',
             ],
-            'author'    =>
-            [
-                'name' => 'felixfw1111',
-                'email' => 'felixfw1111@gmail.com',
-            ],
+//            'author'    =>
+//            [
+//                'name' => 'felixfw1111',
+//                'email' => 'felixfw1111@gmail.com',
+//            ],
         ];
 
         $result = $this->module->ownerRepoContentsPathPut($params);
+
+        $this->assertNotEmpty($result);
+    }
+    
+    // ------------------------------------------------------------------------------
+
+    /**
+     * test owner repo contents path delete
+     *
+     * @throws \Exception
+     */
+    public function testOwnerRepoContentsPathDelete()
+    {
+        $params =
+        [
+            'owner'     => $this->params['owner'],
+            'repo'      => $this->params['repo'],
+            'path'      => 'base/demo2/b.txt',
+            'sha'       => '0a792b5f95356b6bb82409c7cb7b2168af1652c9',
+            'branch'    => 'master',
+            'message'   => 'test commit delete file',
+            'committer' =>
+            [
+                'name'  => 'felixfw1111',
+                'email' => 'felixfw1111@gmail.com',
+            ],
+//            'author'    =>
+//            [
+//                'name' => 'felixfw1111',
+//                'email' => 'felixfw1111@gmail.com',
+//            ],
+        ];
+
+        $result = $this->module->ownerRepoContentsPathDelete($params);
 
         $this->assertNotEmpty($result);
     }
