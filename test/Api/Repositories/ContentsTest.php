@@ -1,9 +1,7 @@
 <?php namespace GithubTest\Repositories;
 
-use Github\Assist\Base\Helper;
 use GithubTest\Abs;
 use Github\Api\Repositories\Contents;
-use phpDocumentor\Reflection\File;
 
 /**
  * ----------------------------------------------------------------------------------
