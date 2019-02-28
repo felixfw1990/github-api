@@ -74,7 +74,7 @@ class Contents
         $repo  = $params['repo']  ?? [];
         $path  = $params['path']  ?? '';
 
-        $keys  = ['message', 'content', 'branch', 'committer', 'author'];
+        $keys  = ['message', 'content', 'branch', 'committer', 'author', 'sha'];
         $queue = Helper::arrayExistCums($params, $keys);
 
         $result = $this->options
