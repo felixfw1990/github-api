@@ -62,7 +62,7 @@ class Contents
     // ------------------------------------------------------------------------------
 
     /**
-     * owner repo contents path put
+     * owner repo contents path put(create or update)
      *
      * @param array $params
      * @return array
