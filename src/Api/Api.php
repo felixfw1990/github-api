@@ -8,12 +8,10 @@ use Github\Assist\Base\BaseAbs;
  * ----------------------------------------------------------------------------------
  *
  * @method Pubs\Pubs Pubs()
+ * @method Data\Data Data()
  * @method Repositories\Repositories Repositories()
  *
  * @author Felix
  * @change 2018/12/19
  */
-class Api extends BaseAbs
-{
-
-}
+class Api extends BaseAbs { }

@@ -12,6 +12,7 @@ use Github\Assist\Base\BaseAbsNoSub;
  * @method Commits  Commits()
  * @method Releases Releases()
  * @method Contents Contents()
+ * @method Merging  Merging()
  * @method Root     Root()
  *
  * @author Felix

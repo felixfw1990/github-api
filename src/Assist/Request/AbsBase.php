@@ -56,7 +56,8 @@ trait AbsBase
     {
         $option =
         [
-            'base_uri' => trim($server ?? API::SERVER)
+            'base_uri' => trim($server ?? API::SERVER),
+            'http'     => ['proxy' => '192.168.0.209:1082'],
         ];
 
         $this->debug  = $debug;

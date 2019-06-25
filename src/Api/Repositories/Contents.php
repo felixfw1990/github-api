@@ -64,6 +64,8 @@ class Contents
     /**
      * owner repo contents path put(create or update)
      *
+     * File size is less than 30m
+     *
      * @param array $params
      * @return array
      * @throws \Exception

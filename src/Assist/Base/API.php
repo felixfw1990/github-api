@@ -31,9 +31,24 @@ class API
         // comments
         'GCGComments'  => 'gists/%s/comments',
         'GCGComment'   => 'gists/%s/comments/%s',
+
+        //data
+        'RORGT'=>'',
     ];
 
     // git data
+    const DATA =
+    [
+        //blob
+        'RORGBlobs' => '/repos/%s/%s/git/blobs',
+
+        //tree
+        'RORGTrees' => '/repos/%s/%s/git/trees',
+
+        //commit
+        'RORGCommit'  => '/repos/%s/%s/git/commits/%s',
+        'RORGCommits' => '/repos/%s/%s/git/commits',
+    ];
     // github apps
     // interactions
     // issues
@@ -108,6 +123,8 @@ class API
         // forks
         // invitations
         // merging
+        'RORMerges'  => '/repos/%s/%s/merges',
+
         // pages
         // releases
         'RRRReleases'  => 'repos/%s/%s/releases',
