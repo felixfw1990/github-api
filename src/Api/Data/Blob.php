@@ -37,7 +37,7 @@ class Blob
     // ------------------------------------------------------------------------------
 
     /**
-     *  create blob 30m-100m
+     * File size is less than 100m
      *
      * @param array $params
      * @return array
