@@ -57,7 +57,6 @@ class Blob
         ->setFormParams($queue)
         ->post(API::DATA['RORGBlobs']);
 
-        Helper::p($result, 0);
         return $result;
     }
 
