@@ -28,6 +28,7 @@ abstract class Abs extends TestCase
      */
     protected $params =
     [
+        'proxy'              => '',
         'client_id'          => '',
         'client_secret'      => '',
 
@@ -46,9 +47,10 @@ abstract class Abs extends TestCase
     {
         $optionParams =
         [
-            'token'         => $this->params['token'],
-            'debug'         => false,
-            'log_file'      => 'Log/log_file.log',
+            'token'    => $this->params['token'],
+            'debug'    => false,
+            'log_file' => 'Log/log_file.log',
+            'proxy'    => $this->params['proxy'],
         ];
 
         $this->client = new Client($optionParams);
