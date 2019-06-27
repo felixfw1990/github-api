@@ -1,7 +1,9 @@
 <?php namespace Github;
 
+use Github\Assist\Base\Helper;
 use Github\Assist\Base\Options;
 use Github\Assist\Exceptions\GithubException;
+use phpDocumentor\Reflection\File;
 
 /**
  * ----------------------------------------------------------------------------------

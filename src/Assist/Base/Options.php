@@ -38,6 +38,13 @@ class Options
     // ------------------------------------------------------------------------------
 
     /**
+     * @var string
+     */
+    private $proxy;
+
+    // ------------------------------------------------------------------------------
+
+    /**
      * Options constructor.
      *
      * @param array $option
@@ -46,6 +53,7 @@ class Options
     {
         $this->token   = $option['token'] ?? '';
         $this->debug   = $option['debug'] ?? false;
+        $this->proxy   = $option['proxy'] ?? '';
         $this->logFile = $option['log_file'] ?? '';
     }
 
@@ -89,7 +97,7 @@ class Options
             $debug = fopen($this->logFile, 'a');
         }
 
-        $sync = new Sync($server, $debug);
+        $sync = new Sync($server, $debug, $this->proxy);
 
         $this->token AND
         $sync->setHeaderParams(['Authorization' => 'token '.$this->token]);
@@ -113,7 +121,7 @@ class Options
             $debug = fopen($this->logFile, 'a');
         }
 
-        return new Async($server, $debug);
+        return new Async($server, $debug, $this->proxy);
     }
 
     // ------------------------------------------------------------------------------

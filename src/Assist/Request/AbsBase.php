@@ -5,6 +5,7 @@ use Github\Assist\Base\API;
 use Github\Assist\Base\Errors;
 use Github\Assist\Base\Helper;
 use Github\Assist\Exceptions\GithubException;
+use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -36,6 +37,7 @@ trait AbsBase
 
     // ------------------------------------------------------------------------------
 
+    private $proxy         = '';
     private $formFiles     = [];
     private $pathParams    = [];
     private $jsonParams    = [];
@@ -51,14 +53,13 @@ trait AbsBase
      *
      * @param string|NULL $server
      * @param bool|resource $debug
+     * @param string $proxy
      */
-    public function __construct(string $server = null, $debug = false)
+    public function __construct(string $server = null, $debug = false, string $proxy = '')
     {
-        $option =
-        [
-            'base_uri' => trim($server ?? API::SERVER),
-            'http'     => ['proxy' => '192.168.0.209:1082'],
-        ];
+        $option = ['base_uri' => trim($server ?? API::SERVER)];
+
+        $proxy && $option['http']['proxy'] = $proxy;
 
         $this->debug  = $debug;
         $this->guzzle = new Client($option);
