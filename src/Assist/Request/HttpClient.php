@@ -1,7 +1,6 @@
 <?php namespace Github\Assist\Request;
 
 use Github\Assist\Base\Options;
-use GuzzleHttp\Client;
 use Psr\Http\Message\MessageInterface;
 
 /**
@@ -50,56 +49,6 @@ class HttpClient
         $this->headers = $params;
     }
 
-    // ------------------------------------------------------------------------------
-
-    /**
-     * get result
-     *
-     * @param string  $uri
-     * @param bool    $getMaxPage
-     * @return array
-     */
-    public function getResult (string $uri, bool $getMaxPage = false):array
-    {
-        $baseUri = $this->option->getBaseUri();
-
-        $clientParam = ['base_uri' => $baseUri];
-
-        $client = new Client($clientParam);
-
-        $headers = $this->requestHeaders();
-
-        $result = $client->get($uri, $headers);
-
-        $data = $this->outputData($result);
-
-        if (!$getMaxPage) { return $data; }
-
-        $maxPage = $this->outputMaxPage($result, $uri);
-
-        return
-        [
-            'data'     => $data,
-            'max_page' => $maxPage,
-        ];
-    }
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * get headers
-     *
-     * @return array
-     */
-    private function requestHeaders()
-    {
-        $headers = ['Authorization' => 'token '.$this->option->getToken()];
-
-        $headers = array_merge($headers, $this->headers ?? []);
-
-        return ['headers' => $headers];
-    }
-    
     // ------------------------------------------------------------------------------
 
     /**

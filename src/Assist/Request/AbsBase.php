@@ -2,10 +2,8 @@
 
 use GuzzleHttp\Client;
 use Github\Assist\Base\API;
-use Github\Assist\Base\Errors;
 use Github\Assist\Base\Helper;
 use Github\Assist\Exceptions\GithubException;
-use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -255,41 +253,6 @@ trait AbsBase
             'data'    => $this->parseResponseData($response),
             'headers' => $this->parseResponseHeaders($response),
         ];
-    }
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * check http status code before response body
-     */
-    private function onHeadersFuncions()
-    {
-        $request = $this;
-        $excpArr = Errors::StatusExceptions;
-
-        return function (ResponseInterface $response) use ($request, $excpArr)
-        {
-            $statusCode = $response->getStatusCode();
-
-            // check status code
-            if ($statusCode >= 400)
-            {
-                // normal exception
-                if (isset($excpArr[$statusCode]))
-                {
-                    throw new $excpArr[$statusCode];
-                }
-
-                // unexpected exception
-                throw new $excpArr['default'];
-            }
-
-            // execute others on header functions
-            foreach ($request->onHeadersFunc as $func)
-            {
-                call_user_func($func, $response);
-            }
-        };
     }
 
     // ------------------------------------------------------------------------------
