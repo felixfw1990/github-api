@@ -19,9 +19,10 @@ class AuthorizingTest extends Abs
      * @var \Github\Oauth\Authorizing\Authorizing
      */
     private $module;
+
     // ------------------------------------------------------------------------------
     
-    public function setUp()
+    public function setUp():void
     {
         parent::setUp();
 

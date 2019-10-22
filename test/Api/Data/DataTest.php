@@ -22,7 +22,7 @@ class BlobTest extends Abs
 
     // ------------------------------------------------------------------------------
 
-    public function setUp()
+    public function setUp():void
     {
        parent::setUp();
 
