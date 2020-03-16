@@ -1,8 +1,8 @@
-.php_cs.cache
-phpunit.xml
-composer.lock
-composer.phar
-vendor/*
-.idea/
-test/TestConfig.php
-test/Log/*
+/.php_cs.cache
+/phpunit.xml
+/composer.lock
+/composer.phar
+/vendor/*
+/.idea/
+/test/TestConfig.php
+/test/Log/*
