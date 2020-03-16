@@ -21,7 +21,6 @@ trait TestConfig
         'client_id'          => '',
         'client_secret'      => '',
 
-
         'code_redirect_uri'  => '',
         'token_redirect_uri' => '',
 
