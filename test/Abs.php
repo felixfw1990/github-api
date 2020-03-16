@@ -16,6 +16,10 @@ abstract class Abs extends TestCase
 {
     // ------------------------------------------------------------------------------
 
+    use TestConfig;
+
+    // ------------------------------------------------------------------------------
+
     /**
      * @var Client
      */
@@ -23,27 +27,7 @@ abstract class Abs extends TestCase
 
     // ------------------------------------------------------------------------------
 
-    /**
-     * @var array
-     */
-    protected $params =
-    [
-        'proxy'              => '',
-        'client_id'          => '',
-        'client_secret'      => '',
-
-        'code_redirect_uri'  => '',
-        'token_redirect_uri' => '',
-
-        'token'              => '',
-
-        'owner'              => '',
-        'repo'               => '',
-    ];
-
-    // ------------------------------------------------------------------------------
-
-    public function setUp()
+    public function setUp() : void
     {
         $optionParams =
         [

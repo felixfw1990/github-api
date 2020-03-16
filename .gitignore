@@ -4,5 +4,4 @@
 /composer.phar
 /vendor/*
 /.idea/
-/test/TestConfig.php
 /test/Log/*
