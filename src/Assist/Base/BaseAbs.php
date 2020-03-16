@@ -48,7 +48,9 @@ abstract class BaseAbs
         $nameSpace = get_class($this);
 
         $tempArray = explode('\\' , $nameSpace);
+
         array_pop($tempArray);
+
         $nameSpace = implode('\\', $tempArray);
 
         $subClass = "{$nameSpace}\\{$name}\\{$name}";

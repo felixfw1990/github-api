@@ -1,17 +1,16 @@
-<?php namespace Github\Api;
+<?php namespace Github\GQL;
 
 use Github\Assist\Base\BaseAbs;
 
 /**
- * ----------------------------------------------------------------------------------
- *  Abs
- * ----------------------------------------------------------------------------------
+ * ---------------------------------------------------------------------------------
+ *  GQL
+ * ---------------------------------------------------------------------------------
  *
- * @method Pubs\Pubs Pubs()
- * @method Data\Data Data()
- * @method Repositories\Repositories Repositories()
- *
- * @author Felix
- * @change 2018/12/19
+ * @author felix
+ * @change 2020/03/16
  */
-class Api extends BaseAbs { }
+class GQL extends BaseAbs
+{
+
+}
