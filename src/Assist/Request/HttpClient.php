@@ -1,10 +1,6 @@
 <?php namespace Github\Assist\Request;
 
-use Elasticsearch\Endpoints\Cat\Help;
-use Github\Assist\Base\Helper;
-use Github\Assist\Base\Validate as V;
 use Github\Assist\Exceptions\GithubException;
-use Psr\Http\Message\StreamInterface;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -91,16 +87,15 @@ class HttpClient
         $apiPath = $this->concatApiPath($api);
         $options = $this->concatOptions();
 
-//        try
-//        {
-            Helper::p([$apiPath, $options], 0);
+        try
+        {
             $response = $this->guzzle->post($apiPath, $options);
-//        }
-//        catch (\Exception $e)
-//        {
-//            throw new GithubException($this->getExceptionMsg($e));
-//        }
-//
+        }
+        catch (\Exception $e)
+        {
+            throw new GithubException($this->getExceptionMsg($e));
+        }
+
         return $this->parseResponse($response, false);
     }
 

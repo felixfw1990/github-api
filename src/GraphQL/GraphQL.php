@@ -1,7 +1,5 @@
 <?php namespace Github\GraphQL;
 
-use Github\Assist\Base\Helper;
-
 /**
  * ---------------------------------------------------------------------------------
  *  GraphQL
@@ -24,7 +22,6 @@ class GraphQL extends Abs
         setBody($body)->
         post('graphql');
 
-        Helper::p($result);
         return $result;
     }
 
