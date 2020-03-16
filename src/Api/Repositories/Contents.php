@@ -2,7 +2,6 @@
 
 use Github\Assist\Base\API;
 use Github\Assist\Base\Helper;
-use Github\Assist\Base\Options;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -12,27 +11,8 @@ use Github\Assist\Base\Options;
  * @author Felix
  * @change 2018/12/19
  */
-class Contents
+class Contents extends Abs
 {
-    // ------------------------------------------------------------------------------
-
-    /**
-     * @var Options
-     */
-    private $options;
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * Contents constructor.
-     *
-     * @param \Github\Assist\Base\Options $options
-     */
-    public function __construct(Options $options)
-    {
-        $this->options = $options;
-    }
-
     // ------------------------------------------------------------------------------
 
     /**
@@ -51,7 +31,7 @@ class Contents
         $queue = Helper::arrayExistCum($params, 'ref');
 
         $result = $this->options
-        ->getSync()
+        ->getClient()
         ->setPath($owner, $repo, $path)
         ->setQuery($queue)
         ->get(API::REPOSITORIES['CRContents']);
@@ -80,7 +60,7 @@ class Contents
         $queue = Helper::arrayExistCums($params, $keys);
 
         $result = $this->options
-        ->getSync()
+        ->getClient()
         ->setPath($owner, $repo, $path)
         ->setFormParams($queue)
         ->put(API::REPOSITORIES['CRContents']);
@@ -108,7 +88,7 @@ class Contents
         $queue = Helper::arrayExistCums($params, $keys);
 
         $result = $this->options
-        ->getSync()
+        ->getClient()
         ->setPath($owner, $repo, $path)
         ->setFormParams($queue)
         ->delete(API::REPOSITORIES['CRContents']);

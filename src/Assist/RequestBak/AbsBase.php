@@ -1,4 +1,4 @@
-<?php namespace Github\Assist\Request;
+<?php namespace Github\Assist\RequestBak;
 
 use GuzzleHttp\Client;
 use Github\Assist\Base\API;
@@ -210,6 +210,7 @@ trait AbsBase
         $temp =
         [
             'debug'       => $this->debug,
+//            'on_headers'  => $this->onHeadersFuncions(),
             'http_errors' => $httpErrors,
         ];
 

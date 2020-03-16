@@ -2,7 +2,6 @@
 
 use Github\Assist\Base\API;
 use Github\Assist\Base\Helper;
-use Github\Assist\Base\Options;
 
 /**
  * ---------------------------------------------------------------------------------
@@ -12,28 +11,8 @@ use Github\Assist\Base\Options;
  * @author felix
  * @change 2019/06/25
  */
-class Blob
+class Blob extends Abs
 {
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * @var Options
-     */
-    private $options;
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * Contents constructor.
-     *
-     * @param \Github\Assist\Base\Options $options
-     */
-    public function __construct(Options $options)
-    {
-        $this->options = $options;
-    }
-
     // ------------------------------------------------------------------------------
 
     /**
@@ -52,7 +31,7 @@ class Blob
         $queue = Helper::arrayExistCums($params, $keys);
 
         $result = $this->options
-        ->getSync()
+        ->getClient()
         ->setPath($owner, $repo)
         ->setFormParams($queue)
         ->post(API::DATA['RORGBlobs']);

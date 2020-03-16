@@ -9,7 +9,6 @@ use Github\Assist\Exceptions\GithubException;
  * ----------------------------------------------------------------------------------
  *
  * @method Api\Api Api()
- * @method Oauth\Oauth Oauth()
  *
  * @author Felix
  * @change 2018/12/13

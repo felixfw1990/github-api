@@ -2,7 +2,6 @@
 
 use Github\Assist\Base\API;
 use Github\Assist\Base\Helper;
-use Github\Assist\Base\Options;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -12,27 +11,8 @@ use Github\Assist\Base\Options;
  * @author Felix
  * @change 2018/12/28
  */
-class Root
+class Root extends Abs
 {
-    // ------------------------------------------------------------------------------
-
-    /**
-     * @var Options
-     */
-    private $options;
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * Project constructor.
-     *
-     * @param Options $options
-     */
-    public function __construct(Options $options)
-    {
-        $this->options = $options;
-    }
-
     // ------------------------------------------------------------------------------
 
     /**
@@ -53,7 +33,7 @@ class Root
         $queue = Helper::arrayExistCums($params, $keys);
 
         return $this->options
-        ->getSync()
+        ->getClient()
         ->setQuery($queue)
         ->get(API::REPOSITORIES['RMRepos'], true);
     }
@@ -73,7 +53,7 @@ class Root
         $repo  = $params['repo'] ?? '';
 
         return $this->options
-        ->getSync()
+        ->getClient()
         ->setPath($owner, $repo)
         ->get(API::REPOSITORIES['RRTags'], true);
     }
@@ -95,7 +75,7 @@ class Root
         $queue = Helper::arrayExistCums($params, $keys);
 
         return $this->options
-        ->getSync()
+        ->getClient()
         ->setPath($userName)
         ->setQuery($queue)
         ->get(API::REPOSITORIES['RURepos'], true);

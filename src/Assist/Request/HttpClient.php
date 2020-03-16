@@ -1,110 +1,196 @@
 <?php namespace Github\Assist\Request;
 
-use Github\Assist\Base\Options;
-use Psr\Http\Message\MessageInterface;
+use Elasticsearch\Endpoints\Cat\Help;
+use Github\Assist\Base\Helper;
+use Github\Assist\Base\Validate as V;
+use Github\Assist\Exceptions\GithubException;
+use Psr\Http\Message\StreamInterface;
 
 /**
  * ----------------------------------------------------------------------------------
- *  HttpClient
+ *  Sync
  * ----------------------------------------------------------------------------------
  *
  * @author Felix
- * @change 2018/12/19
+ * @change 2018/12/20
  */
 class HttpClient
 {
+    // ------------------------------------------------------------------------------
+
     /**
-     * @var Options
+     * base trait
      */
-    private $option;
+    use AbsBase;
 
     // ------------------------------------------------------------------------------
 
     /**
-     * HttpClient constructor.
+     * get request sync
      *
-     * @param \Github\Assist\Base\Options $options
+     * @param string $api
+     * @param bool   $headers
+     * @param bool   $data
+     * @return mixed
+     * @throws \Exception
      */
-    public function __construct(Options $options)
+    public function get(string $api, bool $headers = false, bool $data = true)
     {
-        $this->option = $options;
+        $apiPath = $this->concatApiPath($api);
+        $options = $this->concatOptions();
+
+        try
+        {
+            $response = $this->guzzle->get($apiPath, $options);
+        }
+        catch (\Exception $e)
+        {
+            throw new GithubException($this->getExceptionMsg($e));
+        }
+
+        return $this->parseResponse($response, $headers, $data);
     }
 
     // ------------------------------------------------------------------------------
 
     /**
-     * @var array
-     */
-    private $headers;
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * set headers
+     * put request sync
      *
-     * @param array $params
+     * @param string $api
+     * @return mixed
+     * @throws \Exception
      */
-    public function setHeaders(array $params):void
+    public function put(string $api)
     {
-        $this->headers = $params;
+        $apiPath = $this->concatApiPath($api);
+        $options = $this->concatOptions();
+
+        try
+        {
+            $response = $this->guzzle->put($apiPath, $options);
+        }
+        catch (\Exception $e)
+        {
+            throw new GithubException($this->getExceptionMsg($e));
+        }
+
+        return $this->parseResponse($response, false);
     }
 
     // ------------------------------------------------------------------------------
 
     /**
-     * output data
+     * post request sync
      *
-     * @param \Psr\Http\Message\MessageInterface $result
+     * @param string $api
+     * @return mixed
+     * @throws \Exception
+     */
+    public function post(string $api)
+    {
+        $apiPath = $this->concatApiPath($api);
+        $options = $this->concatOptions();
+
+        try
+        {
+            $response = $this->guzzle->post($apiPath, $options);
+        }
+        catch (\Exception $e)
+        {
+            throw new GithubException($this->getExceptionMsg($e));
+        }
+
+        return $this->parseResponse($response, false);
+    }
+
+    // ------------------------------------------------------------------------------
+
+    /**
+     * delete request sync
+     *
+     * @param string $api
+     * @return mixed
+     * @throws \Exception
+     */
+    public function delete(string $api)
+    {
+        $apiPath = $this->concatApiPath($api);
+        $options = $this->concatOptions();
+
+        try
+        {
+            $response = $this->guzzle->delete($apiPath, $options);
+        }
+        catch (\Exception $e)
+        {
+            throw new GithubException($this->getExceptionMsg($e));
+        }
+
+        return $this->parseResponse($response, false);
+    }
+
+    // ------------------------------------------------------------------------------
+
+    /**
+     * get request & return body stream without preloaded
+     *
+     * @param string $api
+     * @return \Psr\Http\Message\ResponseInterface
+     * @throws \Exception
+     */
+    public function getStream(string $api)
+    {
+        $apiPath = $this->concatApiPath($api);
+        $options = $this->concatOptions();
+        $options = array_merge($options, ['stream' => true]);
+
+        try
+        {
+            $response = $this->guzzle->get($apiPath, $options);
+        }
+        catch (\Exception $e)
+        {
+            throw new GithubException($this->getExceptionMsg($e));
+        }
+
+        return $this->parseResponse($response, false);
+    }
+
+    // ------------------------------------------------------------------------------
+
+    /**
+     * get request & save body to some where
+     *
+     * @param string $api
+     * @param string|resource|\Psr\Http\Message\StreamInterface $sink
      * @return array
+     * @throws \Exception
      */
-    public function outputData(MessageInterface $result):array
+    public function getSink(string $api, $sink)
     {
-        $body    = $result->getBody();
-        $content = $body->getContents();
+        $rules = V::oneOf(
+            V::resourceType(),
+            V::stringType()->notEmpty(),
+            V::instance(StreamInterface::class)
+        );
 
-        return json_decode($content, true);
+        V::doValidate($rules, $sink);
+
+        $options = $this->concatOptions();
+        $options = array_merge($options, ['sink' => $sink]);
+        $apiPath = $this->concatApiPath($api);
+
+        try
+        {
+            $response = $this->guzzle->get($apiPath, $options);
+        }
+        catch (\Exception $e)
+        {
+            throw new GithubException($this->getExceptionMsg($e));
+        }
+
+        return $this->parseResponse($response, true);
     }
 
     // ------------------------------------------------------------------------------
-
-    /**
-     * output max page
-     *
-     * @param \Psr\Http\Message\MessageInterface $result
-     * @param string                             $uri
-     * @return string
-     */
-    public function outputMaxPage(MessageInterface $result, string $uri):string
-    {
-        $linkStr = $result->getHeader('Link');
-        $linkStr = $linkStr[0] ?? '';
-
-        // Does not support paging or
-        // the number of pages exceeds the maximum number
-        if (!$linkStr) { return 1 ;}
-
-        // First treatment
-        $rule    = "/(next|first|prev).*page=(\d).*rel=\"last\"/";
-        $matches = [];
-
-        preg_match($rule, $linkStr, $matches);
-
-        $linkStr = $matches[0] ?? '';
-
-        // Second treatment
-        $rule = '/page=([1-9]\d*)/';
-        preg_match($rule, $linkStr, $matches);
-
-        $max = $matches[1] ?? 0;
-
-        if ($max) { return $max; };
-
-        //There is a paging parameter in the uri, but there is no last tag
-        preg_match($rule, $uri, $matches);
-
-        return $matches[1] ?? 1;
-    }
-
-    // ------------------------------------------------------------------------------
-    
 }

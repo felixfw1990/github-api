@@ -2,7 +2,6 @@
 
 use Github\Assist\Base\API;
 use Github\Assist\Base\Helper;
-use Github\Assist\Base\Options;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -12,27 +11,8 @@ use Github\Assist\Base\Options;
  * @author Felix
  * @change 2018/12/20
  */
-class Branches
+class Branches extends Abs
 {
-    // ------------------------------------------------------------------------------
-
-    /**
-     * @var Options
-     */
-    private $options;
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * Project constructor.
-     *
-     * @param Options $options
-     */
-    public function __construct(Options $options)
-    {
-        $this->options = $options;
-    }
-
     // ------------------------------------------------------------------------------
 
     /**
@@ -51,7 +31,7 @@ class Branches
         $queue = Helper::arrayExistCums($params, $keys);
 
         $result = $this->options
-        ->getSync()
+        ->getClient()
         ->setPath($owner, $repo)
         ->setQuery($queue)
         ->get(API::REPOSITORIES['BRBranches'], true);

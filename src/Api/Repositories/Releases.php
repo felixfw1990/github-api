@@ -2,39 +2,17 @@
 
 use Github\Assist\Base\API;
 use Github\Assist\Base\Helper;
-use Github\Assist\Base\Options;
 
 /**
  * ----------------------------------------------------------------------------------
  *  Releases
  * ----------------------------------------------------------------------------------
  *
- * @TODO felix
- *
  * @author Felix
  * @change 2018/12/29
  */
-class Releases
+class Releases extends Abs
 {
-    // ------------------------------------------------------------------------------
-
-    /**
-     * @var Options
-     */
-    private $options;
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * Comments constructor.
-     *
-     * @param Options $options
-     */
-    public function __construct(Options $options)
-    {
-        $this->options = $options;
-    }
-
     // ------------------------------------------------------------------------------
 
     /**
@@ -53,7 +31,7 @@ class Releases
         $queue = Helper::arrayExistCums($params, $keys);
 
         $result = $this->options
-        ->getSync()
+        ->getClient()
         ->setPath($owner, $repo)
         ->setQuery($queue)
         ->get(API::REPOSITORIES['RRRReleases'], true);

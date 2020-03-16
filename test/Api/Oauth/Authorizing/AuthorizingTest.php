@@ -1,4 +1,4 @@
-<?php namespace GithubTest\Oauth\Authorizing;
+<?php namespace GithubTest\Api\Oauth\Authorizing;
 
 use Github\Assist\Base\Helper;
 use GithubTest\Abs;
@@ -16,7 +16,7 @@ class AuthorizingTest extends Abs
     // ------------------------------------------------------------------------------
 
     /**
-     * @var \Github\Oauth\Authorizing\Authorizing
+     * @var \Github\Api\Oauth\Authorizing\Authorizing
      */
     private $module;
 
@@ -26,7 +26,7 @@ class AuthorizingTest extends Abs
     {
         parent::setUp();
 
-        $this->module = $this->client->Oauth()->Authorizing();
+        $this->module = $this->client->Api()->Oauth()->Authorizing();
     }
 
     // ------------------------------------------------------------------------------

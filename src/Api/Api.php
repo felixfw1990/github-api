@@ -10,6 +10,7 @@ use Github\Assist\Base\BaseAbs;
  * @method Pubs\Pubs Pubs()
  * @method Data\Data Data()
  * @method Repositories\Repositories Repositories()
+ * @method Oauth\Oauth Oauth()
  *
  * @author Felix
  * @change 2018/12/19

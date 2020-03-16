@@ -1,7 +1,5 @@
 <?php namespace Github\Api\Pubs;
 
-use Github\Assist\Base\Options;
-
 /**
  * ----------------------------------------------------------------------------------
  *  Pub
@@ -10,27 +8,8 @@ use Github\Assist\Base\Options;
  * @author Felix
  * @change 2018/12/24
  */
-class Pubs
+class Pubs extends Abs
 {
-    // ------------------------------------------------------------------------------
-
-    /**
-     * @var Options
-     */
-    private $options;
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * Project constructor.
-     *
-     * @param Options $options
-     */
-    public function __construct(Options $options)
-    {
-        $this->options = $options;
-    }
-
     // ------------------------------------------------------------------------------
 
     /**
@@ -50,7 +29,7 @@ class Pubs
         $getData     = $params['get_data']      ?? true;
 
         $result = $this->options
-        ->getSync()
+        ->getClient()
         ->setPath(...$path)
         ->setHeaderParams($headers)
         ->setQuery($queue)
@@ -60,5 +39,4 @@ class Pubs
     }
 
     // ------------------------------------------------------------------------------
-    
 }

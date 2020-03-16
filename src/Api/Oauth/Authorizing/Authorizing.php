@@ -1,7 +1,6 @@
-<?php namespace Github\Oauth\Authorizing;
+<?php namespace Github\Api\Oauth\Authorizing;
 
 use Github\Assist\Base\Helper;
-use Github\Assist\Base\Options;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -11,26 +10,8 @@ use Github\Assist\Base\Options;
  * @author Felix
  * @change 2018/12/21
  */
-class Authorizing
+class Authorizing extends Abs
 {
-    // ------------------------------------------------------------------------------
-
-    /**
-     * @var Options
-     */
-    private $options;
-
-    // ------------------------------------------------------------------------------
-
-    /** * Project constructor.
-     *
-     * @param Options $options
-     */
-    public function __construct(Options $options)
-    {
-        $this->options = $options;
-    }
-
     // ------------------------------------------------------------------------------
 
     /**
@@ -77,7 +58,7 @@ class Authorizing
         $queue = Helper::arrayExistCums($params, $keys);
 
         $result = $this->options
-        ->getSync()
+        ->getClient()
         ->setHeaderParams(['Accept' => 'application/json'])
         ->setQuery($queue)
         ->post($uri);

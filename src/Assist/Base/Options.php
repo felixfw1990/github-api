@@ -1,7 +1,6 @@
 <?php namespace Github\Assist\Base;
 
-use Github\Assist\Request\Async;
-use Github\Assist\Request\Sync;
+use Github\Assist\Request\HttpClient;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -86,7 +85,7 @@ class Options
     /**
      * get sync request instance
      */
-    public function getSync()
+    public function getClient()
     {
         $debug  = $this->debug;
         $server = API::SERVER;
@@ -97,31 +96,12 @@ class Options
             $debug = fopen($this->logFile, 'a');
         }
 
-        $sync = new Sync($server, $debug, $this->proxy);
+        $sync = new HttpClient($server, $debug, $this->proxy);
 
         $this->token AND
         $sync->setHeaderParams(['Authorization' => 'token '.$this->token]);
 
         return $sync;
-    }
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * get async request instance
-     */
-    public function getAsync()
-    {
-        $debug  = $this->debug;
-        $server = API::SERVER;
-
-        // when set log file
-        if ($this->debug && !empty($this->logFile))
-        {
-            $debug = fopen($this->logFile, 'a');
-        }
-
-        return new Async($server, $debug, $this->proxy);
     }
 
     // ------------------------------------------------------------------------------

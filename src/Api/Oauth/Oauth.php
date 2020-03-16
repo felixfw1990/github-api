@@ -1,4 +1,4 @@
-<?php namespace Github\Oauth;
+<?php namespace Github\Api\Oauth;
 
 use Github\Assist\Base\BaseAbs;
 

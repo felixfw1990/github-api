@@ -1,38 +1,14 @@
 <?php namespace Github\Api\Repositories;
 
-use Github\Assist\Base\Options;
-
 /**
  * ----------------------------------------------------------------------------------
  *  Comments
  * ----------------------------------------------------------------------------------
  *
- * @TODO felix
- *
  * @author Felix
  * @change 2018/12/20
  */
-class Comments
+class Comments extends Abs
 {
-    // ------------------------------------------------------------------------------
 
-    /**
-     * @var Options
-     */
-    private $options;
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * Comments constructor.
-     *
-     * @param Options $options
-     */
-    public function __construct(Options $options)
-    {
-        $this->options = $options;
-    }
-
-    // ------------------------------------------------------------------------------
-    
 }
