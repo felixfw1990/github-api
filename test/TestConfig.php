@@ -17,12 +17,12 @@ trait TestConfig
      */
     protected $params =
     [
-        'proxy'              => '',
-        'client_id'          => '',
-        'client_secret'      => '',
+        'proxy'             => '',
+        'clientId'          => '',
+        'clientSecret'      => '',
 
-        'code_redirect_uri'  => '',
-        'token_redirect_uri' => '',
+        'codeRedirectUri'  => '',
+        'tokenRedirectUri' => '',
 
         'token'              => '',
 
