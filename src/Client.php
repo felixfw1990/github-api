@@ -9,6 +9,7 @@ use Github\Assist\Exceptions\GithubException;
  * ----------------------------------------------------------------------------------
  *
  * @method Api\Api Api()
+ * @method GraphQL\GraphQL GraphQL()
  *
  * @author Felix
  * @change 2018/12/13

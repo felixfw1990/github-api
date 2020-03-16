@@ -98,10 +98,10 @@ trait AbsBase
     /**
      * set query params
      *
-     * @param array $query
+     * @param array|string $query
      * @return $this
      */
-    public function setQuery(array $query)
+    public function setQuery($query)
     {
         $this->queryParams = ['query' => $query];
 

@@ -91,15 +91,16 @@ class HttpClient
         $apiPath = $this->concatApiPath($api);
         $options = $this->concatOptions();
 
-        try
-        {
+//        try
+//        {
+            Helper::p([$apiPath, $options], 0);
             $response = $this->guzzle->post($apiPath, $options);
-        }
-        catch (\Exception $e)
-        {
-            throw new GithubException($this->getExceptionMsg($e));
-        }
-
+//        }
+//        catch (\Exception $e)
+//        {
+//            throw new GithubException($this->getExceptionMsg($e));
+//        }
+//
         return $this->parseResponse($response, false);
     }
 
@@ -127,69 +128,6 @@ class HttpClient
         }
 
         return $this->parseResponse($response, false);
-    }
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * get request & return body stream without preloaded
-     *
-     * @param string $api
-     * @return \Psr\Http\Message\ResponseInterface
-     * @throws \Exception
-     */
-    public function getStream(string $api)
-    {
-        $apiPath = $this->concatApiPath($api);
-        $options = $this->concatOptions();
-        $options = array_merge($options, ['stream' => true]);
-
-        try
-        {
-            $response = $this->guzzle->get($apiPath, $options);
-        }
-        catch (\Exception $e)
-        {
-            throw new GithubException($this->getExceptionMsg($e));
-        }
-
-        return $this->parseResponse($response, false);
-    }
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * get request & save body to some where
-     *
-     * @param string $api
-     * @param string|resource|\Psr\Http\Message\StreamInterface $sink
-     * @return array
-     * @throws \Exception
-     */
-    public function getSink(string $api, $sink)
-    {
-        $rules = V::oneOf(
-            V::resourceType(),
-            V::stringType()->notEmpty(),
-            V::instance(StreamInterface::class)
-        );
-
-        V::doValidate($rules, $sink);
-
-        $options = $this->concatOptions();
-        $options = array_merge($options, ['sink' => $sink]);
-        $apiPath = $this->concatApiPath($api);
-
-        try
-        {
-            $response = $this->guzzle->get($apiPath, $options);
-        }
-        catch (\Exception $e)
-        {
-            throw new GithubException($this->getExceptionMsg($e));
-        }
-
-        return $this->parseResponse($response, true);
     }
 
     // ------------------------------------------------------------------------------

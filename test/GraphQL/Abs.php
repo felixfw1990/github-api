@@ -1,16 +1,11 @@
-<?php namespace Github\GQL;
-
-use Github\Assist\Base\BaseAbs;
+<?php namespace GithubTest\GraphQL;
 
 /**
  * ---------------------------------------------------------------------------------
- *  GQL
+ *  Abs
  * ---------------------------------------------------------------------------------
  *
  * @author felix
  * @change 2020/03/16
  */
-class GQL extends BaseAbs
-{
-
-}
+abstract class Abs extends \GithubTest\Abs { }
