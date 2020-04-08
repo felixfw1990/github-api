@@ -1,6 +1,5 @@
-<?php namespace GithubTest\Repositories;
+<?php namespace GithubTest\Api\Repositories;
 
-use GithubTest\Abs;
 use Github\Api\Repositories\Contents;
 
 /**
@@ -22,6 +21,10 @@ class ContentsTest extends Abs
 
     // ------------------------------------------------------------------------------
 
+    /**
+     * setUp
+     *
+     */
     public function setUp():void
     {
        parent::setUp();

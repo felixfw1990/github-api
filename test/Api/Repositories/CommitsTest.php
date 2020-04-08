@@ -1,7 +1,6 @@
-<?php namespace GithubTest\Repositories;
+<?php namespace GithubTest\Api\Repositories;
 
 use Github\Assist\Base\Helper;
-use GithubTest\Abs;
 use Github\Api\Repositories\Commits;
 
 /**
@@ -23,6 +22,10 @@ class CommitsTest extends Abs
 
     // ------------------------------------------------------------------------------
 
+    /**
+     * setUp
+     *
+     */
     public function setUp():void
     {
        parent::setUp();

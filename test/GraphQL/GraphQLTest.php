@@ -32,7 +32,16 @@ class GraphQLTest extends Abs
     {
         $str = '{viewer{login}}';
 
-        $this->tm->run($str);
+        $status = true;
+
+        try
+        {
+            $this->tm->run($str);
+        }
+
+        catch (\Exception $e){ $status = false; }
+
+        $this->assertTrue($status);
     }
 
     // ------------------------------------------------------------------------------

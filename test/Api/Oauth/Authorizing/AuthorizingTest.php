@@ -1,7 +1,6 @@
 <?php namespace GithubTest\Api\Oauth\Authorizing;
 
 use Github\Assist\Base\Helper;
-use GithubTest\Abs;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -21,7 +20,11 @@ class AuthorizingTest extends Abs
     private $module;
 
     // ------------------------------------------------------------------------------
-    
+
+    /**
+     * setUp
+     *
+     */
     public function setUp():void
     {
         parent::setUp();

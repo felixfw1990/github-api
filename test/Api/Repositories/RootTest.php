@@ -1,6 +1,5 @@
-<?php namespace GithubTest\Repositories;
+<?php namespace GithubTest\Api\Repositories;
 
-use GithubTest\Abs;
 use Github\Api\Repositories\Root;
 use Github\Assist\Base\Helper;
 
@@ -23,6 +22,10 @@ class RootTest extends Abs
 
     // ------------------------------------------------------------------------------
 
+    /**
+     * setUp
+     *
+     */
     public function setUp():void
     {
        parent::setUp();

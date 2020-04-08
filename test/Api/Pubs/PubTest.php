@@ -1,9 +1,6 @@
 <?php namespace GithubTest\Api\Pubs;
 
 use Github\Assist\Base\API;
-use Github\Assist\Base\Helper;
-use Github\Client;
-use GithubTest\Abs;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -24,6 +21,10 @@ class PubTest extends Abs
 
     // ------------------------------------------------------------------------------
 
+    /**
+     * setUp
+     *
+     */
     public function setUp():void
     {
         parent::setUp();

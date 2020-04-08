@@ -1,6 +1,5 @@
 <?php namespace GithubTest\Api\Repositories;
 
-use GithubTest\Abs;
 use Github\Assist\Base\Helper;
 use Github\Api\Repositories\Branches;
 
@@ -23,6 +22,10 @@ class BranchesTest extends Abs
 
     // ------------------------------------------------------------------------------
 
+    /**
+     * setUp
+     *
+     */
     public function setUp():void
     {
        parent::setUp();

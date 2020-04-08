@@ -1,6 +1,5 @@
 <?php namespace GithubTest\Api\Repositories;
 
-use GithubTest\Abs;
 use Github\Api\Repositories\Releases;
 
 /**
@@ -22,6 +21,10 @@ class ReleasesTest extends Abs
 
     // ------------------------------------------------------------------------------
 
+    /**
+     * setUp
+     *
+     */
     public function setUp():void
     {
        parent::setUp();

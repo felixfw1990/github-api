@@ -1,6 +1,5 @@
-<?php namespace GithubTest\Data;
+<?php namespace GithubTest\Api\Data;
 
-use GithubTest\Abs;
 use Github\Assist\Base\Helper;
 
 /**
@@ -22,6 +21,10 @@ class BlobTest extends Abs
 
     // ------------------------------------------------------------------------------
 
+    /**
+     * setUp
+     *
+     */
     public function setUp():void
     {
        parent::setUp();
