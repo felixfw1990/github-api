@@ -1,5 +1,8 @@
 <?php namespace Github\Assist\Base;
 
+use function count;
+use function is_string;
+
 /**
  * ----------------------------------------------------------------------------------
  *  Helper
@@ -10,34 +13,6 @@
  */
 class Helper
 {
-
-    //------------------------------------------------------------------------------
-
-    /**
-     * Debug output
-     *
-     * @param     $data
-     * @param int $type
-     */
-    static function p($data, $type = 1)
-    {
-        echo '<pre />';
-        print_r($data);
-        if ($type) exit;
-    }
-    // ------------------------------------------------------------------------------
-
-    /**
-     * convert assoc array to multi
-     *
-     * @param array $arr
-     * @return array
-     */
-    public static function arrayToMulti(array $arr) : array
-    {
-        return self::isAssoc($arr) ? [$arr] : $arr;
-    }
-
     // ------------------------------------------------------------------------------
 
     /**
@@ -96,7 +71,7 @@ class Helper
     {
         if (!$params) { return $baseUri; }
 
-        $baseUri .= "?";
+        $baseUri .= '?';
 
         $index = 0;
 
@@ -109,52 +84,6 @@ class Helper
         }
 
         return $baseUri;
-    }
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * check if assoc array
-     *
-     * @param array $arr
-     * @return bool
-     */
-    public static function isAssoc(array $arr) : bool
-    {
-        foreach ($arr as $key => $value)
-        {
-            if (is_string($key)) { return true; }
-        }
-
-        return false;
-    }
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * Extract an element (non-null value) from a two-dimensional array to form a new array
-     *
-     * @param  array  $data
-     * @param  string $key _id, id ...
-     * @param  bool   $inside true is array false is string
-     * @return array
-     */
-    public  static function generalArray(array $data, string $key = '_id', bool $inside = false): array
-    {
-        $temp = [];
-
-        if (!count($data)) { return $temp; }
-
-        foreach ($data as $val)
-        {
-            if (empty($val[$key])) { continue; }
-
-            $inside ?
-            $temp = array_merge($temp, $val[$key]) :
-            $temp[] = $val[$key];
-        }
-
-        return $temp;
     }
 
     // ------------------------------------------------------------------------------
@@ -190,28 +119,10 @@ class Helper
     // ------------------------------------------------------------------------------
 
     /**
-     * get has string
-     *
-     * @param string $str
-     * @param string $has
-     * @return bool
-     */
-    public static function getHas(string $str, string $has):bool
-    {
-        if (!$str || !$has) { return false; }
-
-        $result = strpos($str, $has);
-
-        return $result !== false ? true : false;
-    }
-
-    // ------------------------------------------------------------------------------
-
-    /**
      * @param int $length
      * @return string
      */
-    public static function getRandString(int $length = 12)
+    public static function getRandString(int $length = 12):string
     {
         $keys =
         [
@@ -230,15 +141,29 @@ class Helper
 
         while ($length)
         {
-            $str .= $keys[rand(0, count($keys) - 1)];
+            $str .= $keys[ random_int(0, count($keys) - 1)];
 
             $length -- ;
         }
 
         return $str;
     }
+    //------------------------------------------------------------------------------
 
+    /**
+     * Debug output
+     *
+     * @param     $data
+     * @param int $type
+     */
+    public static function p($data, int $type = 1):void
+    {
+        echo '<pre />';
+
+        print_r($data);
+
+        if ($type) { exit; }
+    }
 
     // ------------------------------------------------------------------------------
-
 }

@@ -30,13 +30,11 @@ class Releases extends Abs
         $keys  = ['page', 'per_page', 'protected'];
         $queue = Helper::arrayExistCums($params, $keys);
 
-        $result = $this->options
+        return $this->options
         ->getClient()
         ->setPath($owner, $repo)
         ->setQuery($queue)
         ->get(API::REPOSITORIES['RRRReleases'], true);
-
-        return $result;
     }
 
     // ------------------------------------------------------------------------------

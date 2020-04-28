@@ -1,5 +1,6 @@
 <?php namespace GithubTest\Api\Data;
 
+use Github\Api\Data\Data;
 use Github\Assist\Base\Helper;
 
 /**
@@ -10,14 +11,11 @@ use Github\Assist\Base\Helper;
  * @author felix
  * @change 2019/06/25
  */
-class BlobTest extends Abs
+class DataTest extends Abs
 {
     // ------------------------------------------------------------------------------
 
-    /**
-     * @var \Github\Api\Data\Data
-     */
-    private $module;
+    private Data $module;
 
     // ------------------------------------------------------------------------------
 
@@ -37,10 +35,10 @@ class BlobTest extends Abs
     /**
      * @throws \Exception
      */
-    public function testData()
+    public function testData():void
     {
         $filePath = 'img.zip';
-        $content  = fopen($filePath, 'r');
+        $content  = fopen($filePath, 'rb');
         $content  = fread($content, filesize($filePath));
         $content  = base64_encode($content);
 

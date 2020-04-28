@@ -23,7 +23,7 @@ class Authorizing extends Abs
      */
     public function getUrl(array $params):string
     {
-        $uri = "https://github.com/login/oauth/authorize";
+        $uri = 'https://github.com/login/oauth/authorize';
 
         $keys =
         [
@@ -47,7 +47,7 @@ class Authorizing extends Abs
      */
     public function getToken(array $params):array
     {
-        $uri = "https://github.com/login/oauth/access_token";
+        $uri = 'https://github.com/login/oauth/access_token';
 
         $keys =
         [
@@ -57,13 +57,11 @@ class Authorizing extends Abs
 
         $queue = Helper::arrayExistCums($params, $keys);
 
-        $result = $this->options
+        return $this->options
         ->getClient()
         ->setHeaderParams(['Accept' => 'application/json'])
         ->setQuery($queue)
         ->post($uri);
-
-        return $result;
     }
     
     // ------------------------------------------------------------------------------

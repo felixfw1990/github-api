@@ -30,13 +30,11 @@ class Contents extends Abs
 
         $queue = Helper::arrayExistCum($params, 'ref');
 
-        $result = $this->options
+        return $this->options
         ->getClient()
         ->setPath($owner, $repo, $path)
         ->setQuery($queue)
         ->get(API::REPOSITORIES['CRContents']);
-
-        return $result;
     }
     
     // ------------------------------------------------------------------------------
@@ -59,13 +57,11 @@ class Contents extends Abs
         $keys  = ['message', 'content', 'branch', 'committer', 'author', 'sha'];
         $queue = Helper::arrayExistCums($params, $keys);
 
-        $result = $this->options
+        return $this->options
         ->getClient()
         ->setPath($owner, $repo, $path)
         ->setFormParams($queue)
         ->put(API::REPOSITORIES['CRContents']);
-
-        return $result;
     }
 
     // ------------------------------------------------------------------------------
@@ -78,7 +74,7 @@ class Contents extends Abs
      * @return array
      * @throws \Exception
      */
-    public function ownerRepoContentsPathDelete(array $params)
+    public function ownerRepoContentsPathDelete(array $params):array
     {
         $owner = $params['owner'] ?? '';
         $repo  = $params['repo']  ?? [];
@@ -87,13 +83,11 @@ class Contents extends Abs
         $keys  = ['message', 'sha', 'branch', 'committer', 'author'];
         $queue = Helper::arrayExistCums($params, $keys);
 
-        $result = $this->options
+        return $this->options
         ->getClient()
         ->setPath($owner, $repo, $path)
         ->setFormParams($queue)
         ->delete(API::REPOSITORIES['CRContents']);
-
-        return $result;
     }
 
     // ------------------------------------------------------------------------------

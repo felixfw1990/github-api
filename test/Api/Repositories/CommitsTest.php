@@ -2,6 +2,7 @@
 
 use Github\Assist\Base\Helper;
 use Github\Api\Repositories\Commits;
+use function count;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -15,10 +16,7 @@ class CommitsTest extends Abs
 {
     // ------------------------------------------------------------------------------
 
-    /**
-     * @var Commits
-     */
-    private $module;
+    private Commits $module;
 
     // ------------------------------------------------------------------------------
 
@@ -40,7 +38,7 @@ class CommitsTest extends Abs
      *
      * @throws \Exception
      */
-    public function testOwnerRepoCommits()
+    public function testOwnerRepoCommits():void
     {
         $params =
         [
@@ -58,7 +56,7 @@ class CommitsTest extends Abs
         $headers = $result['headers'] ?? [];
         $maxPageSize = Helper::getLastPage($headers['Link'][0] ?? '');
 
-        $this->assertCount(1, $data);
+        $this->assertTrue(count($data) >= 1);
         $this->assertNotEmpty($maxPageSize);
     }
 
@@ -69,7 +67,7 @@ class CommitsTest extends Abs
      *
      * @throws \Exception
      */
-    public function testOwnerRepoCommitsSha()
+    public function testOwnerRepoCommitsSha():void
     {
         $params =
         [

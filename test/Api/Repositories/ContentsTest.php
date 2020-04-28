@@ -14,10 +14,7 @@ class ContentsTest extends Abs
 {
     // ------------------------------------------------------------------------------
 
-    /**
-     * @var Contents
-     */
-    private $module;
+    private Contents $module;
 
     // ------------------------------------------------------------------------------
 
@@ -39,7 +36,7 @@ class ContentsTest extends Abs
      *
      * @throws \Exception
      */
-    public function testOwnerRepoContentsPathGet()
+    public function testOwnerRepoContentsPathGet():void
     {
         $params =
         [
@@ -61,13 +58,13 @@ class ContentsTest extends Abs
      *
      * @throws \Exception
      */
-    public function testOwnerRepoContentsPathPut()
+    public function testOwnerRepoContentsPathPut():void
     {
         $jpgImageUrl = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1546513898773&di=dc9b490443745d40652cc7be4a788577&imgtype=0&src=http%3A%2F%2Fc.hiphotos.baidu.com%2Fzhidao%2Fwh%253D450%252C600%2Fsign%3D1bbb2c61952bd4074292dbf94eb9b267%2Fe1fe9925bc315c602637d9a68fb1cb13485477dc.jpg';
         $result      = file_get_contents($jpgImageUrl);
 
         $content     = base64_encode($result);
-        $number      = rand(100000, 10000000000);
+        $number      = random_int(100000, 10000000000);
         $suffix      = 'jpg';
         $params      =
         [
@@ -101,7 +98,7 @@ class ContentsTest extends Abs
      *
      * @throws \Exception
      */
-    public function testOwnerRepoContentsPathDelete()
+    public function testOwnerRepoContentsPathDelete():void
     {
         $params =
         [

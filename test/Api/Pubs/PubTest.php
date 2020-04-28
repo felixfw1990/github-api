@@ -1,5 +1,6 @@
 <?php namespace GithubTest\Api\Pubs;
 
+use Github\Api\Pubs\Pubs;
 use Github\Assist\Base\API;
 
 /**
@@ -14,10 +15,7 @@ class PubTest extends Abs
 {
     // ------------------------------------------------------------------------------
 
-    /**
-     * @var \Github\Api\Pubs\Pubs
-     */
-    private $module;
+    private Pubs $module;
 
     // ------------------------------------------------------------------------------
 
@@ -34,7 +32,7 @@ class PubTest extends Abs
 
     // ------------------------------------------------------------------------------
 
-    public function testRequest()
+    public function testRequest():void
     {
         $params =
         [

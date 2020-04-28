@@ -1,8 +1,8 @@
 <?php namespace Github\Assist\Request;
 
+use Exception;
 use GuzzleHttp\Client;
 use Github\Assist\Base\API;
-use Github\Assist\Base\Helper;
 use Github\Assist\Exceptions\GithubException;
 use Psr\Http\Message\ResponseInterface;
 
@@ -50,10 +50,10 @@ trait AbsBase
      * Request constructor.
      *
      * @param string|NULL $server
-     * @param bool|resource $debug
+     * @param bool $debug
      * @param string $proxy
      */
-    public function __construct(string $server = null, $debug = false, string $proxy = '')
+    public function __construct(string $server = null, bool $debug = false, string $proxy = '')
     {
         $option = ['base_uri' => trim($server ?? API::SERVER)];
 
@@ -71,7 +71,7 @@ trait AbsBase
      * @param string[] $path
      * @return $this
      */
-    public function setPath(string ...$path)
+    public function setPath(string ...$path):self
     {
         $this->pathParams = $path;
 
@@ -86,7 +86,7 @@ trait AbsBase
      * @param string|resource|\Psr\Http\Message\StreamInterface $body
      * @return $this
      */
-    public function setBody($body)
+    public function setBody($body):self
     {
         $this->bodyContents = ['body' => $body];
 
@@ -101,7 +101,7 @@ trait AbsBase
      * @param array|string $query
      * @return $this
      */
-    public function setQuery($query)
+    public function setQuery($query):self
     {
         $this->queryParams = ['query' => $query];
 
@@ -116,24 +116,9 @@ trait AbsBase
      * @param array $params
      * @return $this
      */
-    public function setFormParams(array $params)
+    public function setFormParams(array $params):self
     {
         $this->jsonParams = ['json' => $params];
-
-        return $this;
-    }
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * set form files
-     *
-     * @param array $files
-     * @return $this
-     */
-    public function setFormFiles(array $files)
-    {
-        $this->formFiles = ['multipart' => Helper::arrayToMulti($files)];
 
         return $this;
     }
@@ -147,7 +132,7 @@ trait AbsBase
      * @param bool  $cover
      * @return $this
      */
-    public function setHeaderParams(array $headers, $cover = false)
+    public function setHeaderParams(array $headers, bool $cover = false):self
     {
         $headers = $cover ? $headers:
         array_merge($this->headerParams['headers'] ?? [], $headers);
@@ -160,22 +145,12 @@ trait AbsBase
     // ------------------------------------------------------------------------------
 
     /**
-     * @param callable $func
-     */
-    public function setHeaderFunctions(callable $func)
-    {
-        $this->onHeadersFunc[] = $func;
-    }
-
-    // ------------------------------------------------------------------------------
-
-    /**
      * concat api path for request
      *
      * @param string $api
      * @return string
      */
-    private function concatApiPath(string $api)
+    private function concatApiPath(string $api):string
     {
         return sprintf($api, ...$this->pathParams);
     }
@@ -188,7 +163,7 @@ trait AbsBase
      * @param \Exception $e
      * @return string
      */
-    private function getExceptionMsg(\Exception $e)
+    private function getExceptionMsg(Exception $e):string
     {
         $preExcep = $e->getPrevious();
 
@@ -205,7 +180,7 @@ trait AbsBase
      * @param bool $httpErrors
      * @return array
      */
-    private function concatOptions(bool $httpErrors = false)
+    private function concatOptions(bool $httpErrors = false):array
     {
         $temp =
         [
@@ -231,27 +206,17 @@ trait AbsBase
      *
      * @param ResponseInterface $response
      * @param bool $headers true return headers
-     * @param bool $data  true return  body
-     * @return mixed
+     * @return array
      * @throws \Exception if the response body is not in JSON format
      */
-    private function parseResponse
-    (
-        ResponseInterface $response, bool $headers = false, $data = true
-    )
+    private function parseResponse ( ResponseInterface $response, bool $headers = false):array
     {
-        if ($data && !$headers) { return $this->parseResponseData($response); }
-
-        if ($headers && !$data) { return $this->parseResponseHeaders($response); }
-
-        // Are you ok?
-        if (!$headers && !$data) { return []; }
-
-        return
+        return $headers ?
         [
             'data'    => $this->parseResponseData($response),
             'headers' => $this->parseResponseHeaders($response),
-        ];
+        ]:
+        $this->parseResponseData($response);
     }
 
     // ------------------------------------------------------------------------------
@@ -262,18 +227,18 @@ trait AbsBase
      * @param \Psr\Http\Message\ResponseInterface $response
      * @return array
      */
-    private function parseResponseData(ResponseInterface $response)
+    private function parseResponseData(ResponseInterface $response):array
     {
         $expc = 'application/json';
         $type = $response->getHeader('Content-Type');
 
-        $noJson = strpos(strtolower(current($type)), $expc) === false;
+        $noJson = stripos(current($type), $expc) === false;
 
         $data = $noJson ?
         $response->getBody():
         $response->getBody()->getContents();
 
-        $noJson OR $data = json_decode($data, true);
+        $noJson OR $data = json_decode($data, true, 512, JSON_THROW_ON_ERROR);
 
         return $data;
     }

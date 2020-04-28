@@ -1,5 +1,6 @@
 <?php namespace GithubTest\Api\Oauth\Authorizing;
 
+use Github\Api\Oauth\Authorizing\Authorizing;
 use Github\Assist\Base\Helper;
 
 /**
@@ -14,10 +15,7 @@ class AuthorizingTest extends Abs
 {
     // ------------------------------------------------------------------------------
 
-    /**
-     * @var \Github\Api\Oauth\Authorizing\Authorizing
-     */
-    private $module;
+    private Authorizing $module;
 
     // ------------------------------------------------------------------------------
 
@@ -39,7 +37,7 @@ class AuthorizingTest extends Abs
      *
      * @throws \Exception
      */
-    public function testGetUrl()
+    public function testGetUrl():void
     {
         $params =
         [
@@ -66,7 +64,7 @@ class AuthorizingTest extends Abs
      *
      * @throws \Exception
      */
-    public function testGetToken()
+    public function testGetToken():void
     {
         $params =
         [

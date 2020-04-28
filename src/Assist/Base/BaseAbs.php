@@ -1,6 +1,7 @@
 <?php namespace Github\Assist\Base;
 
 use Github\Assist\Exceptions\GithubException;
+use function get_class;
 
 /**
  * ----------------------------------------------------------------------------------

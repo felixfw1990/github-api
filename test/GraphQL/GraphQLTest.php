@@ -1,5 +1,7 @@
 <?php namespace GithubTest\GraphQL;
 
+use Github\GraphQL\GraphQL;
+
 /**
  * ---------------------------------------------------------------------------------
  *  Abs
@@ -12,10 +14,7 @@ class GraphQLTest extends Abs
 {
     // ------------------------------------------------------------------------------
 
-    /**
-     * @var \Github\GraphQL\GraphQL
-     */
-    private $tm;
+    protected GraphQL $tm;
 
     // ------------------------------------------------------------------------------
 
@@ -28,20 +27,11 @@ class GraphQLTest extends Abs
     
     // ------------------------------------------------------------------------------
 
-    public function testRun()
+    public function testRun():void
     {
         $str = '{viewer{login}}';
 
-        $status = true;
-
-        try
-        {
-            $this->tm->run($str);
-        }
-
-        catch (\Exception $e){ $status = false; }
-
-        $this->assertTrue($status);
+        $this->assertLogic(fn() => $this->tm->run($str));
     }
 
     // ------------------------------------------------------------------------------

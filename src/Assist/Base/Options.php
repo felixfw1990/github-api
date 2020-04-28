@@ -59,33 +59,9 @@ class Options
     // ------------------------------------------------------------------------------
 
     /**
-     * set token
-     *
-     * @param string $token
-     */
-    public function setToken(string $token):void
-    {
-        $this->token = $token;
-    }
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * get token
-     *
-     * @return string
-     */
-    public function getToken():string
-    {
-        return $this->token;
-    }
-
-    // ------------------------------------------------------------------------------
-
-    /**
      * get sync request instance
      */
-    public function getClient()
+    public function getClient():HttpClient
     {
         $debug  = $this->debug;
         $server = API::SERVER;
@@ -93,7 +69,7 @@ class Options
         // when set log file
         if ($this->debug && !empty($this->logFile))
         {
-            $debug = fopen($this->logFile, 'a');
+            $debug = fopen($this->logFile, 'ab');
         }
 
         $sync = new HttpClient($server, $debug, $this->proxy);

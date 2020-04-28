@@ -31,13 +31,11 @@ class Tree extends Abs
         $keys  = ['tree', 'base_tree'];
         $queue = Helper::arrayExistCums($params, $keys);
 
-        $result = $this->options
+        return $this->options
         ->getClient()
         ->setPath($owner, $repo)
         ->setFormParams($queue)
         ->post(API::DATA['RORGTrees']);
-
-        return $result;
     }
 
     // ------------------------------------------------------------------------------

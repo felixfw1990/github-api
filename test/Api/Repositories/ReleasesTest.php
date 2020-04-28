@@ -14,10 +14,7 @@ class ReleasesTest extends Abs
 {
     // ------------------------------------------------------------------------------
 
-    /**
-     * @var Releases
-     */
-    private $module;
+    private Releases $module;
 
     // ------------------------------------------------------------------------------
 
@@ -39,7 +36,7 @@ class ReleasesTest extends Abs
      *
      * @throws \Exception
      */
-    public function testOwnerRepoBranches()
+    public function testOwnerRepoBranches():void
     {
         $params =
         [

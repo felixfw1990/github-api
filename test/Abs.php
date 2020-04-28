@@ -1,5 +1,7 @@
 <?php namespace GithubTest;
 
+use Closure;
+use Exception;
 use \PHPUnit\Framework\TestCase;
 
 use Github\Client;
@@ -38,6 +40,27 @@ abstract class Abs extends TestCase
         ];
 
         $this->client = new Client($optionParams);
+    }
+
+    // ------------------------------------------------------------------------------
+
+    /**
+     * assert Logic
+     *
+     * @param \Closure $fn
+     */
+    public function assertLogic(Closure $fn):void
+    {
+        $status = true;
+
+        try
+        {
+            $fn();
+        }
+
+        catch (Exception $e){ $status = false; }
+
+        $this->assertTrue($status);
     }
 
     // ------------------------------------------------------------------------------

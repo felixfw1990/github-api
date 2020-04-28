@@ -12,10 +12,10 @@ class API
 {
     // ------------------------------------------------------------------------------
 
-    const SERVER = 'https://api.github.com';
+    public const SERVER = 'https://api.github.com';
 
     // gists
-    const GISTS =
+    public const GISTS =
     [
         // gists root
         'GGUGists'   => 'users/%s/gists',
@@ -37,7 +37,7 @@ class API
     ];
 
     // git data
-    const DATA =
+    public const DATA =
     [
         //blob
         'RORGBlobs' => '/repos/%s/%s/git/blobs',
@@ -62,7 +62,7 @@ class API
     // ------------------------------------------------------------------------------
 
     //repositories
-    const REPOSITORIES =
+    public const REPOSITORIES =
     [
         // repos root
         'RMRepos'        => 'user/repos',  //

@@ -30,13 +30,11 @@ class Merging extends Abs
         $keys  = ['base', 'head', 'commit_message'];
         $queue = Helper::arrayExistCums($params, $keys);
 
-        $result = $this->options
+        return $this->options
         ->getClient()
         ->setPath($owner, $repo)
         ->setFormParams($queue)
         ->post(API::REPOSITORIES['RORMerges']);
-
-        return $result;
     }
 
     // ------------------------------------------------------------------------------

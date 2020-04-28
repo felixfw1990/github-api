@@ -15,10 +15,7 @@ class RootTest extends Abs
 {
     // ------------------------------------------------------------------------------
 
-    /**
-     * @var Root
-     */
-    private $module;
+    private Root $module;
 
     // ------------------------------------------------------------------------------
 
@@ -40,7 +37,7 @@ class RootTest extends Abs
      *
      * @throws \Exception
      */
-    public function testUserRepos()
+    public function testUserRepos():void
     {
         $params =
         [
@@ -66,7 +63,7 @@ class RootTest extends Abs
      *
      * @throws \Exception
      */
-    public function testReposOwnerRepoTags()
+    public function testReposOwnerRepoTags():void
     {
         $params =
         [
@@ -88,7 +85,7 @@ class RootTest extends Abs
      *
      * @throws \Exception
      */
-    public function testUserUserNameRepos()
+    public function testUserUserNameRepos():void
     {
         $params =
         [

@@ -39,7 +39,7 @@ class Client
      *
      * @return \Github\Assist\Base\Options
      */
-    public function Options()
+    public function Options():Options
     {
         return $this->options;
     }

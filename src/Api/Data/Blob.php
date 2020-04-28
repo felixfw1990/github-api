@@ -30,13 +30,11 @@ class Blob extends Abs
         $keys  = ['content', 'encoding'];
         $queue = Helper::arrayExistCums($params, $keys);
 
-        $result = $this->options
+        return $this->options
         ->getClient()
         ->setPath($owner, $repo)
         ->setFormParams($queue)
         ->post(API::DATA['RORGBlobs']);
-
-        return $result;
     }
 
     // ------------------------------------------------------------------------------

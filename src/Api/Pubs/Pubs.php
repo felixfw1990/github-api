@@ -28,14 +28,12 @@ class Pubs extends Abs
         $getHeaders  = $params['get_headers']   ?? false;
         $getData     = $params['get_data']      ?? true;
 
-        $result = $this->options
+        return $this->options
         ->getClient()
         ->setPath(...$path)
         ->setHeaderParams($headers)
         ->setQuery($queue)
         ->$requestType($uri, $getHeaders, $getData);
-
-        return $result;
     }
 
     // ------------------------------------------------------------------------------

@@ -30,13 +30,11 @@ class Branches extends Abs
         $keys  = ['page', 'per_page', 'protected'];
         $queue = Helper::arrayExistCums($params, $keys);
 
-        $result = $this->options
+        return $this->options
         ->getClient()
         ->setPath($owner, $repo)
         ->setQuery($queue)
         ->get(API::REPOSITORIES['BRBranches'], true);
-
-        return $result;
     }
 
     // ------------------------------------------------------------------------------

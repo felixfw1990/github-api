@@ -31,13 +31,11 @@ class Commit extends Abs
         $keys  = ['message', 'tree', 'parents', 'author', 'committer', 'signature'];
         $queue = Helper::arrayExistCums($params, $keys);
 
-        $result = $this->options
+        return $this->options
         ->getClient()
         ->setPath($owner, $repo)
         ->setFormParams($queue)
         ->post(API::DATA['RORGCommits']);
-
-        return $result;
     }
 
     // ------------------------------------------------------------------------------

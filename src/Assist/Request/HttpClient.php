@@ -1,5 +1,6 @@
 <?php namespace Github\Assist\Request;
 
+use Exception;
 use Github\Assist\Exceptions\GithubException;
 
 /**
@@ -26,11 +27,10 @@ class HttpClient
      *
      * @param string $api
      * @param bool   $headers
-     * @param bool   $data
      * @return mixed
      * @throws \Exception
      */
-    public function get(string $api, bool $headers = false, bool $data = true)
+    public function get(string $api, bool $headers = false)
     {
         $apiPath = $this->concatApiPath($api);
         $options = $this->concatOptions();
@@ -39,12 +39,12 @@ class HttpClient
         {
             $response = $this->guzzle->get($apiPath, $options);
         }
-        catch (\Exception $e)
+        catch (Exception $e)
         {
             throw new GithubException($this->getExceptionMsg($e));
         }
 
-        return $this->parseResponse($response, $headers, $data);
+        return $this->parseResponse($response, $headers);
     }
 
     // ------------------------------------------------------------------------------
@@ -65,12 +65,12 @@ class HttpClient
         {
             $response = $this->guzzle->put($apiPath, $options);
         }
-        catch (\Exception $e)
+        catch (Exception $e)
         {
             throw new GithubException($this->getExceptionMsg($e));
         }
 
-        return $this->parseResponse($response, false);
+        return $this->parseResponse($response);
     }
 
     // ------------------------------------------------------------------------------
@@ -91,12 +91,12 @@ class HttpClient
         {
             $response = $this->guzzle->post($apiPath, $options);
         }
-        catch (\Exception $e)
+        catch (Exception $e)
         {
             throw new GithubException($this->getExceptionMsg($e));
         }
 
-        return $this->parseResponse($response, false);
+        return $this->parseResponse($response);
     }
 
     // ------------------------------------------------------------------------------
@@ -117,12 +117,12 @@ class HttpClient
         {
             $response = $this->guzzle->delete($apiPath, $options);
         }
-        catch (\Exception $e)
+        catch (Exception $e)
         {
             throw new GithubException($this->getExceptionMsg($e));
         }
 
-        return $this->parseResponse($response, false);
+        return $this->parseResponse($response);
     }
 
     // ------------------------------------------------------------------------------

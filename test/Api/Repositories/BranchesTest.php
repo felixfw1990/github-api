@@ -15,10 +15,7 @@ class BranchesTest extends Abs
 {
     // ------------------------------------------------------------------------------
 
-    /**
-     * @var Branches
-     */
-    private $module;
+    private Branches $module;
 
     // ------------------------------------------------------------------------------
 
@@ -40,7 +37,7 @@ class BranchesTest extends Abs
      *
      * @throws \Exception
      */
-    public function testOwnerRepoBranches()
+    public function testOwnerRepoBranches():void
     {
         $params =
         [
