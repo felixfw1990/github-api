@@ -209,13 +209,14 @@ trait AbsBase
      * @return array
      * @throws \Exception if the response body is not in JSON format
      */
-    private function parseResponse ( ResponseInterface $response, bool $headers = false):array
+    private function parseResponse ( ResponseInterface $response, bool $headers = true):array
     {
         return $headers ?
         [
             'data'    => $this->parseResponseData($response),
             'headers' => $this->parseResponseHeaders($response),
         ]:
+
         $this->parseResponseData($response);
     }
 
