@@ -1,4 +1,6 @@
-<?php namespace Github\Api\Pubs;
+<?php
+
+namespace Github\Api\Pubs;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -16,9 +18,10 @@ class Pubs extends Abs
      * request public function
      *
      * @param array $params
+     *
      * @return array
      */
-    public function request(array $params):array
+    public function request(array $params): array
     {
         $uri         = $params['uri']           ?? '';
         $requestType = $params['request_type']  ?? 'get';
@@ -29,11 +32,11 @@ class Pubs extends Abs
         $getData     = $params['get_data']      ?? true;
 
         return $this->options
-        ->getClient()
-        ->setPath(...$path)
-        ->setHeaderParams($headers)
-        ->setQuery($queue)
-        ->$requestType($uri, $getHeaders, $getData);
+            ->getClient()
+            ->setPath(...$path)
+            ->setHeaderParams($headers)
+            ->setQuery($queue)
+            ->{$requestType}($uri, $getHeaders, $getData);
     }
 
     // ------------------------------------------------------------------------------

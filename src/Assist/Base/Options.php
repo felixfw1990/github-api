@@ -1,4 +1,6 @@
-<?php namespace Github\Assist\Base;
+<?php
+
+namespace Github\Assist\Base;
 
 use Github\Assist\Request\HttpClient;
 
@@ -12,7 +14,6 @@ use Github\Assist\Request\HttpClient;
  */
 class Options
 {
-
     // ------------------------------------------------------------------------------
 
     /**
@@ -50,9 +51,9 @@ class Options
      */
     public function __construct(array $option)
     {
-        $this->token   = $option['token'] ?? '';
-        $this->debug   = $option['debug'] ?? false;
-        $this->proxy   = $option['proxy'] ?? '';
+        $this->token   = $option['token']    ?? '';
+        $this->debug   = $option['debug']    ?? false;
+        $this->proxy   = $option['proxy']    ?? '';
         $this->logFile = $option['log_file'] ?? '';
     }
 
@@ -61,7 +62,7 @@ class Options
     /**
      * get sync request instance
      */
-    public function getClient():HttpClient
+    public function getClient(): HttpClient
     {
         $debug  = $this->debug;
         $server = API::SERVER;
@@ -69,17 +70,16 @@ class Options
         // when set log file
         if ($this->debug && !empty($this->logFile))
         {
-            $debug = fopen($this->logFile, 'ab');
+            $debug = \fopen($this->logFile, 'ab');
         }
 
         $sync = new HttpClient($server, $debug, $this->proxy);
 
-        $this->token AND
+        $this->token and
         $sync->setHeaderParams(['Authorization' => 'token '.$this->token]);
 
         return $sync;
     }
 
     // ------------------------------------------------------------------------------
-    
 }

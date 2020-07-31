@@ -1,5 +1,8 @@
-<?php namespace GithubTest\Api\Data;
+<?php
 
+namespace GithubTest\Api\Data;
+
+use Exception;
 use Github\Api\Data\Data;
 use Github\Assist\Base\Helper;
 
@@ -10,6 +13,8 @@ use Github\Assist\Base\Helper;
  *
  * @author felix
  * @change 2019/06/25
+ *
+ * @internal
  */
 class DataTest extends Abs
 {
@@ -21,26 +26,25 @@ class DataTest extends Abs
 
     /**
      * setUp
-     *
      */
-    public function setUp():void
+    public function setUp(): void
     {
-       parent::setUp();
+        parent::setUp();
 
         $this->module = $this->client->Api()->Data();
     }
-    
+
     // ------------------------------------------------------------------------------
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
-    public function testData():void
+    public function testData(): void
     {
         $filePath = 'img.zip';
-        $content  = fopen($filePath, 'rb');
-        $content  = fread($content, filesize($filePath));
-        $content  = base64_encode($content);
+        $content  = \fopen($filePath, 'rb');
+        $content  = \fread($content, \filesize($filePath));
+        $content  = \base64_encode($content);
 
         $suffix   = 'zip';
         $hs       = 'g';
@@ -62,14 +66,13 @@ class DataTest extends Abs
         [
             'owner' => $this->params['owner'],
             'repo'  => $this->params['repo'],
-            'tree'  =>
-            [
+            'tree'  => [
                 [
                     'path' => $path,
                     'mode' => '100644',
                     'type' => 'blob',
                     'sha'  => $result['sha'],
-                ]
+                ],
             ],
         ];
 
@@ -83,7 +86,7 @@ class DataTest extends Abs
             'repo'     => $this->params['repo'],
             'message'  => $hs.' commit',
             'parents'  => [],
-            'tree'     => $result['sha']
+            'tree'     => $result['sha'],
         ];
 
         $result = $this->module->Commit()->create($param);
@@ -108,5 +111,4 @@ class DataTest extends Abs
     }
 
     // ------------------------------------------------------------------------------
-    
 }

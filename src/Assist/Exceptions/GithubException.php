@@ -1,4 +1,6 @@
-<?php namespace Github\Assist\Exceptions;
+<?php
+
+namespace Github\Assist\Exceptions;
 
 use Exception;
 
@@ -19,5 +21,4 @@ class GithubException extends Exception
     protected $message = 'some issue found when calling github.';
 
     // ------------------------------------------------------------------------------
-    
 }

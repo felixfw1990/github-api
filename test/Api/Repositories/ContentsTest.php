@@ -1,5 +1,8 @@
-<?php namespace GithubTest\Api\Repositories;
+<?php
 
+namespace GithubTest\Api\Repositories;
+
+use Exception;
 use Github\Api\Repositories\Contents;
 
 /**
@@ -9,6 +12,8 @@ use Github\Api\Repositories\Contents;
  *
  * @author Felix
  * @change 2018/12/19
+ *
+ * @internal
  */
 class ContentsTest extends Abs
 {
@@ -20,23 +25,22 @@ class ContentsTest extends Abs
 
     /**
      * setUp
-     *
      */
-    public function setUp():void
+    public function setUp(): void
     {
-       parent::setUp();
+        parent::setUp();
 
         $this->module = $this->client->Api()->Repositories()->Contents();
     }
-    
+
     // ------------------------------------------------------------------------------
 
     /**
      * test owner repo contents path
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function testOwnerRepoContentsPathGet():void
+    public function testOwnerRepoContentsPathGet(): void
     {
         $params =
         [
@@ -56,15 +60,15 @@ class ContentsTest extends Abs
     /**
      * download
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function testOwnerRepoContentsPathPut():void
+    public function testOwnerRepoContentsPathPut(): void
     {
         $jpgImageUrl = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1546513898773&di=dc9b490443745d40652cc7be4a788577&imgtype=0&src=http%3A%2F%2Fc.hiphotos.baidu.com%2Fzhidao%2Fwh%253D450%252C600%2Fsign%3D1bbb2c61952bd4074292dbf94eb9b267%2Fe1fe9925bc315c602637d9a68fb1cb13485477dc.jpg';
-        $result      = file_get_contents($jpgImageUrl);
+        $result      = \file_get_contents($jpgImageUrl);
 
-        $content     = base64_encode($result);
-        $number      = random_int(100000, 10000000000);
+        $content     = \base64_encode($result);
+        $number      = \random_int(100000, 10000000000);
         $suffix      = 'jpg';
         $params      =
         [
@@ -74,31 +78,30 @@ class ContentsTest extends Abs
             'message'   => 'test commit create file',
             'content'   => $content,
             'branch'    => 'master',
-            'committer' =>
-            [
-                'name' => 'felixfw1111',
+            'committer' => [
+                'name'  => 'felixfw1111',
                 'email' => 'felixfw1111@gmail.com',
             ],
-//            'author'    =>
-//            [
-//                'name' => 'felixfw1111',
-//                'email' => 'felixfw1111@gmail.com',
-//            ],
+            //            'author'    =>
+            //            [
+            //                'name' => 'felixfw1111',
+            //                'email' => 'felixfw1111@gmail.com',
+            //            ],
         ];
 
         $result = $this->module->ownerRepoContentsPathPut($params);
 
         $this->assertNotEmpty($result);
     }
-    
+
     // ------------------------------------------------------------------------------
 
     /**
      * test owner repo contents path delete
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function testOwnerRepoContentsPathDelete():void
+    public function testOwnerRepoContentsPathDelete(): void
     {
         $params =
         [
@@ -108,16 +111,15 @@ class ContentsTest extends Abs
             'sha'       => '0a792b5f95356b6bb82409c7cb7b2168af1652c9',
             'branch'    => 'master',
             'message'   => 'test commit delete file',
-            'committer' =>
-            [
+            'committer' => [
                 'name'  => 'felixfw1111',
                 'email' => 'felixfw1111@gmail.com',
             ],
-//            'author'    =>
-//            [
-//                'name' => 'felixfw1111',
-//                'email' => 'felixfw1111@gmail.com',
-//            ],
+            //            'author'    =>
+            //            [
+            //                'name' => 'felixfw1111',
+            //                'email' => 'felixfw1111@gmail.com',
+            //            ],
         ];
 
         $result = $this->module->ownerRepoContentsPathDelete($params);
@@ -126,5 +128,4 @@ class ContentsTest extends Abs
     }
 
     // ------------------------------------------------------------------------------
-    
 }

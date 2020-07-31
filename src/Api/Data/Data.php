@@ -1,4 +1,6 @@
-<?php namespace Github\Api\Data;
+<?php
+
+namespace Github\Api\Data;
 
 use Github\Assist\Base\BaseAbsNoSub;
 
@@ -14,4 +16,6 @@ use Github\Assist\Base\BaseAbsNoSub;
  * @author felix
  * @change 2019/06/25
  */
-class Data extends BaseAbsNoSub { }
+class Data extends BaseAbsNoSub
+{
+}

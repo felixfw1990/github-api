@@ -1,7 +1,8 @@
-<?php namespace Github\Assist\Base;
+<?php
+
+namespace Github\Assist\Base;
 
 use Github\Assist\Exceptions\GithubException;
-use function get_class;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -13,7 +14,6 @@ use function get_class;
  */
 abstract class BaseAbs
 {
-
     // ------------------------------------------------------------------------------
 
     /**
@@ -28,9 +28,9 @@ abstract class BaseAbs
      *
      * @param \Github\Assist\Base\Options $options
      */
-    public function __construct(Options $options = NULL)
+    public function __construct(?Options $options = null)
     {
-        $options AND $this->options = $options;
+        $options and $this->options = $options;
     }
 
     // ------------------------------------------------------------------------------
@@ -40,24 +40,26 @@ abstract class BaseAbs
      *
      * @param string $name
      * @param array  $arguments
-     * @return mixed
+     *
      * @throws \Github\Assist\Exceptions\GithubException
+     *
+     * @return mixed
      */
     public function __call(string $name, array $arguments)
     {
-        $name      = ucfirst($name);
-        $nameSpace = get_class($this);
+        $name      = \ucfirst($name);
+        $nameSpace = \get_class($this);
 
-        $tempArray = explode('\\' , $nameSpace);
+        $tempArray = \explode('\\', $nameSpace);
 
-        array_pop($tempArray);
+        \array_pop($tempArray);
 
-        $nameSpace = implode('\\', $tempArray);
+        $nameSpace = \implode('\\', $tempArray);
 
         $subClass = "{$nameSpace}\\{$name}\\{$name}";
 
         // check class exists
-        if (!class_exists($subClass))
+        if (!\class_exists($subClass))
         {
             throw new GithubException("class {$subClass} not found!");
         }
@@ -66,5 +68,4 @@ abstract class BaseAbs
     }
 
     // ------------------------------------------------------------------------------
-
 }

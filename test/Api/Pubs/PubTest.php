@@ -1,4 +1,6 @@
-<?php namespace GithubTest\Api\Pubs;
+<?php
+
+namespace GithubTest\Api\Pubs;
 
 use Github\Api\Pubs\Pubs;
 use Github\Assist\Base\API;
@@ -10,6 +12,8 @@ use Github\Assist\Base\API;
  *
  * @author Felix
  * @change 2018/12/24
+ *
+ * @internal
  */
 class PubTest extends Abs
 {
@@ -21,9 +25,8 @@ class PubTest extends Abs
 
     /**
      * setUp
-     *
      */
-    public function setUp():void
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -32,7 +35,7 @@ class PubTest extends Abs
 
     // ------------------------------------------------------------------------------
 
-    public function testRequest():void
+    public function testRequest(): void
     {
         $params =
         [
@@ -40,8 +43,7 @@ class PubTest extends Abs
             'request_type'  => 'get',
             'path'          => ['felixfw1990', 'test'],
             'headers'       => [],
-            'queue'         =>
-            [
+            'queue'         => [
 
                 'page'      => 1,
                 'per_page'  => 1,
@@ -57,5 +59,4 @@ class PubTest extends Abs
     }
 
     // ------------------------------------------------------------------------------
-    
 }

@@ -1,4 +1,6 @@
-<?php namespace Github\Api\Oauth\Authorizing;
+<?php
+
+namespace Github\Api\Oauth\Authorizing;
 
 /**
  * ---------------------------------------------------------------------------------
@@ -8,4 +10,6 @@
  * @author felix
  * @change 2020/03/16
  */
-abstract class Abs extends \Github\Api\Abs { }
+abstract class Abs extends \Github\Api\Abs
+{
+}

@@ -1,4 +1,6 @@
-<?php namespace Github\Assist\Base;
+<?php
+
+namespace Github\Assist\Base;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -33,7 +35,7 @@ class API
         'GCGComment'   => 'gists/%s/comments/%s',
 
         //data
-        'RORGT'=>'',
+        'RORGT'=> '',
     ];
 
     // git data
@@ -65,8 +67,8 @@ class API
     public const REPOSITORIES =
     [
         // repos root
-        'RMRepos'        => 'user/repos',  //
-        'RURepos'        => 'users/%s/repos',  //
+        'RMRepos'        => 'user/repos',
+        'RURepos'        => 'users/%s/repos',
         'RORepos'        => 'orgs/%s/repos',
         'RRepositories'  => 'repositories',
         'RRRepo'         => 'repos/%s/repo',
@@ -79,7 +81,7 @@ class API
         'RRTransfer'     => 'repos/%s/%s/transfer',
 
         // branches
-        'BRBranches'        => 'repos/%s/%s/branches', //
+        'BRBranches'        => 'repos/%s/%s/branches',
         'BRBBranch'         => 'repos/%s/%s/branches/%s',
         'BRBBProtection'    => 'repos/%s/%s/branches/%s/protection',
         'BRBBPStatus'       => 'repos/%s/%s/branches/%s/protection/required_status_checks',
@@ -102,8 +104,8 @@ class API
         'CRComment'   => 'repos/%s/%s/commits/%s',
 
         // commits
-        'CRCommits' => 'repos/%s/%s/commits',   //
-        'CRCommit'  => 'repos/%s/%s/commits/%s', //
+        'CRCommits' => 'repos/%s/%s/commits',
+        'CRCommit'  => 'repos/%s/%s/commits/%s',
         'CRCompare' => 'repos/%s/%s/compare/%s...%s',
 
         // commits
@@ -111,7 +113,7 @@ class API
 
         // content
         'CRReadme'        => 'repos/%s/%s/readme',
-        'CRContents'      => 'repos/%s/%s/contents/%s', //
+        'CRContents'      => 'repos/%s/%s/contents/%s',
         'CRArchiveFormat' => 'repos/%s/%s/%s/%s',
 
         // deploy keys

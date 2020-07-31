@@ -1,4 +1,6 @@
-<?php namespace Github;
+<?php
+
+namespace Github;
 
 use Github\Assist\Base\Options;
 use Github\Assist\Exceptions\GithubException;
@@ -8,7 +10,7 @@ use Github\Assist\Exceptions\GithubException;
  *  Client
  * ----------------------------------------------------------------------------------
  *
- * @method Api\Api Api()
+ * @method Api\Api         Api()
  * @method GraphQL\GraphQL GraphQL()
  *
  * @author Felix
@@ -17,7 +19,7 @@ use Github\Assist\Exceptions\GithubException;
 class Client
 {
     // ------------------------------------------------------------------------------
-    
+
     private $options;
 
     // ------------------------------------------------------------------------------
@@ -35,34 +37,24 @@ class Client
     // ------------------------------------------------------------------------------
 
     /**
-     * get options
-     *
-     * @return \Github\Assist\Base\Options
-     */
-    public function Options():Options
-    {
-        return $this->options;
-    }
-
-    // ------------------------------------------------------------------------------
-
-    /**
      * call github apis
      *
      * @param string $name
      * @param array  $arguments
-     * @return mixed
+     *
      * @throws \Github\Assist\Exceptions\GithubException
+     *
+     * @return mixed
      */
     public function __call(string $name, array $arguments)
     {
-        $name      = ucfirst($name);
+        $name      = \ucfirst($name);
         $nameSpace = __NAMESPACE__;
 
         $apiClass = "{$nameSpace}\\{$name}\\{$name}";
 
         // check class exists
-        if (!class_exists($apiClass))
+        if (!\class_exists($apiClass))
         {
             throw new GithubException("class {$apiClass} not found!");
         }
@@ -71,5 +63,16 @@ class Client
     }
 
     // ------------------------------------------------------------------------------
-    
+
+    /**
+     * get options
+     *
+     * @return \Github\Assist\Base\Options
+     */
+    public function Options(): Options
+    {
+        return $this->options;
+    }
+
+    // ------------------------------------------------------------------------------
 }

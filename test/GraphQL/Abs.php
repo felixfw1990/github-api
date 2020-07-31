@@ -1,4 +1,6 @@
-<?php namespace GithubTest\GraphQL;
+<?php
+
+namespace GithubTest\GraphQL;
 
 /**
  * ---------------------------------------------------------------------------------
@@ -8,4 +10,6 @@
  * @author felix
  * @change 2020/03/16
  */
-abstract class Abs extends \GithubTest\Abs { }
+abstract class Abs extends \GithubTest\Abs
+{
+}

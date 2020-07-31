@@ -1,5 +1,8 @@
-<?php namespace Github\Api\Repositories;
+<?php
 
+namespace Github\Api\Repositories;
+
+use Exception;
 use Github\Assist\Base\API;
 use Github\Assist\Base\Helper;
 
@@ -19,43 +22,47 @@ class Root extends Abs
      * get contents
      *
      * @param array $params
+     *
+     * @throws Exception
+     *
      * @return array
-     * @throws \Exception
      */
-    public function userRepos(array $params):array
+    public function userRepos(array $params): array
     {
         $keys =
         [
             'visibility', 'affiliation', 'type',
-            'sort', 'direction', 'page', 'per_page'
+            'sort', 'direction', 'page', 'per_page',
         ];
 
         $queue = Helper::arrayExistCums($params, $keys);
 
         return $this->options
-        ->getClient()
-        ->setQuery($queue)
-        ->get(API::REPOSITORIES['RMRepos'], true);
+            ->getClient()
+            ->setQuery($queue)
+            ->get(API::REPOSITORIES['RMRepos']);
     }
-    
+
     // ------------------------------------------------------------------------------
 
     /**
      * repos owner repo tags
      *
      * @param array $params
+     *
+     * @throws Exception
+     *
      * @return array
-     * @throws \Exception
      */
-    public function reposOwnerRepoTags(array $params):array
+    public function reposOwnerRepoTags(array $params): array
     {
         $owner = $params['owner'] ?? '';
-        $repo  = $params['repo'] ?? '';
+        $repo  = $params['repo']  ?? '';
 
         return $this->options
-        ->getClient()
-        ->setPath($owner, $repo)
-        ->get(API::REPOSITORIES['RRTags'], true);
+            ->getClient()
+            ->setPath($owner, $repo)
+            ->get(API::REPOSITORIES['RRTags']);
     }
 
     // ------------------------------------------------------------------------------
@@ -64,8 +71,10 @@ class Root extends Abs
      * user user name repos
      *
      * @param array $params
+     *
+     * @throws Exception
+     *
      * @return mixed
-     * @throws \Exception
      */
     public function usersUserNameRepos(array $params)
     {
@@ -75,12 +84,11 @@ class Root extends Abs
         $queue = Helper::arrayExistCums($params, $keys);
 
         return $this->options
-        ->getClient()
-        ->setPath($userName)
-        ->setQuery($queue)
-        ->get(API::REPOSITORIES['RURepos'], true);
+            ->getClient()
+            ->setPath($userName)
+            ->setQuery($queue)
+            ->get(API::REPOSITORIES['RURepos']);
     }
 
     // ------------------------------------------------------------------------------
-    
 }

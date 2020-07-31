@@ -1,5 +1,8 @@
-<?php namespace GithubTest\Api\Repositories;
+<?php
 
+namespace GithubTest\Api\Repositories;
+
+use Exception;
 use Github\Api\Repositories\Releases;
 
 /**
@@ -9,6 +12,8 @@ use Github\Api\Repositories\Releases;
  *
  * @author Felix
  * @change 2018/12/29
+ *
+ * @internal
  */
 class ReleasesTest extends Abs
 {
@@ -20,23 +25,22 @@ class ReleasesTest extends Abs
 
     /**
      * setUp
-     *
      */
-    public function setUp():void
+    public function setUp(): void
     {
-       parent::setUp();
+        parent::setUp();
 
         $this->module = $this->client->Api()->Repositories()->Releases();
     }
-    
+
     // ------------------------------------------------------------------------------
 
     /**
      * test contents
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function testOwnerRepoBranches():void
+    public function testOwnerRepoBranches(): void
     {
         $params =
         [
@@ -52,5 +56,4 @@ class ReleasesTest extends Abs
     }
 
     // ------------------------------------------------------------------------------
-    
 }

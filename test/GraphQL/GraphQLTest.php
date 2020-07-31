@@ -1,4 +1,6 @@
-<?php namespace GithubTest\GraphQL;
+<?php
+
+namespace GithubTest\GraphQL;
 
 use Github\GraphQL\GraphQL;
 
@@ -9,6 +11,8 @@ use Github\GraphQL\GraphQL;
  *
  * @author felix
  * @change 2020/03/16
+ *
+ * @internal
  */
 class GraphQLTest extends Abs
 {
@@ -18,20 +22,20 @@ class GraphQLTest extends Abs
 
     // ------------------------------------------------------------------------------
 
-    public function setUp():void
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->tm = $this->client->GraphQL();
     }
-    
+
     // ------------------------------------------------------------------------------
 
-    public function testRun():void
+    public function testRun(): void
     {
         $str = '{viewer{login}}';
 
-        $this->assertLogic(fn() => $this->tm->run($str));
+        $this->assertLogic(fn () => $this->tm->run($str));
     }
 
     // ------------------------------------------------------------------------------

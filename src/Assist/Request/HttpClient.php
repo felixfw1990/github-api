@@ -1,4 +1,6 @@
-<?php namespace Github\Assist\Request;
+<?php
+
+namespace Github\Assist\Request;
 
 use Exception;
 use Github\Assist\Exceptions\GithubException;
@@ -15,9 +17,7 @@ class HttpClient
 {
     // ------------------------------------------------------------------------------
 
-    /**
-     * base trait
-     */
+    // base trait
     use AbsBase;
 
     // ------------------------------------------------------------------------------
@@ -26,11 +26,12 @@ class HttpClient
      * get request sync
      *
      * @param string $api
-     * @param bool   $headers
+     *
+     * @throws Exception
+     *
      * @return mixed
-     * @throws \Exception
      */
-    public function get(string $api, bool $headers = false)
+    public function get(string $api)
     {
         $apiPath = $this->concatApiPath($api);
         $options = $this->concatOptions();
@@ -44,7 +45,7 @@ class HttpClient
             throw new GithubException($this->getExceptionMsg($e));
         }
 
-        return $this->parseResponse($response, $headers);
+        return $this->parseResponse($response);
     }
 
     // ------------------------------------------------------------------------------
@@ -53,8 +54,10 @@ class HttpClient
      * put request sync
      *
      * @param string $api
+     *
+     * @throws Exception
+     *
      * @return mixed
-     * @throws \Exception
      */
     public function put(string $api)
     {
@@ -79,8 +82,10 @@ class HttpClient
      * post request sync
      *
      * @param string $api
+     *
+     * @throws Exception
+     *
      * @return mixed
-     * @throws \Exception
      */
     public function post(string $api)
     {
@@ -105,8 +110,10 @@ class HttpClient
      * delete request sync
      *
      * @param string $api
+     *
+     * @throws Exception
+     *
      * @return mixed
-     * @throws \Exception
      */
     public function delete(string $api)
     {

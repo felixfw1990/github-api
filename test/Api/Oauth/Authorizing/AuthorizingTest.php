@@ -1,7 +1,10 @@
-<?php namespace GithubTest\Api\Oauth\Authorizing;
+<?php
 
-use Github\Api\Oauth\Authorizing\Authorizing;
+namespace GithubTest\Api\Oauth\Authorizing;
+
+use Exception;
 use Github\Assist\Base\Helper;
+use Github\Api\Oauth\Authorizing\Authorizing;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -10,6 +13,8 @@ use Github\Assist\Base\Helper;
  *
  * @author Felix
  * @change 2018/12/21
+ *
+ * @internal
  */
 class AuthorizingTest extends Abs
 {
@@ -21,9 +26,8 @@ class AuthorizingTest extends Abs
 
     /**
      * setUp
-     *
      */
-    public function setUp():void
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -35,9 +39,9 @@ class AuthorizingTest extends Abs
     /**
      * get url
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function testGetUrl():void
+    public function testGetUrl(): void
     {
         $params =
         [
@@ -56,15 +60,15 @@ class AuthorizingTest extends Abs
 
         $this->assertNotEmpty($result);
     }
-    
+
     // ------------------------------------------------------------------------------
 
     /**
      * test get token
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function testGetToken():void
+    public function testGetToken(): void
     {
         $params =
         [
@@ -83,5 +87,4 @@ class AuthorizingTest extends Abs
     }
 
     // ------------------------------------------------------------------------------
-    
 }

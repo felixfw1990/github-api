@@ -1,8 +1,10 @@
-<?php namespace GithubTest\Api\Repositories;
+<?php
 
+namespace GithubTest\Api\Repositories;
+
+use Exception;
 use Github\Assist\Base\Helper;
 use Github\Api\Repositories\Commits;
-use function count;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -11,6 +13,8 @@ use function count;
  *
  * @author Felix
  * @change 2018/12/20
+ *
+ * @internal
  */
 class CommitsTest extends Abs
 {
@@ -22,23 +26,22 @@ class CommitsTest extends Abs
 
     /**
      * setUp
-     *
      */
-    public function setUp():void
+    public function setUp(): void
     {
-       parent::setUp();
+        parent::setUp();
 
         $this->module = $this->client->Api()->Repositories()->Commits();
     }
-    
+
     // ------------------------------------------------------------------------------
 
     /**
      * test owner repo commits
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function testOwnerRepoCommits():void
+    public function testOwnerRepoCommits(): void
     {
         $params =
         [
@@ -53,10 +56,10 @@ class CommitsTest extends Abs
 
         $data = $result['data'] ?? [];
 
-        $headers = $result['headers'] ?? [];
+        $headers     = $result['headers'] ?? [];
         $maxPageSize = Helper::getLastPage($headers['Link'][0] ?? '');
 
-        $this->assertTrue(count($data) >= 1);
+        $this->assertTrue(\count($data) >= 1);
         $this->assertNotEmpty($maxPageSize);
     }
 
@@ -65,9 +68,9 @@ class CommitsTest extends Abs
     /**
      * test owner repo commits sha
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function testOwnerRepoCommitsSha():void
+    public function testOwnerRepoCommitsSha(): void
     {
         $params =
         [
@@ -82,5 +85,4 @@ class CommitsTest extends Abs
     }
 
     // ------------------------------------------------------------------------------
-    
 }

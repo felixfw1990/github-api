@@ -1,5 +1,8 @@
-<?php namespace GithubTest\Api\Repositories;
+<?php
 
+namespace GithubTest\Api\Repositories;
+
+use Exception;
 use Github\Assist\Base\Helper;
 use Github\Api\Repositories\Branches;
 
@@ -10,6 +13,8 @@ use Github\Api\Repositories\Branches;
  *
  * @author Felix
  * @change 2018/12/20
+ *
+ * @internal
  */
 class BranchesTest extends Abs
 {
@@ -21,23 +26,22 @@ class BranchesTest extends Abs
 
     /**
      * setUp
-     *
      */
-    public function setUp():void
+    public function setUp(): void
     {
-       parent::setUp();
+        parent::setUp();
 
         $this->module = $this->client->Api()->Repositories()->Branches();
     }
-    
+
     // ------------------------------------------------------------------------------
 
     /**
      * test contents
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function testOwnerRepoBranches():void
+    public function testOwnerRepoBranches(): void
     {
         $params =
         [
@@ -60,5 +64,4 @@ class BranchesTest extends Abs
     }
 
     // ------------------------------------------------------------------------------
-    
 }

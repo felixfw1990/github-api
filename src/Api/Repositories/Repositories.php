@@ -1,4 +1,6 @@
-<?php namespace Github\Api\Repositories;
+<?php
+
+namespace Github\Api\Repositories;
 
 use Github\Assist\Base\BaseAbsNoSub;
 
@@ -20,5 +22,4 @@ use Github\Assist\Base\BaseAbsNoSub;
  */
 class Repositories extends BaseAbsNoSub
 {
-
 }

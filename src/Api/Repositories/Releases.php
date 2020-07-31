@@ -1,5 +1,8 @@
-<?php namespace Github\Api\Repositories;
+<?php
 
+namespace Github\Api\Repositories;
+
+use Exception;
 use Github\Assist\Base\API;
 use Github\Assist\Base\Helper;
 
@@ -19,24 +22,25 @@ class Releases extends Abs
      * repos Releases
      *
      * @param array $params
+     *
+     * @throws Exception
+     *
      * @return array
-     * @throws \Exception
      */
-    public function ownerRepoReleases(array $params):array
+    public function ownerRepoReleases(array $params): array
     {
         $owner = $params['owner'] ?? '';
-        $repo  = $params['repo'] ?? '';
+        $repo  = $params['repo']  ?? '';
 
         $keys  = ['page', 'per_page', 'protected'];
         $queue = Helper::arrayExistCums($params, $keys);
 
         return $this->options
-        ->getClient()
-        ->setPath($owner, $repo)
-        ->setQuery($queue)
-        ->get(API::REPOSITORIES['RRRReleases'], true);
+            ->getClient()
+            ->setPath($owner, $repo)
+            ->setQuery($queue)
+            ->get(API::REPOSITORIES['RRRReleases']);
     }
 
     // ------------------------------------------------------------------------------
-    
 }

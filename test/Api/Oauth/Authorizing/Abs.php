@@ -1,4 +1,6 @@
-<?php namespace GithubTest\Api\Oauth\Authorizing;
+<?php
+
+namespace GithubTest\Api\Oauth\Authorizing;
 
 /**
  * ---------------------------------------------------------------------------------
@@ -7,5 +9,9 @@
  *
  * @author felix
  * @change 2020/04/08
+ *
+ * @internal
  */
-class Abs extends \GithubTest\Api\Oauth\Abs { }
+class Abs extends \GithubTest\Api\Oauth\Abs
+{
+}

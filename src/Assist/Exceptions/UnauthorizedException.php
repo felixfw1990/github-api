@@ -1,4 +1,6 @@
-<?php namespace Github\Assist\Exceptions;
+<?php
+
+namespace Github\Assist\Exceptions;
 
 /**
  * ----------------------------------------------------------------------------------

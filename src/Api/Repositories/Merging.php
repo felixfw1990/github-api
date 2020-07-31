@@ -1,5 +1,8 @@
-<?php namespace Github\Api\Repositories;
+<?php
 
+namespace Github\Api\Repositories;
+
+use Exception;
 use Github\Assist\Base\API;
 use Github\Assist\Base\Helper;
 
@@ -19,10 +22,12 @@ class Merging extends Abs
      * owner repo contents path put(create or update)
      *
      * @param array $params
+     *
+     * @throws Exception
+     *
      * @return array
-     * @throws \Exception
      */
-    public function merge(array $params):array
+    public function merge(array $params): array
     {
         $owner = $params['owner'] ?? '';
         $repo  = $params['repo']  ?? [];
@@ -31,12 +36,11 @@ class Merging extends Abs
         $queue = Helper::arrayExistCums($params, $keys);
 
         return $this->options
-        ->getClient()
-        ->setPath($owner, $repo)
-        ->setFormParams($queue)
-        ->post(API::REPOSITORIES['RORMerges']);
+            ->getClient()
+            ->setPath($owner, $repo)
+            ->setFormParams($queue)
+            ->post(API::REPOSITORIES['RORMerges']);
     }
 
     // ------------------------------------------------------------------------------
-    
 }

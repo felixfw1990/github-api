@@ -1,10 +1,12 @@
-<?php namespace GithubTest;
+<?php
+
+namespace GithubTest;
 
 use Closure;
 use Exception;
-use \PHPUnit\Framework\TestCase;
-
 use Github\Client;
+
+use PHPUnit\Framework\TestCase;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -29,7 +31,7 @@ abstract class Abs extends TestCase
 
     // ------------------------------------------------------------------------------
 
-    public function setUp() : void
+    public function setUp(): void
     {
         $optionParams =
         [
@@ -47,9 +49,9 @@ abstract class Abs extends TestCase
     /**
      * assert Logic
      *
-     * @param \Closure $fn
+     * @param Closure $fn
      */
-    public function assertLogic(Closure $fn):void
+    public function assertLogic(Closure $fn): void
     {
         $status = true;
 
@@ -57,12 +59,13 @@ abstract class Abs extends TestCase
         {
             $fn();
         }
-
-        catch (Exception $e){ $status = false; }
+        catch (Exception $e)
+        {
+            $status = false;
+        }
 
         $this->assertTrue($status);
     }
 
     // ------------------------------------------------------------------------------
-    
 }

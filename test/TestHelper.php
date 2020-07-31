@@ -1,8 +1,7 @@
 <?php
 
-define('BASEPATH', realpath(dirname(dirname(__FILE__))) . '/');
+\define('BASEPATH', \realpath(\dirname(__DIR__)).'/');
 
-require BASEPATH . 'vendor/autoload.php';
+require BASEPATH.'vendor/autoload.php';
 
 // ------------------------------------------------------------------------------
-

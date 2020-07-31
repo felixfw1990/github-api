@@ -1,4 +1,6 @@
-<?php namespace GithubTest\Api\Repositories;
+<?php
+
+namespace GithubTest\Api\Repositories;
 
 /**
  * ---------------------------------------------------------------------------------
@@ -8,4 +10,6 @@
  * @author felix
  * @change 2020/04/08
  */
-abstract class Abs extends \GithubTest\Abs {}
+abstract class Abs extends \GithubTest\Abs
+{
+}

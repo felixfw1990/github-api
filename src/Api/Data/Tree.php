@@ -1,5 +1,8 @@
-<?php namespace Github\Api\Data;
+<?php
 
+namespace Github\Api\Data;
+
+use Exception;
 use Github\Assist\Base\API;
 use Github\Assist\Base\Helper;
 
@@ -19,10 +22,12 @@ class Tree extends Abs
      * create tree
      *
      * @param array $params
+     *
+     * @throws Exception
+     *
      * @return array
-     * @throws \Exception
      */
-    public function create(array $params):array
+    public function create(array $params): array
     {
         $owner = $params['owner'] ?? '';
         $repo  = $params['repo']  ?? [];
@@ -32,10 +37,10 @@ class Tree extends Abs
         $queue = Helper::arrayExistCums($params, $keys);
 
         return $this->options
-        ->getClient()
-        ->setPath($owner, $repo)
-        ->setFormParams($queue)
-        ->post(API::DATA['RORGTrees']);
+            ->getClient()
+            ->setPath($owner, $repo)
+            ->setFormParams($queue)
+            ->post(API::DATA['RORGTrees']);
     }
 
     // ------------------------------------------------------------------------------

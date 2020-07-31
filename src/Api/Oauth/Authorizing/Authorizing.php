@@ -1,5 +1,8 @@
-<?php namespace Github\Api\Oauth\Authorizing;
+<?php
 
+namespace Github\Api\Oauth\Authorizing;
+
+use Exception;
 use Github\Assist\Base\Helper;
 
 /**
@@ -18,23 +21,25 @@ class Authorizing extends Abs
      * get url
      *
      * @param array $params
+     *
+     * @throws Exception
+     *
      * @return string
-     * @throws \Exception
      */
-    public function getUrl(array $params):string
+    public function getUrl(array $params): string
     {
         $uri = 'https://github.com/login/oauth/authorize';
 
         $keys =
         [
             'client_id', 'redirect_uri', 'login',
-            'scope', 'state', 'allow_signup'
+            'scope', 'state', 'allow_signup',
         ];
         $queue = Helper::arrayExistCums($params, $keys);
 
         return Helper::getLink($uri, $queue);
     }
-    
+
     // ------------------------------------------------------------------------------
 
     /**
@@ -42,27 +47,28 @@ class Authorizing extends Abs
      *
      * @param array $params
      *
-     * @return  array
-     * @throws \Exception
+     * @throws Exception
+     *
+     * @return array
      */
-    public function getToken(array $params):array
+    public function getToken(array $params): array
     {
         $uri = 'https://github.com/login/oauth/access_token';
 
         $keys =
         [
             'code', 'state', 'client_id',
-            'client_secret', 'redirect_uri'
+            'client_secret', 'redirect_uri',
         ];
 
         $queue = Helper::arrayExistCums($params, $keys);
 
         return $this->options
-        ->getClient()
-        ->setHeaderParams(['Accept' => 'application/json'])
-        ->setQuery($queue)
-        ->post($uri);
+            ->getClient()
+            ->setHeaderParams(['Accept' => 'application/json'])
+            ->setQuery($queue)
+            ->post($uri);
     }
-    
+
     // ------------------------------------------------------------------------------
 }

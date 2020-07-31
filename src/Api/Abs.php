@@ -1,4 +1,6 @@
-<?php namespace Github\Api;
+<?php
+
+namespace Github\Api;
 
 use Github\Assist\Base\Options;
 

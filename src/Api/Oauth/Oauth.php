@@ -1,4 +1,6 @@
-<?php namespace Github\Api\Oauth;
+<?php
+
+namespace Github\Api\Oauth;
 
 use Github\Assist\Base\BaseAbs;
 
@@ -12,4 +14,6 @@ use Github\Assist\Base\BaseAbs;
  * @author Felix
  * @change 2018/12/28
  */
-class Oauth extends BaseAbs { }
+class Oauth extends BaseAbs
+{
+}

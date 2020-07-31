@@ -1,4 +1,6 @@
-<?php namespace Github\GraphQL;
+<?php
+
+namespace Github\GraphQL;
 
 use Github\Assist\Base\Options;
 

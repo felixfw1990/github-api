@@ -1,5 +1,8 @@
-<?php namespace Github\Api\Repositories;
+<?php
 
+namespace Github\Api\Repositories;
+
+use Exception;
 use Github\Assist\Base\API;
 use Github\Assist\Base\Helper;
 
@@ -19,10 +22,12 @@ class Contents extends Abs
      * owner repo contents path
      *
      * @param array $params
+     *
+     * @throws Exception
+     *
      * @return array
-     * @throws \Exception
      */
-    public function ownerRepoContentsPath(array $params):array
+    public function ownerRepoContentsPath(array $params): array
     {
         $owner = $params['owner'] ?? '';
         $repo  = $params['repo']  ?? [];
@@ -31,12 +36,12 @@ class Contents extends Abs
         $queue = Helper::arrayExistCum($params, 'ref');
 
         return $this->options
-        ->getClient()
-        ->setPath($owner, $repo, $path)
-        ->setQuery($queue)
-        ->get(API::REPOSITORIES['CRContents']);
+            ->getClient()
+            ->setPath($owner, $repo, $path)
+            ->setQuery($queue)
+            ->get(API::REPOSITORIES['CRContents']);
     }
-    
+
     // ------------------------------------------------------------------------------
 
     /**
@@ -45,10 +50,12 @@ class Contents extends Abs
      * File size is less than 30m
      *
      * @param array $params
+     *
+     * @throws Exception
+     *
      * @return array
-     * @throws \Exception
      */
-    public function ownerRepoContentsPathPut(array $params):array
+    public function ownerRepoContentsPathPut(array $params): array
     {
         $owner = $params['owner'] ?? '';
         $repo  = $params['repo']  ?? [];
@@ -58,10 +65,10 @@ class Contents extends Abs
         $queue = Helper::arrayExistCums($params, $keys);
 
         return $this->options
-        ->getClient()
-        ->setPath($owner, $repo, $path)
-        ->setFormParams($queue)
-        ->put(API::REPOSITORIES['CRContents']);
+            ->getClient()
+            ->setPath($owner, $repo, $path)
+            ->setFormParams($queue)
+            ->put(API::REPOSITORIES['CRContents']);
     }
 
     // ------------------------------------------------------------------------------
@@ -71,10 +78,11 @@ class Contents extends Abs
      *
      * @param array $params
      *
+     * @throws Exception
+     *
      * @return array
-     * @throws \Exception
      */
-    public function ownerRepoContentsPathDelete(array $params):array
+    public function ownerRepoContentsPathDelete(array $params): array
     {
         $owner = $params['owner'] ?? '';
         $repo  = $params['repo']  ?? [];
@@ -84,12 +92,11 @@ class Contents extends Abs
         $queue = Helper::arrayExistCums($params, $keys);
 
         return $this->options
-        ->getClient()
-        ->setPath($owner, $repo, $path)
-        ->setFormParams($queue)
-        ->delete(API::REPOSITORIES['CRContents']);
+            ->getClient()
+            ->setPath($owner, $repo, $path)
+            ->setFormParams($queue)
+            ->delete(API::REPOSITORIES['CRContents']);
     }
 
     // ------------------------------------------------------------------------------
-    
 }

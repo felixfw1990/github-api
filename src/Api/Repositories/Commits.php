@@ -1,5 +1,8 @@
-<?php namespace Github\Api\Repositories;
+<?php
 
+namespace Github\Api\Repositories;
+
+use Exception;
 use Github\Assist\Base\API;
 use Github\Assist\Base\Helper;
 
@@ -19,10 +22,12 @@ class Commits extends Abs
      * get commits list
      *
      * @param array $params
+     *
+     * @throws Exception
+     *
      * @return array
-     * @throws \Exception
      */
-    public function ownerRepoCommits(array $params):array
+    public function ownerRepoCommits(array $params): array
     {
         $owner = $params['owner'] ?? '';
         $repo  = $params['repo']  ?? '';
@@ -31,10 +36,10 @@ class Commits extends Abs
         $queue = Helper::arrayExistCums($params, $keys);
 
         return $this->options
-        ->getClient()
-        ->setPath($owner, $repo)
-        ->setQuery($queue)
-        ->get(API::REPOSITORIES['CRCommits'], true);
+            ->getClient()
+            ->setPath($owner, $repo)
+            ->setQuery($queue)
+            ->get(API::REPOSITORIES['CRCommits']);
     }
 
     // ------------------------------------------------------------------------------
@@ -43,21 +48,22 @@ class Commits extends Abs
      * get commit
      *
      * @param array $params
+     *
+     * @throws Exception
+     *
      * @return array
-     * @throws \Exception
      */
-    public function ownerRepoCommitsSha(array $params):array
+    public function ownerRepoCommitsSha(array $params): array
     {
         $owner  = $params['owner'] ?? '';
         $repo   = $params['repo']  ?? [];
         $sha    = $params['sha']   ?? '';
 
         return $this->options
-        ->getClient()
-        ->setPath($owner, $repo, $sha)
-        ->get(API::REPOSITORIES['CRCommit']);
+            ->getClient()
+            ->setPath($owner, $repo, $sha)
+            ->get(API::REPOSITORIES['CRCommit']);
     }
 
     // ------------------------------------------------------------------------------
-    
 }

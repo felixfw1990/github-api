@@ -1,7 +1,10 @@
-<?php namespace GithubTest\Api\Repositories;
+<?php
 
-use Github\Api\Repositories\Root;
+namespace GithubTest\Api\Repositories;
+
+use Exception;
 use Github\Assist\Base\Helper;
+use Github\Api\Repositories\Root;
 
 /**
  * ----------------------------------------------------------------------------------
@@ -10,6 +13,8 @@ use Github\Assist\Base\Helper;
  *
  * @author Felix
  * @change 2018/12/28
+ *
+ * @internal
  */
 class RootTest extends Abs
 {
@@ -21,23 +26,22 @@ class RootTest extends Abs
 
     /**
      * setUp
-     *
      */
-    public function setUp():void
+    public function setUp(): void
     {
-       parent::setUp();
+        parent::setUp();
 
         $this->module = $this->client->Api()->Repositories()->Root();
     }
-    
+
     // ------------------------------------------------------------------------------
 
     /**
      * user repos
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function testUserRepos():void
+    public function testUserRepos(): void
     {
         $params =
         [
@@ -61,9 +65,9 @@ class RootTest extends Abs
     /**
      * user repos
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function testReposOwnerRepoTags():void
+    public function testReposOwnerRepoTags(): void
     {
         $params =
         [
@@ -83,9 +87,9 @@ class RootTest extends Abs
     /**
      * user repos
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function testUserUserNameRepos():void
+    public function testUserUserNameRepos(): void
     {
         $params =
         [
@@ -98,13 +102,8 @@ class RootTest extends Abs
 
         $data = $result['data'] ?? [];
 
-        $headers     = $result['headers'] ?? [];
-        $pageMaxSize = Helper::getLastPage($headers['Link'][0] ?? '');
-
         $this->assertCount(1, $data);
-        $this->assertNotEmpty($pageMaxSize);
     }
 
     // ------------------------------------------------------------------------------
-    
 }
