@@ -26,7 +26,7 @@ class GraphQLTest extends Abs
     {
         parent::setUp();
 
-        $this->tm = $this->client->GraphQL();
+        $this->tm = new GraphQL();
     }
 
     // ------------------------------------------------------------------------------

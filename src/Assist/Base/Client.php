@@ -12,35 +12,14 @@ use Github\Assist\Request\HttpClient;
  * @author Felix
  * @change 2018/12/13
  */
-class Options
+class Client
 {
     // ------------------------------------------------------------------------------
 
-    /**
-     * @var bool
-     */
-    private $debug;
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * @var string
-     */
-    private $logFile;
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * @var string
-     */
-    private $token;
-
-    // ------------------------------------------------------------------------------
-
-    /**
-     * @var string
-     */
-    private $proxy;
+    private bool $debug;
+    private string $logFile;
+    private string $token;
+    private string $proxy;
 
     // ------------------------------------------------------------------------------
 
@@ -62,7 +41,7 @@ class Options
     /**
      * get sync request instance
      */
-    public function getClient(): HttpClient
+    public function get(): HttpClient
     {
         $debug  = $this->debug;
         $server = API::SERVER;

@@ -2,6 +2,8 @@
 
 namespace Github\Api\Pubs;
 
+use Github\Assist\Base\Client;
+
 /**
  * ----------------------------------------------------------------------------------
  *  Pub
@@ -10,8 +12,19 @@ namespace Github\Api\Pubs;
  * @author Felix
  * @change 2018/12/24
  */
-class Pubs extends Abs
+class Pubs
 {
+    // ------------------------------------------------------------------------------
+
+    private Client $clientObj;
+
+    // ------------------------------------------------------------------------------
+
+    public function __construct(array $objects = [])
+    {
+        $this->clientObj = $objects['clientObj'];
+    }
+
     // ------------------------------------------------------------------------------
 
     /**
@@ -31,8 +44,8 @@ class Pubs extends Abs
         $getHeaders  = $params['get_headers']   ?? false;
         $getData     = $params['get_data']      ?? true;
 
-        return $this->options
-            ->getClient()
+        return $this->clientObj
+            ->get()
             ->setPath(...$path)
             ->setHeaderParams($headers)
             ->setQuery($queue)

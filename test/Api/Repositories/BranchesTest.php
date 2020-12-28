@@ -3,7 +3,6 @@
 namespace GithubTest\Api\Repositories;
 
 use Exception;
-use Github\Assist\Base\Helper;
 use Github\Api\Repositories\Branches;
 
 /**
@@ -20,18 +19,19 @@ class BranchesTest extends Abs
 {
     // ------------------------------------------------------------------------------
 
-    private Branches $module;
+    private Branches $tm;
 
     // ------------------------------------------------------------------------------
 
     /**
      * setUp
+     *
      */
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->module = $this->client->Api()->Repositories()->Branches();
+        $this->tm = new Branches(['clientObj' => $this->client]);
     }
 
     // ------------------------------------------------------------------------------
@@ -52,12 +52,12 @@ class BranchesTest extends Abs
             'protected' => false,
         ];
 
-        $result = $this->module->ownerRepoBranches($params);
+        $result = $this->tm->ownerRepoBranches($params);
 
         $resultData = $result['data'] ?? [];
 
         $resultHeaders = $result['headers'] ?? [];
-        $maxPageSize   = Helper::getLastPage($resultHeaders['Link'][0] ?? '');
+        $maxPageSize   = $this->getLastPage($resultHeaders['Link'][0] ?? '');
 
         $this->assertCount(1, $resultData);
         $this->assertNotEmpty($maxPageSize);

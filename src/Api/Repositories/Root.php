@@ -4,6 +4,7 @@ namespace Github\Api\Repositories;
 
 use Exception;
 use Github\Assist\Base\API;
+use Github\Assist\Base\Client;
 use Github\Assist\Base\Helper;
 
 /**
@@ -14,8 +15,21 @@ use Github\Assist\Base\Helper;
  * @author Felix
  * @change 2018/12/28
  */
-class Root extends Abs
+class Root
 {
+    // ------------------------------------------------------------------------------
+
+    private Client $clientObj;
+    private Helper $helperObj;
+
+    // ------------------------------------------------------------------------------
+
+    public function __construct(array $objects = [])
+    {
+        $this->clientObj = $objects['clientObj'];
+        $this->helperObj = $objects['helperObj'] ?? new Helper();
+    }
+
     // ------------------------------------------------------------------------------
 
     /**
@@ -35,10 +49,10 @@ class Root extends Abs
             'sort', 'direction', 'page', 'per_page',
         ];
 
-        $queue = Helper::arrayExistCums($params, $keys);
+        $queue = $this->helperObj->arrayExistCums($params, $keys);
 
-        return $this->options
-            ->getClient()
+        return $this->clientObj
+            ->get()
             ->setQuery($queue)
             ->get(API::REPOSITORIES['RMRepos']);
     }
@@ -59,8 +73,8 @@ class Root extends Abs
         $owner = $params['owner'] ?? '';
         $repo  = $params['repo']  ?? '';
 
-        return $this->options
-            ->getClient()
+        return $this->clientObj
+            ->get()
             ->setPath($owner, $repo)
             ->get(API::REPOSITORIES['RRTags']);
     }
@@ -81,10 +95,10 @@ class Root extends Abs
         $userName = $params['username'];
 
         $keys  = ['page', 'per_page', 'type', 'sort', 'direction'];
-        $queue = Helper::arrayExistCums($params, $keys);
+        $queue = $this->helperObj->arrayExistCums($params, $keys);
 
-        return $this->options
-            ->getClient()
+        return $this->clientObj
+            ->get()
             ->setPath($userName)
             ->setQuery($queue)
             ->get(API::REPOSITORIES['RURepos']);

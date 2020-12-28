@@ -3,7 +3,6 @@
 namespace GithubTest\Api\Repositories;
 
 use Exception;
-use Github\Assist\Base\Helper;
 use Github\Api\Repositories\Root;
 
 /**
@@ -20,7 +19,7 @@ class RootTest extends Abs
 {
     // ------------------------------------------------------------------------------
 
-    private Root $module;
+    private Root $tm;
 
     // ------------------------------------------------------------------------------
 
@@ -31,7 +30,7 @@ class RootTest extends Abs
     {
         parent::setUp();
 
-        $this->module = $this->client->Api()->Repositories()->Root();
+        $this->tm = new Root(['clientObj' => $this->client]);
     }
 
     // ------------------------------------------------------------------------------
@@ -43,18 +42,17 @@ class RootTest extends Abs
      */
     public function testUserRepos(): void
     {
-        $params =
-        [
+        $params = [
             'page'     => 1,
             'per_page' => 5,
         ];
 
-        $result = $this->module->userRepos($params);
+        $result = $this->tm->userRepos($params);
 
         $data = $result['data'] ?? [];
 
         $headers     = $result['headers'] ?? [];
-        $pageMaxSize = Helper::getLastPage($headers['Link'][0] ?? '');
+        $pageMaxSize = $this->getLastPage($headers['Link'][0] ?? '');
 
         $this->assertCount(5, $data);
         $this->assertNotEmpty($pageMaxSize);
@@ -69,15 +67,14 @@ class RootTest extends Abs
      */
     public function testReposOwnerRepoTags(): void
     {
-        $params =
-        [
+        $params = [
             'owner'    => $this->params['owner'],
             'repo'     => $this->params['repo'],
             'page'     => 1,
             'per_page' => 1,
         ];
 
-        $result = $this->module->reposOwnerRepoTags($params);
+        $result = $this->tm->reposOwnerRepoTags($params);
 
         $this->assertNotEmpty($result);
     }
@@ -91,14 +88,13 @@ class RootTest extends Abs
      */
     public function testUserUserNameRepos(): void
     {
-        $params =
-        [
+        $params = [
             'username' => 'felixfw1111',
             'page'     => 1,
             'per_page' => 1,
         ];
 
-        $result = $this->module->usersUserNameRepos($params);
+        $result = $this->tm->usersUserNameRepos($params);
 
         $data = $result['data'] ?? [];
 

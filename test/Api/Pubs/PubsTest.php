@@ -7,7 +7,7 @@ use Github\Assist\Base\API;
 
 /**
  * ----------------------------------------------------------------------------------
- *  PubTest
+ *  PubsTest
  * ----------------------------------------------------------------------------------
  *
  * @author Felix
@@ -15,11 +15,11 @@ use Github\Assist\Base\API;
  *
  * @internal
  */
-class PubTest extends Abs
+class PubsTest extends Abs
 {
     // ------------------------------------------------------------------------------
 
-    private Pubs $module;
+    private Pubs $tm;
 
     // ------------------------------------------------------------------------------
 
@@ -30,30 +30,29 @@ class PubTest extends Abs
     {
         parent::setUp();
 
-        $this->module = $this->client->Api()->Pubs();
+        $this->tm = new Pubs(['clientObj' => $this->client]);
     }
 
     // ------------------------------------------------------------------------------
 
     public function testRequest(): void
     {
-        $params =
-        [
-            'uri'           => API::REPOSITORIES['BRBranches'],
-            'request_type'  => 'get',
-            'path'          => ['felixfw1990', 'test'],
-            'headers'       => [],
-            'queue'         => [
+        $params = [
+            'uri'          => API::REPOSITORIES['BRBranches'],
+            'request_type' => 'get',
+            'path'         => ['felixfw1990', 'test'],
+            'headers'      => [],
+            'queue'        => [
 
                 'page'      => 1,
                 'per_page'  => 1,
                 'protected' => false,
             ],
-            'get_headers'   => true,
-            'get_data'      => true,
+            'get_headers' => true,
+            'get_data'    => true,
         ];
 
-        $result = $this->module->request($params);
+        $result = $this->tm->request($params);
 
         $this->assertNotEmpty($result);
     }

@@ -3,6 +3,7 @@
 namespace Github\Api\Oauth\Authorizing;
 
 use Exception;
+use Github\Assist\Base\Client;
 use Github\Assist\Base\Helper;
 
 /**
@@ -13,8 +14,21 @@ use Github\Assist\Base\Helper;
  * @author Felix
  * @change 2018/12/21
  */
-class Authorizing extends Abs
+class Authorizing
 {
+    // ------------------------------------------------------------------------------
+
+    private Client $clientObj;
+    private Helper $helperObj;
+
+    // ------------------------------------------------------------------------------
+
+    public function __construct(array $objects = [])
+    {
+        $this->clientObj = $objects['clientObj'];
+        $this->helperObj = $objects['helperObj'] ?? new Helper();
+    }
+
     // ------------------------------------------------------------------------------
 
     /**
@@ -35,9 +49,9 @@ class Authorizing extends Abs
             'client_id', 'redirect_uri', 'login',
             'scope', 'state', 'allow_signup',
         ];
-        $queue = Helper::arrayExistCums($params, $keys);
+        $queue = $this->helperObj->arrayExistCums($params, $keys);
 
-        return Helper::getLink($uri, $queue);
+        return $this->helperObj->getLink($uri, $queue);
     }
 
     // ------------------------------------------------------------------------------
@@ -61,10 +75,10 @@ class Authorizing extends Abs
             'client_secret', 'redirect_uri',
         ];
 
-        $queue = Helper::arrayExistCums($params, $keys);
+        $queue = $this->helperObj->arrayExistCums($params, $keys);
 
-        return $this->options
-            ->getClient()
+        return $this->clientObj
+            ->get()
             ->setHeaderParams(['Accept' => 'application/json'])
             ->setQuery($queue)
             ->post($uri);

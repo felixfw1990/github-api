@@ -3,7 +3,6 @@
 namespace GithubTest\Api\Oauth\Authorizing;
 
 use Exception;
-use Github\Assist\Base\Helper;
 use Github\Api\Oauth\Authorizing\Authorizing;
 
 /**
@@ -20,7 +19,7 @@ class AuthorizingTest extends Abs
 {
     // ------------------------------------------------------------------------------
 
-    private Authorizing $module;
+    private Authorizing $tm;
 
     // ------------------------------------------------------------------------------
 
@@ -31,7 +30,7 @@ class AuthorizingTest extends Abs
     {
         parent::setUp();
 
-        $this->module = $this->client->Api()->Oauth()->Authorizing();
+        $this->tm = new Authorizing(['clientObj' => $this->client]);
     }
 
     // ------------------------------------------------------------------------------
@@ -43,20 +42,19 @@ class AuthorizingTest extends Abs
      */
     public function testGetUrl(): void
     {
-        $params =
-        [
+        $params = [
             'scope'           => 'repo',
-            'state'           => Helper::getRandString(30),
+            'state'           => $this->getRandString(30),
             'approval_prompt' => 'yes',
             'redirect_uri'    => $this->params['code_redirect_uri'],
             'client_id'       => $this->params['client_id'],
         ];
 
-        $result = $this->module->getUrl($params);
+        $result = $this->tm->getUrl($params);
 
         echo "\nstate:{$params['state']}\n";
 
-        Helper::p($result);
+        $this->p($result);
 
         $this->assertNotEmpty($result);
     }
@@ -70,8 +68,7 @@ class AuthorizingTest extends Abs
      */
     public function testGetToken(): void
     {
-        $params =
-        [
+        $params = [
             'code'          => '1e937f1bd2e6ea0f9f23',
             'state'         => 'Z93QmWdkK6AQroqaZ9EDQNUW2GhsMn',
             'client_id'     => $this->params['client_id'],
@@ -79,9 +76,9 @@ class AuthorizingTest extends Abs
             'redirect_uri'  => $this->params['token_redirect_uri'],
         ];
 
-        $result = $this->module->getToken($params);
+        $result = $this->tm->getToken($params);
 
-        Helper::p($result);
+        $this->p($result);
 
         $this->assertNotEmpty($result);
     }

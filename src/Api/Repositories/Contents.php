@@ -4,6 +4,7 @@ namespace Github\Api\Repositories;
 
 use Exception;
 use Github\Assist\Base\API;
+use Github\Assist\Base\Client;
 use Github\Assist\Base\Helper;
 
 /**
@@ -14,8 +15,21 @@ use Github\Assist\Base\Helper;
  * @author Felix
  * @change 2018/12/19
  */
-class Contents extends Abs
+class Contents
 {
+    // ------------------------------------------------------------------------------
+
+    private Client $clientObj;
+    private Helper $helperObj;
+
+    // ------------------------------------------------------------------------------
+
+    public function __construct(array $objects = [])
+    {
+        $this->clientObj = $objects['clientObj'];
+        $this->helperObj = $objects['helperObj'] ?? new Helper();
+    }
+
     // ------------------------------------------------------------------------------
 
     /**
@@ -33,10 +47,10 @@ class Contents extends Abs
         $repo  = $params['repo']  ?? [];
         $path  = $params['path']  ?? '';
 
-        $queue = Helper::arrayExistCum($params, 'ref');
+        $queue = $this->helperObj->arrayExistCum($params, 'ref');
 
-        return $this->options
-            ->getClient()
+        return $this->clientObj
+            ->get()
             ->setPath($owner, $repo, $path)
             ->setQuery($queue)
             ->get(API::REPOSITORIES['CRContents']);
@@ -62,10 +76,10 @@ class Contents extends Abs
         $path  = $params['path']  ?? '';
 
         $keys  = ['message', 'content', 'branch', 'committer', 'author', 'sha'];
-        $queue = Helper::arrayExistCums($params, $keys);
+        $queue = $this->helperObj->arrayExistCums($params, $keys);
 
-        return $this->options
-            ->getClient()
+        return $this->clientObj
+            ->get()
             ->setPath($owner, $repo, $path)
             ->setFormParams($queue)
             ->put(API::REPOSITORIES['CRContents']);
@@ -89,10 +103,10 @@ class Contents extends Abs
         $path  = $params['path']  ?? '';
 
         $keys  = ['message', 'sha', 'branch', 'committer', 'author'];
-        $queue = Helper::arrayExistCums($params, $keys);
+        $queue = $this->helperObj->arrayExistCums($params, $keys);
 
-        return $this->options
-            ->getClient()
+        return $this->clientObj
+            ->get()
             ->setPath($owner, $repo, $path)
             ->setFormParams($queue)
             ->delete(API::REPOSITORIES['CRContents']);

@@ -10,6 +10,6 @@ namespace Github\Api\Repositories;
  * @author Felix
  * @change 2018/12/20
  */
-class Comments extends Abs
+class Comments
 {
 }

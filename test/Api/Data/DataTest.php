@@ -3,8 +3,11 @@
 namespace GithubTest\Api\Data;
 
 use Exception;
-use Github\Api\Data\Data;
-use Github\Assist\Base\Helper;
+use Github\Api\Data\Blob;
+use Github\Api\Data\Commit;
+
+use Github\Api\Data\Tree;
+use Github\Api\Repositories\Merging;
 
 /**
  * ---------------------------------------------------------------------------------
@@ -20,7 +23,9 @@ class DataTest extends Abs
 {
     // ------------------------------------------------------------------------------
 
-    private Data $module;
+    private Blob $tmBlob;
+    private Commit $tmCommit;
+    private Tree $tmTree;
 
     // ------------------------------------------------------------------------------
 
@@ -31,7 +36,9 @@ class DataTest extends Abs
     {
         parent::setUp();
 
-        $this->module = $this->client->Api()->Data();
+        $this->tmBlob = new Blob(['clientObj' => $this->client]);
+        $this->tmCommit = new Commit(['clientObj' => $this->client]);
+        $this->tmTree = new Tree(['clientObj' => $this->client]);
     }
 
     // ------------------------------------------------------------------------------
@@ -59,7 +66,7 @@ class DataTest extends Abs
             'encoding' => 'base64',
         ];
 
-        $result = $this->module->Blob()->create($param);
+        $result = $this->tmBlob->create($param);
 
         //create tree
         $param =
@@ -76,8 +83,8 @@ class DataTest extends Abs
             ],
         ];
 
-        $result = $this->module->Tree()->create($param);
-        Helper::p($result, 0);
+        $result = $this->tmTree->create($param);
+        $this->p($result, 0);
 
         // create commit
         $param =
@@ -89,13 +96,11 @@ class DataTest extends Abs
             'tree'     => $result['sha'],
         ];
 
-        $result = $this->module->Commit()->create($param);
+        $result = $this->tmCommit->create($param);
 
-        Helper::p($result, 0);
+        $this->p($result, 0);
 
         //create merging
-        $mergingModule = $this->client->Api()->Repositories()->Merging();
-
         $param =
         [
             'owner'           => $this->params['owner'],
@@ -105,9 +110,9 @@ class DataTest extends Abs
             'commit_message'  => $hs.' commit message',
         ];
 
-        $result = $mergingModule->merge($param);
+        $result = (new Merging())->merge($param);
 
-        Helper::p($result);
+        $this->p($result);
     }
 
     // ------------------------------------------------------------------------------

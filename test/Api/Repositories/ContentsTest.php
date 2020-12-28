@@ -19,7 +19,7 @@ class ContentsTest extends Abs
 {
     // ------------------------------------------------------------------------------
 
-    private Contents $module;
+    private Contents $tm;
 
     // ------------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ class ContentsTest extends Abs
     {
         parent::setUp();
 
-        $this->module = $this->client->Api()->Repositories()->Contents();
+        $this->tm = new Contents(['clientObj' => $this->client]);
     }
 
     // ------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ class ContentsTest extends Abs
             'ref'   => 'demo1',
         ];
 
-        $result = $this->module->ownerRepoContentsPath($params);
+        $result = $this->tm->ownerRepoContentsPath($params);
 
         $this->assertNotEmpty($result);
     }
@@ -89,7 +89,7 @@ class ContentsTest extends Abs
             //            ],
         ];
 
-        $result = $this->module->ownerRepoContentsPathPut($params);
+        $result = $this->tm->ownerRepoContentsPathPut($params);
 
         $this->assertNotEmpty($result);
     }
@@ -122,7 +122,7 @@ class ContentsTest extends Abs
             //            ],
         ];
 
-        $result = $this->module->ownerRepoContentsPathDelete($params);
+        $result = $this->tm->ownerRepoContentsPathDelete($params);
 
         $this->assertNotEmpty($result);
     }

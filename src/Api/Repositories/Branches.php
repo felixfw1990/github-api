@@ -4,6 +4,7 @@ namespace Github\Api\Repositories;
 
 use Exception;
 use Github\Assist\Base\API;
+use Github\Assist\Base\Client;
 use Github\Assist\Base\Helper;
 
 /**
@@ -14,8 +15,21 @@ use Github\Assist\Base\Helper;
  * @author Felix
  * @change 2018/12/20
  */
-class Branches extends Abs
+class Branches
 {
+    // ------------------------------------------------------------------------------
+
+    private Client $clientObj;
+    private Helper $helperObj;
+
+    // ------------------------------------------------------------------------------
+
+    public function __construct(array $objects = [])
+    {
+        $this->clientObj = $objects['clientObj'];
+        $this->helperObj = $objects['helperObj'] ?? new Helper();
+    }
+
     // ------------------------------------------------------------------------------
 
     /**
@@ -33,10 +47,10 @@ class Branches extends Abs
         $repo  = $params['repo']  ?? '';
 
         $keys  = ['page', 'per_page', 'protected'];
-        $queue = Helper::arrayExistCums($params, $keys);
+        $queue = $this->helperObj->arrayExistCums($params, $keys);
 
-        return $this->options
-            ->getClient()
+        return $this->clientObj
+            ->get()
             ->setPath($owner, $repo)
             ->setQuery($queue)
             ->get(API::REPOSITORIES['BRBranches']);

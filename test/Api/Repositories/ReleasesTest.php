@@ -19,7 +19,7 @@ class ReleasesTest extends Abs
 {
     // ------------------------------------------------------------------------------
 
-    private Releases $module;
+    private Releases $tm;
 
     // ------------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ class ReleasesTest extends Abs
     {
         parent::setUp();
 
-        $this->module = $this->client->Api()->Repositories()->Releases();
+        $this->tm = new Releases(['clientObj' => $this->client]);
     }
 
     // ------------------------------------------------------------------------------
@@ -42,15 +42,14 @@ class ReleasesTest extends Abs
      */
     public function testOwnerRepoBranches(): void
     {
-        $params =
-        [
-            'owner'     => $this->params['owner'],
-            'repo'      => $this->params['repo'],
-            'page'      => 1,
-            'per_page'  => 1,
+        $params = [
+            'owner'    => $this->params['owner'],
+            'repo'     => $this->params['repo'],
+            'page'     => 1,
+            'per_page' => 1,
         ];
 
-        $result = $this->module->ownerRepoReleases($params);
+        $result = $this->tm->ownerRepoReleases($params);
 
         $this->assertNotEmpty($result);
     }
