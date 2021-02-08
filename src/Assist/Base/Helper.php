@@ -98,7 +98,7 @@ class Helper
      * @param int $length
      * @return string
      */
-    public static function getRandString(int $length = 12):string
+    public function getRandString(int $length = 12):string
     {
         $keys = [
             '0','1','2','3','4','5','6','7','8','9','10',
@@ -134,7 +134,7 @@ class Helper
      * @param  string $linkString
      * @return int
      */
-    public static function getLastPage(string $linkString):int
+    public function getLastPage(string $linkString):int
     {
         //不支持分页或者每页数量超出最大数量
         if (!$linkString) { return 0 ;}
